@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prueba de Rendimiento Profesional Docente — MINERD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0B3B47;          /* teal-ink primario */
+    --ink-2:#0F4A58;
+    --amber:#D98A2B;        /* acento cálido */
+    --amber-soft:#F3E4CE;
+    --bg:#EEF1F0;
+    --card:#FFFFFF;
+    --line:#D9E0DE;
+    --muted:#5C6B6E;
+    --ok:#1F7A5A;
+    --ok-bg:#E4F3EC;
+    --bad:#B23B3B;
+    --bad-bg:#F8E7E5;
+    --shadow:0 1px 2px rgba(11,59,71,.06),0 8px 30px rgba(11,59,71,.08);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:24px 18px 64px}
+  .display{font-family:"Fraunces",Georgia,serif}
+
+  /* ---------- PANTALLA INICIO ---------- */
+  #inicio{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+  .hero{
+    max-width:560px;width:100%;background:var(--card);border-radius:22px;
+    box-shadow:var(--shadow);overflow:hidden;border:1px solid var(--line);
+  }
+  .hero-top{
+    background:linear-gradient(150deg,var(--ink) 0%,var(--ink-2) 70%);
+    color:#fff;padding:38px 34px 30px;position:relative;
+  }
+  .hero-top:after{content:"";position:absolute;right:-40px;bottom:-40px;width:160px;height:160px;border-radius:50%;background:rgba(217,138,43,.18)}
+  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);font-weight:600;margin:0 0 12px}
+  .hero h1{font-size:30px;line-height:1.12;margin:0;font-weight:600}
+  .hero-sub{margin:14px 0 0;color:#CFE0E2;font-size:14.5px;max-width:42ch}
+  .hero-body{padding:30px 34px 34px}
+  .facts{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 24px}
+  .fact{flex:1;min-width:120px;background:var(--bg);border-radius:12px;padding:12px 14px;border:1px solid var(--line)}
+  .fact b{display:block;font-family:"Fraunces",serif;font-size:20px}
+  .fact span{font-size:12px;color:var(--muted)}
+  label.lbl{display:block;font-weight:600;font-size:14px;margin:0 0 7px}
+  input[type=email]{
+    width:100%;padding:14px 15px;border-radius:12px;border:1.5px solid var(--line);
+    font-size:15px;font-family:inherit;color:var(--ink);transition:border-color .15s,box-shadow .15s;
+  }
+  input[type=email]:focus{outline:none;border-color:var(--ink);box-shadow:0 0 0 4px rgba(11,59,71,.10)}
+  .hint{font-size:12.5px;color:var(--muted);margin:8px 2px 0}
+  .err{color:var(--bad);font-size:12.5px;margin:8px 2px 0;display:none}
+  .btn{
+    font-family:inherit;font-weight:600;font-size:15px;cursor:pointer;border:none;border-radius:12px;
+    padding:14px 22px;transition:transform .08s,filter .15s,background .15s;
+  }
+  .btn:active{transform:translateY(1px)}
+  .btn-primary{background:var(--ink);color:#fff;width:100%;margin-top:18px}
+  .btn-primary:hover{filter:brightness(1.08)}
+  .btn-primary:disabled{opacity:.45;cursor:not-allowed;filter:none}
+  .credit{margin:22px 0 0;font-size:13px;color:var(--muted);text-align:center}
+  .credit b{color:var(--ink);font-weight:600}
+
+  /* ---------- BARRA SUPERIOR EXAMEN ---------- */
+  #examen{display:none}
+  .topbar{
+    position:sticky;top:0;z-index:30;background:rgba(238,241,240,.92);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar-in{max-width:1080px;margin:0 auto;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:11px;min-width:0}
+  .mark{width:38px;height:38px;border-radius:10px;background:var(--ink);color:#fff;display:grid;place-items:center;font-family:"Fraunces",serif;font-weight:600;font-size:18px;flex:none}
+  .brand .t1{font-weight:600;font-size:14px;line-height:1.15}
+  .brand .t2{font-size:12px;color:var(--muted)}
+  .timer{
+    display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);
+    padding:8px 14px;border-radius:12px;box-shadow:var(--shadow);
+  }
+  .timer .dot{width:9px;height:9px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px var(--ok-bg)}
+  .timer .clock{font-family:"Fraunces",serif;font-weight:600;font-size:19px;letter-spacing:.02em;font-variant-numeric:tabular-nums}
+  .timer .lab{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+  .timer.warn .dot{background:var(--amber);box-shadow:0 0 0 4px var(--amber-soft)}
+  .timer.danger{border-color:var(--bad)}
+  .timer.danger .dot{background:var(--bad);box-shadow:0 0 0 4px var(--bad-bg);animation:pulse 1s infinite}
+  .timer.danger .clock{color:var(--bad)}
+  @keyframes pulse{50%{opacity:.35}}
+
+  /* ---------- LAYOUT EXAMEN ---------- */
+  .grid{display:grid;grid-template-columns:248px 1fr;gap:22px;margin-top:22px}
+  .side{position:sticky;top:88px;align-self:start}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:18px}
+  .panel h3{margin:0 0 4px;font-size:13px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:600}
+  .progress-txt{font-family:"Fraunces",serif;font-size:22px;margin:0 0 14px}
+  .progress-txt span{color:var(--muted);font-size:15px}
+  .navgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}
+  .nav-cell{
+    aspect-ratio:1;border-radius:9px;border:1px solid var(--line);background:#fff;color:var(--ink);
+    font-weight:600;font-size:13px;cursor:pointer;display:grid;place-items:center;transition:all .12s;
+  }
+  .nav-cell:hover{border-color:var(--ink)}
+  .nav-cell.answered{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .nav-cell.current{outline:3px solid var(--amber);outline-offset:1px}
+  .legend{display:flex;flex-direction:column;gap:8px;margin-top:16px;font-size:12.5px;color:var(--muted)}
+  .legend span{display:flex;align-items:center;gap:8px}
+  .sw{width:15px;height:15px;border-radius:5px;border:1px solid var(--line);flex:none}
+  .sw.a{background:var(--ink);border-color:var(--ink)}
+  .btn-finish{background:var(--amber);color:#3a2509;width:100%;margin-top:18px}
+  .btn-finish:hover{filter:brightness(1.05)}
+
+  /* ---------- TARJETA PREGUNTA ---------- */
+  .qcard{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:30px 32px;min-height:60vh;display:flex;flex-direction:column}
+  .qnum{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);font-weight:600;margin:0 0 12px}
+  .qtext{font-size:18px;line-height:1.5;margin:0 0 24px;font-weight:500;color:var(--ink)}
+  .opts{display:flex;flex-direction:column;gap:12px;flex:1}
+  .opt{
+    display:flex;gap:14px;align-items:flex-start;padding:15px 17px;border:1.5px solid var(--line);
+    border-radius:13px;cursor:pointer;transition:all .12s;background:#fff;
+  }
+  .opt:hover{border-color:var(--ink);background:#FAFBFB}
+  .opt.sel{border-color:var(--ink);background:#F0F5F4;box-shadow:0 0 0 3px rgba(11,59,71,.07)}
+  .radio{width:22px;height:22px;border-radius:50%;border:2px solid var(--line);flex:none;margin-top:1px;display:grid;place-items:center;transition:all .12s}
+  .opt.sel .radio{border-color:var(--ink)}
+  .opt.sel .radio:after{content:"";width:11px;height:11px;border-radius:50%;background:var(--ink)}
+  .opt .ltr{font-weight:600;color:var(--muted);margin-right:2px}
+  .opt-txt{font-size:15px;line-height:1.5}
+  .qfoot{display:flex;justify-content:space-between;align-items:center;margin-top:26px;gap:12px}
+  .btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--ink)}
+  .btn-ghost:disabled{opacity:.4;cursor:not-allowed}
+  .btn-next{background:var(--ink);color:#fff}
+  .btn-next:hover{filter:brightness(1.08)}
+
+  /* ---------- RESULTADOS ---------- */
+  #resultados{display:none}
+  .score-hero{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);overflow:hidden;margin-top:8px}
+  .score-band{padding:34px 34px 30px;display:flex;gap:30px;align-items:center;flex-wrap:wrap;color:#fff;background:linear-gradient(150deg,var(--ink),var(--ink-2))}
+  .ring{position:relative;width:148px;height:148px;flex:none}
+  .ring svg{transform:rotate(-90deg)}
+  .ring .val{position:absolute;inset:0;display:grid;place-items:center;text-align:center}
+  .ring .val b{font-family:"Fraunces",serif;font-size:40px;line-height:1;display:block}
+  .ring .val small{font-size:12px;color:#CFE0E2;letter-spacing:.06em}
+  .score-meta h2{font-family:"Fraunces",serif;font-weight:600;font-size:27px;margin:0 0 6px}
+  .score-meta .who{color:#CFE0E2;font-size:14px;margin:0 0 16px;word-break:break-all}
+  .pills{display:flex;gap:10px;flex-wrap:wrap}
+  .pill{background:rgba(255,255,255,.12);border-radius:10px;padding:9px 14px;font-size:13px}
+  .pill b{font-family:"Fraunces",serif;font-size:17px;display:block}
+  .msg{padding:24px 34px;border-bottom:1px solid var(--line);font-size:15.5px}
+  .msg .tag{display:inline-block;font-weight:600;font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:20px;margin-bottom:10px}
+  .res-actions{padding:20px 34px;display:flex;gap:12px;flex-wrap:wrap}
+  .review-h{font-family:"Fraunces",serif;font-size:21px;margin:34px 0 4px}
+  .review-sub{color:var(--muted);font-size:14px;margin:0 0 18px}
+  .rev{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:14px;box-shadow:var(--shadow)}
+  .rev-head{display:flex;gap:12px;align-items:flex-start;margin-bottom:14px}
+  .rev-badge{flex:none;width:30px;height:30px;border-radius:8px;display:grid;place-items:center;font-weight:700;font-size:13px;color:#fff}
+  .rev-badge.ok{background:var(--ok)}
+  .rev-badge.bad{background:var(--bad)}
+  .rev-q{font-weight:500;font-size:15px;line-height:1.45}
+  .rev-opt{padding:11px 14px;border-radius:10px;font-size:14px;line-height:1.45;margin-bottom:8px;border:1px solid var(--line);display:flex;gap:10px}
+  .rev-opt .ltr{font-weight:600}
+  .rev-opt.correct{background:var(--ok-bg);border-color:#BFE3D1}
+  .rev-opt.wrong{background:var(--bad-bg);border-color:#EFC9C5}
+  .rev-opt .mk{margin-left:auto;font-size:12px;font-weight:600;white-space:nowrap}
+  .rev-opt.correct .mk{color:var(--ok)}
+  .rev-opt.wrong .mk{color:var(--bad)}
+
+  .footer-credit{text-align:center;color:var(--muted);font-size:13px;margin:40px 0 0}
+  .footer-credit b{color:var(--ink)}
+
+  @media (max-width:860px){
+    .grid{grid-template-columns:1fr}
+    .side{position:static;order:2}
+    .qcard{order:1;min-height:auto;padding:24px 20px}
+    .qtext{font-size:17px}
+  }
+  @media print{
+    .res-actions,.topbar{display:none}
+    body{background:#fff}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ PANTALLA 1: INICIO ============ -->
+<section id="inicio">
+  <div class="hero">
+    <div class="hero-top">
+      <p class="eyebrow">Evaluación de Rendimiento Profesional · ERP</p>
+      <h1 class="display">Prueba de competencias docentes</h1>
+      <p class="hero-sub">Simulacro alineado al marco pedagógico del Sistema Educativo Dominicano (MINERD). 40 ítems de situaciones de aula con enfoque por competencias.</p>
+    </div>
+    <div class="hero-body">
+      <div class="facts">
+        <div class="fact"><b>40</b><span>ítems de selección</span></div>
+        <div class="fact"><b>2:00 h</b><span>tiempo límite</span></div>
+        <div class="fact"><b>0–20</b><span>escala de calificación</span></div>
+      </div>
+      <label class="lbl" for="email">Correo electrónico</label>
+      <input type="email" id="email" placeholder="tucorreo@ejemplo.com" autocomplete="email" inputmode="email">
+      <p class="hint">Lo usamos para identificar tu intento y mostrarlo junto a tu calificación.</p>
+      <p class="err" id="emailErr">Escribe un correo electrónico válido para continuar.</p>
+      <button class="btn btn-primary" id="startBtn" disabled>Comenzar evaluación</button>
+      <p class="credit">Test creado por <b>Francisco L. Yean</b>, autor del libro <b>“Tu Turno”</b>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PANTALLA 2: EXAMEN ============ -->
+<section id="examen">
+  <div class="topbar">
+    <div class="topbar-in">
+      <div class="brand">
+        <div class="mark">ERP</div>
+        <div>
+          <div class="t1">Rendimiento Profesional Docente</div>
+          <div class="t2" id="userTag">—</div>
+        </div>
+      </div>
+      <div class="timer" id="timerBox">
+        <span class="dot"></span>
+        <div>
+          <div class="lab">Tiempo restante</div>
+          <div class="clock" id="clock">2:00:00</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="grid">
+      <aside class="side">
+        <div class="panel">
+          <h3>Ítems</h3>
+          <p class="progress-txt"><span id="answeredCount">0</span><span> / 40 respondidos</span></p>
+          <div class="navgrid" id="navgrid"></div>
+          <div class="legend">
+            <span><i class="sw a"></i> Contestado</span>
+            <span><i class="sw"></i> Sin contestar</span>
+          </div>
+          <button class="btn btn-finish" id="finishBtn">Finalizar evaluación</button>
+        </div>
+      </aside>
+
+      <main class="qcard">
+        <p class="qnum" id="qnum">Ítem 1 de 40</p>
+        <p class="qtext" id="qtext"></p>
+        <div class="opts" id="opts"></div>
+        <div class="qfoot">
+          <button class="btn btn-ghost" id="prevBtn">Anterior</button>
+          <button class="btn btn-next" id="nextBtn">Siguiente</button>
+        </div>
+      </main>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PANTALLA 3: RESULTADOS ============ -->
+<section id="resultados">
+  <div class="wrap">
+    <div class="score-hero">
+      <div class="score-band">
+        <div class="ring">
+          <svg width="148" height="148" viewBox="0 0 148 148">
+            <circle cx="74" cy="74" r="64" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="12"></circle>
+            <circle id="ringFg" cx="74" cy="74" r="64" fill="none" stroke="#D98A2B" stroke-width="12" stroke-linecap="round" stroke-dasharray="402" stroke-dashoffset="402"></circle>
+          </svg>
+          <div class="val"><b id="scoreNum">0</b><small>de 20</small></div>
+        </div>
+        <div class="score-meta">
+          <h2 class="display" id="scoreTitle">Resultados</h2>
+          <p class="who">Intento de: <span id="resEmail">—</span></p>
+          <div class="pills">
+            <div class="pill"><b id="correctNum">0</b>respuestas correctas (de 40)</div>
+            <div class="pill"><b id="pctNum">0%</b>de acierto</div>
+            <div class="pill"><b id="timeUsed">—</b>tiempo utilizado</div>
+          </div>
+        </div>
+      </div>
+      <div class="msg" id="msgBox"></div>
+      <div class="res-actions">
+        <button class="btn btn-primary" style="width:auto" onclick="window.print()">Imprimir / Guardar PDF</button>
+        <button class="btn btn-ghost" id="retryBtn">Realizar de nuevo</button>
+      </div>
+    </div>
+
+    <h3 class="review-h display">Revisión y retroalimentación</h3>
+    <p class="review-sub">Tu respuesta vs. la respuesta alineada al enfoque por competencias del MINERD.</p>
+    <div id="review"></div>
+
+    <p class="footer-credit">Test creado por <b>Francisco L. Yean</b>, autor del libro <b>“Tu Turno”</b>.</p>
+  </div>
+</section>
+
+<script>
+/* ===================== BANCO DE ÍTEMS ===================== */
+/* correct = índice (0=A,1=B,2=C,3=D) de la opción alineada al enfoque por competencias */
+const QUESTIONS = [
+ {n:1, q:`El docente trabaja en un contexto en el que el acceso a internet es limitado y la mayoría del estudiantado no dispone de dispositivos tecnológicos en el hogar. Algunas actividades propuestas suponen trabajo en línea fuera del aula. El docente busca asegurar la continuidad del aprendizaje sin generar brechas debido a las condiciones socioeconómicas. ¿Qué estrategia de planificación permitiría ajustar las actividades a estas condiciones y garantizar oportunidades de aprendizaje equitativas?`,
+  o:[`Mantener el uso exclusivo de herramientas digitales en la planificación, sin considerar las limitaciones de acceso de los estudiantes.`,
+     `Reducir los contenidos del currículo para no exigir demasiado a los estudiantes en un entorno con pocos recursos.`,
+     `Esperar a que las condiciones tecnológicas de la comunidad mejoren antes de implementar ajustes en la planificación.`,
+     `Diseñar actividades que aprovechen los recursos disponibles en la comunidad, como aprendizaje basado en proyectos con materiales físicos, observaciones directas y trabajo colaborativo.`], correct:3},
+
+ {n:2, q:`Al finalizar una unidad de Lengua Española, el docente quiere identificar en qué medida los estudiantes han logrado los aprendizajes esperados en comprensión lectora y producción escrita. Le interesa contar con evidencias del nivel alcanzado para retroalimentar al grupo, ajustar la enseñanza posterior y comunicar avances, sin que la evaluación se limite a la memorización de contenidos. ¿Qué tipo de evaluación le brindaría la información más pertinente?`,
+  o:[`Evaluación sumativa, ya que busca medir el rendimiento final de los estudiantes y asignar calificaciones.`,
+     `Evaluación diagnóstica, le permite ver lo que saben los estudiantes del tema a continuación y de allí puede tener claro lo que aprendieron del anterior.`,
+     `Ninguna evaluación es necesaria al finalizar un tema, el docente debe esperar al momento de realizar la evaluación de fin de período.`,
+     `Evaluación formativa, ya que se aplica durante todo el proceso de aprendizaje y se usa para retroalimentar y ajustar la enseñanza.`], correct:3},
+
+ {n:3, q:`Un docente de primaria necesita diseñar una actividad de cierre del primer período que evidencie los aprendizajes logrados por sus estudiantes. Busca una estrategia que no se limite a la repetición de contenidos, sino que permita observar la aplicación de saberes en situaciones significativas, la integración de conocimientos, habilidades y actitudes, y el desempeño en contextos cercanos a la realidad del estudiantado. ¿Qué estrategia metodológica resultaría más adecuada con el enfoque por competencias?`,
+  o:[`Pedir a los estudiantes que se organicen en grupos, sortear el área que trabajará cada uno y entregarles una pauta de trabajo para presentar de forma independiente. El grupo con la mejor exposición tendrá un reconocimiento.`,
+     `Plantear la idea a los estudiantes, invitándolos a integrarse al grupo de acuerdo al área de su preferencia y preparar una exposición que incluya material audiovisual.`,
+     `Organizar grupos de estudiantes por asignatura para que preparen una exposición de sus aprendizajes durante el período.`,
+     `Implementar un proyecto en el que, con la participación de los estudiantes, se definen roles y responsabilidades y se toman decisiones sobre los contenidos a presentar y la forma de hacerlo. El docente apoya en el proceso.`], correct:3},
+
+ {n:4, q:`En sexto grado, algunos estudiantes tienen acceso a dispositivos en casa y otros no. El docente quiere evitar que las tareas tecnológicas amplíen las brechas de aprendizaje y asegurar que todos se beneficien del uso de las TIC en el aula. ¿Cómo puede el docente organizar el uso de la tecnología para garantizar condiciones de equidad en el aprendizaje de todo el grupo?`,
+  o:[`Depender completamente de los dispositivos personales de los estudiantes, sin considerar la brecha digital existente en el grupo.`,
+     `Utilizar principalmente plataformas en línea para todas las actividades, sin ofrecer alternativas para quienes no tienen acceso a tecnología en casa.`,
+     `Diseñar actividades que combinen recursos digitales y analógicos, permitiendo que todos los estudiantes participen sin importar sus recursos personales.`,
+     `Excluir la tecnología del aula para evitar desigualdades, enfocándose solo en métodos tradicionales de enseñanza.`], correct:2},
+
+ {n:5, q:`Durante el desarrollo de una unidad, el docente observa que algunos estudiantes comprenden rápidamente los contenidos y exigen mayores desafíos, mientras que otros requieren más tiempo, apoyos concretos y andamiaje. Mantener una única secuencia y ritmo ha generado desmotivación en ambos grupos. ¿Cómo debería ajustar la planificación para atender la diversidad de ritmos y promover aprendizajes significativos para todo el grupo?`,
+  o:[`Ajustar la planificación reduciendo el nivel de complejidad de los contenidos para todo el grupo, con el fin de sostener un ritmo común de avance, aun cuando se limite la profundidad de los aprendizajes.`,
+     `Ajustar la planificación condicionando el avance de la unidad a que todo el grupo alcance el mismo nivel de logro, incorporando apoyos diferenciados de manera puntual para quienes presentan mayores dificultades.`,
+     `Ajustar la planificación incorporando itinerarios de trabajo con niveles de desafío diferenciados, tiempos flexibles y apoyos graduados, para atender necesidades diversas sin frenar el avance del grupo.`,
+     `Ajustar la planificación manteniendo el ritmo del grupo que progresa con mayor rapidez y esperando que el resto se adapte gradualmente, sin introducir cambios sustantivos en las actividades.`], correct:2},
+
+ {n:6, q:`Durante un proyecto grupal, dos estudiantes entran en desacuerdos frecuentes sobre cómo organizar las tareas y quién debe asumir determinadas responsabilidades. La tensión ha comenzado a afectar al resto del equipo, que ha reducido su nivel de participación. El docente advierte que, si no se interviene oportunamente, el conflicto podría escalar y afectar el clima del aula. ¿Cómo debería intervenir para promover la convivencia y restablecer la productividad del equipo?`,
+  o:[`Intervenir como mediador, solicitando apoyo al orientador o psicólogo del centro para que le provea estrategias de resolución de conflictos y así finalizar la situación y retomar la clase.`,
+     `Intervenir como mediador, ayudando a los estudiantes a comunicarse de manera efectiva y a negociar una solución en la que ambos se sientan escuchados y valorados.`,
+     `Permitir que los estudiantes resuelvan el conflicto por sí solos, evitando cualquier intervención docente para no interrumpir la dinámica grupal.`,
+     `Asignar una práctica a ambos estudiantes involucrados en el conflicto, con el fin de mantener el orden y prevenir futuras discusiones.`], correct:1},
+
+ {n:7, q:`Luego de evaluar el desempeño en matemáticas, el docente debe informar a las familias y a los propios estudiantes sobre el progreso en relación con los indicadores de logro. Busca una forma de comunicar los resultados que no se limite a una nota numérica, sino que sea comprensible, accesible para distintos niveles de escolaridad de las familias y útil para acompañar el aprendizaje en casa. ¿Cuál sería la manera más pertinente de comunicar el progreso?`,
+  o:[`Entregar solo una calificación numérica en un informe, proporcionando detalles sobre los indicadores de logro al final del año mediante una evaluación más exhaustiva.`,
+     `Organizar reuniones individuales o grupales con los padres y estudiantes, explicando el progreso con base en evidencia, fortalezas y áreas de mejora, así como sugerencias para continuar avanzando.`,
+     `Informar principalmente a los padres, sin involucrar a los estudiantes en el proceso de evaluación, pero proporcionándoles retroalimentación sobre el desempeño.`,
+     `Realizar encuentros con los estudiantes para comentar de forma general su desempeño, sin involucrar a los padres, ya que el estudiante debe ser responsable de su aprendizaje.`], correct:1},
+
+ {n:8, q:`En un aula de primaria de jornada extendida, el docente atiende a estudiantes con discapacidad visual y a otros con dificultades de lectura. La mayoría de los materiales están en formato impreso con letra pequeña y se utilizan frecuentemente consignas escritas en la pizarra. El docente quiere ajustar su planificación para garantizar que todos puedan acceder al contenido, participar activamente y demostrar sus aprendizajes en condiciones de equidad. ¿Qué ajustes favorecerían un aprendizaje inclusivo y accesible para todo el grupo?`,
+  o:[`Ajustar la planificación incorporando materiales accesibles y apoyos multimodales, y adaptando las estrategias para garantizar la participación y el acceso equitativo de todo el grupo.`,
+     `Ajustar la planificación asignando a los estudiantes con dificultades tareas simplificadas de forma paralela, e integrarlos plenamente en las actividades comunes del aula.`,
+     `Ajustar la planificación manteniendo los materiales impresos y las consignas en la pizarra sin modificaciones, a la espera de que el estudiantado se adapte progresivamente al ritmo general.`,
+     `Ajustar la planificación exigiendo el uso de los mismos materiales para todo el grupo y hacer adaptaciones solo cuando sea necesario, para promover autonomía y evitar dependencias.`], correct:0},
+
+ {n:9, q:`Durante una actividad en parejas para resolver una tarea, el docente observa que uno de los estudiantes se desentiende del proceso, permanece pasivo y deja que su compañero asuma la mayor parte del trabajo. Aunque el producto final se completa, no se evidencian aprendizajes compartidos ni corresponsabilidad. El docente busca una intervención que promueva la implicación activa de ambos y el aprendizaje colaborativo genuino. ¿Qué acción pedagógica permitiría fortalecer el compromiso y la participación equitativa de ambos integrantes?`,
+  o:[`Solicitar que el estudiante más activo modele el procedimiento para su compañero y complete las partes más complejas, mientras el otro observa y, al final, replica para asegurar que el producto quede terminado.`,
+     `Mantener la dinámica de trabajo en parejas y recordar las normas de participación, reforzando el respeto mutuo y el cumplimiento de la tarea, sin introducir cambios en la estructura.`,
+     `Establecer roles con responsabilidades claras, monitorear el proceso y promover breves instancias de metacognición y coevaluación para equilibrar la participación durante la tarea.`,
+     `Reasignar la pareja para evitar el desbalance y pedir que cada estudiante entregue una parte individual del producto final, priorizando el resultado sobre el proceso de colaboración.`], correct:2},
+
+ {n:10, q:`Al planificar una unidad sobre fracciones, el docente reconoce que el grupo ya ha trabajado en años anteriores nociones como mitades y tercios en contextos cotidianos. No obstante, detecta que algunos recuerdan procedimientos de forma mecánica, mientras que otros no relacionan las fracciones con representaciones gráficas ni con situaciones reales de reparto. El docente busca una progresión que conecte los saberes previos con nuevas nociones sin generar rupturas. ¿Qué estrategia permitiría continuar la secuencia de manera progresiva y con sentido para todo el grupo?`,
+  o:[`Mantenerse en la enseñanza de mitades y tercios sin introducir nuevos conceptos, para que los estudiantes no se sientan abrumados, y luego adaptar los contenidos más complejos a situaciones más fáciles.`,
+     `Diseñar actividades progresivas que inicien con la revisión de fracciones simples y avancen hacia operaciones con fracciones, contextualizando el aprendizaje en situaciones del mundo real.`,
+     `Diseñar actividades alternando entre fracciones y otros temas para hacer la clase más dinámica; esto correspondería a una adaptación curricular.`,
+     `Iniciar directamente con problemas de fracciones mixtas y equivalentes, ya que los estudiantes recordarán los conocimientos previos sin necesidad de repaso, con una retroalimentación final de todos los conceptos.`], correct:1},
+
+ {n:11, q:`Durante una clase de geografía, un estudiante presenta dificultades para diferenciar los conceptos de meridianos, paralelos y husos horarios. Tiende a memorizar las definiciones, pero no logra explicar su función ni utilizarlas para ubicar lugares en el mapa ni interpretar diferencias horarias entre países. Además, confunde los términos al trabajar con planisferios o globos terráqueos. ¿Cómo podría el docente apoyar la construcción de significado de estos conceptos y su uso funcional?`,
+  o:[`Trabajar los conceptos usando ejemplos puntuales del Ecuador y del meridiano de Greenwich para ubicar lugares en el mapa y profundizar en la función de los términos.`,
+     `Realizar correcciones inmediatas cada vez que confunda los términos, repitiendo las definiciones para reforzar su memorización y el uso correcto del vocabulario.`,
+     `Solicitar que consulte los términos en el diccionario y elabore un pequeño glosario personal para tener las definiciones a mano cuando surjan dudas.`,
+     `Explicar los términos con apoyo del mapa, globos terráqueos y otros recursos visuales, promoviendo actividades de ubicación y comparación para que comprendan su significado, uso y función.`], correct:3},
+
+ {n:12, q:`En segundo grado, el docente tiene estudiantes que hablan distintas variedades del idioma y otros que tienen dificultades para comprender términos académicos. Observa que el lenguaje de los textos y consignas resulta poco accesible para algunos, lo que dificulta su comprensión de las tareas. ¿Qué estrategia didáctica permitiría hacer el lenguaje académico más comprensible y accesible sin desvalorizar las variedades lingüísticas del estudiantado?`,
+  o:[`Sostener el uso del lenguaje disciplinar propio del área, limitando simplificaciones excesivas, con la intención de favorecer la familiarización gradual con los términos técnicos requeridos en el nivel.`,
+     `Priorizar un registro cercano y cotidiano en las interacciones de aula, reduciendo la densidad conceptual del discurso para asegurar que todos participen con mayor comodidad.`,
+     `Alternar el uso del lenguaje académico con reformulaciones estratégicas, ejemplos contextualizados y apoyos semánticos que permitan construir significado sin sustituir el vocabulario propio de la disciplina.`,
+     `Intervenir de forma frecuente en las participaciones orales para ajustar expresiones al registro académico esperado, procurando que incorporen progresivamente formas lingüísticas más formales y precisas.`], correct:2},
+
+ {n:13, q:`En una secuencia de lectura comprensiva, el docente propone que el estudiantado identifique ideas primarias, ideas secundarias y conectores en textos breves. Sin embargo, observa que muchos estudiantes subrayan frases al azar, confunden ejemplos con las ideas principales y no reconocen la función de los conectores. Aunque leen con fluidez, les cuesta explicar por qué una idea es central o cómo los conectores articulan el sentido global del texto. ¿Qué acción pedagógica concreta permitiría aclarar estos conceptos?`,
+  o:[`Pedir que busquen ejemplos en el libro y traten de replicarlos con el texto proporcionado, promoviendo que se organicen de manera autónoma y revisen sus respuestas antes de compartirlas.`,
+     `Leer en conjunto las definiciones del libro, aclarar dudas generales y pedirles que realicen la actividad de forma individual siguiendo las indicaciones del texto.`,
+     `Solicitar a un estudiante voluntario que modele en la pizarra el procedimiento, mientras el resto observa, toma notas y luego intenta aplicar lo explicado en su propio texto, con apoyo puntual del docente.`,
+     `Modelar con un texto en la pizarra o proyectado; leer y comentar en conjunto, señalar las partes indicadas, permitir equivocaciones y ofrecer retroalimentación; luego, pedir que cada quien trabaje de forma individual y comparta.`], correct:3},
+
+ {n:14, q:`Al aplicar una evaluación diagnóstica al inicio de una unidad, el docente identifica que la mayoría del grupo presenta vacíos en conceptos previos esenciales para abordar los nuevos contenidos. Continuar con la planificación original implicaría avanzar sin bases sólidas, lo que podría profundizar las dificultades. El docente busca una respuesta pedagógica que atienda estas brechas sin perder de vista los aprendizajes esperados del grado. ¿Qué decisión de planificación resultaría más adecuada ante estos resultados diagnósticos?`,
+  o:[`Seguir con la planificación original sin hacer ajustes, esperando que los estudiantes superen sus dificultades con el tiempo.`,
+     `Modificar la planificación inicial para incluir actividades de refuerzo sobre los conceptos previos antes de avanzar con el contenido nuevo.`,
+     `Omitir la enseñanza de los conceptos previos y centrarse solo en los contenidos nuevos, ya que están programados en el currículo.`,
+     `Repetir la evaluación hasta que los estudiantes obtengan mejores resultados sin modificar la planificación.`], correct:1},
+
+ {n:15, q:`Tras implementar el Aprendizaje Basado en Proyectos (ABP) en la clase de ciencias, el docente desea determinar si la estrategia ha sido efectiva. Observa productos finales variados, pero le interesa valorar no solo el resultado, sino también los procesos de investigación, la colaboración, la aplicación de conocimientos científicos y el desarrollo de competencias como la resolución de problemas y la comunicación. ¿Qué enfoque de evaluación permitiría valorar de manera más pertinente la efectividad del ABP?`,
+  o:[`Implementar una evaluación auténtica que integre evidencias de proceso y de producto, alineadas con las competencias, con retroalimentación durante el proyecto.`,
+     `Aplicar una prueba escrita estandarizada al finalizar el proyecto para comparar resultados entre estudiantes, centrando la valoración en los contenidos científicos abordados.`,
+     `Solicitar informes individuales al cierre del proyecto para verificar la comprensión de conceptos, dejando la valoración del trabajo en equipo como un criterio secundario no sistematizado.`,
+     `Valorar principalmente el producto final del proyecto con una rúbrica de presentación, priorizando la calidad del informe o maqueta como evidencia del aprendizaje.`], correct:0},
+
+ {n:16, q:`Un estudiante presenta dificultades persistentes de aprendizaje y problemas de integración social. El docente reconoce que la situación supera el abordaje exclusivo del aula y requiere una intervención articulada con otros actores de la comunidad educativa. ¿Qué estrategia de trabajo colaborativo con la comunidad educativa permitiría brindar un apoyo integral al estudiante?`,
+  o:[`Establecer comunicación con la familia para recoger información contextual y conocer las estrategias implementadas previamente, integrando estos insumos en la toma de decisiones pedagógicas dentro del aula.`,
+     `Remitir formalmente la situación al equipo de orientación y a la dirección del centro, activando los protocolos institucionales y delegando en instancias especializadas la valoración y seguimiento del caso.`,
+     `Desarrollar estrategias de intervención pedagógica inicial en el aula, documentando evidencias de avance y, de persistir las dificultades, gestionar la derivación al equipo de orientación.`,
+     `Coordinar intercambios con el equipo de orientación, la familia y docentes vinculados al estudiante, a fin de acordar estrategias compartidas que favorezcan su desempeño académico y su participación en la dinámica escolar.`], correct:3},
+
+ {n:17, q:`Durante la secuencia didáctica sobre relaciones de cantidad y comparación de números, el docente observa que un grupo de estudiantes logra identificar los resultados cuando se presentan ejercicios simbólicos (números y signos), mientras que otros muestran confusión, se frustran con facilidad y tienden a memorizar procedimientos sin comprender el significado. Además, se evidencian diferencias en el ritmo de trabajo y en la transferencia de lo aprendido a situaciones cotidianas. ¿Cuál de las siguientes estrategias permitiría atender esta diversidad y favorecer la comprensión significativa?`,
+  o:[`Implementar evaluaciones periódicas de carácter formativo para identificar brechas y asignar actividades de refuerzo focalizadas, manteniendo el enfoque metodológico inicial para asegurar la continuidad.`,
+     `Diseñar secuencias en papel y lápiz que integren esquemas, pictogramas y el uso ocasional de material manipulativo, con ejercicios graduados que refuercen procedimientos paso a paso, incorporando discusión guiada.`,
+     `Presentar explicaciones orales estructuradas, apoyadas en organizadores visuales y ejemplos modelados, promoviendo la repetición guiada de los procedimientos para afianzar su ejecución.`,
+     `Integrar de manera planificada materiales concretos, recursos digitales interactivos y entornos de simulación que permitan explorar, representar y manipular los conceptos matemáticos en múltiples registros, con retroalimentación durante el proceso.`], correct:3},
+
+ {n:18, q:`Con el propósito de ampliar el acceso a la información, un docente incorpora recursos digitales (presentaciones, videos, actividades interactivas) en el aula. Sin embargo, observa que algunos estudiantes presentan barreras para acceder a los contenidos debido a diferencias en habilidades digitales, necesidades educativas específicas o limitaciones en los formatos de los materiales (letra pequeña, exceso de texto, ausencia de apoyos visuales o auditivos). El docente desea asegurarse de que la tecnología no genere nuevas exclusiones. ¿Cuál estrategia permitiría garantizar una accesibilidad plena y equitativa al contenido?`,
+  o:[`Utilizar dispositivos electrónicos personales de quienes los tienen para acceder a recursos digitales y organizar pares académicos con quienes no los poseen, de modo que compartan los materiales.`,
+     `Integrar plataformas digitales interactivas y algunos materiales adaptados, manteniendo como base la misma planificación digital para todo el grupo y previendo alternativas análogas cuando no haya acceso.`,
+     `Utilizar plataformas digitales interactivas, audiolibros y materiales adaptados a diferentes estilos de aprendizaje, combinándolos con alternativas no digitales para garantizar el acceso equitativo a la información.`,
+     `Priorizar libros impresos y explicaciones orales como estrategia principal, incorporando tecnología solo cuando esté disponible para no generar desigualdades de acceso.`], correct:2},
+
+ {n:19, q:`Un docente desea fortalecer los aprendizajes mediante la incorporación de metodologías innovadoras en su práctica. Sin embargo, su grupo presenta diversidad en ritmos de aprendizaje, niveles de autonomía y acceso a recursos, y el contexto de la escuela plantea restricciones de tiempo y conectividad. Además, los contenidos combinan saberes conceptuales, procedimentales y actitudinales. El docente busca un enfoque que no solo sea "novedoso", sino también pedagógicamente pertinente y contextualizado. ¿Qué criterios y procesos permitirían elegir el enfoque metodológico más adecuado?`,
+  o:[`Utilizar exclusivamente métodos expositivos tradicionales, incorporando actividades activas que favorezcan la participación de los estudiantes.`,
+     `Seleccionar estrategias metodológicas solo en función de la disponibilidad de materiales y tiempo; no es necesario considerar las diferencias del grupo, basta con completar el currículo.`,
+     `Enfocarse en cubrir el contenido curricular, priorizando la memorización de información por encima del desarrollo de habilidades prácticas o colaborativas.`,
+     `Analizar las características de los estudiantes, sus estilos de aprendizaje y el contexto educativo, eligiendo estrategias activas como el aprendizaje basado en proyectos o en problemas.`], correct:3},
+
+ {n:20, q:`En el marco del desarrollo de la competencia escritora, el docente observa que el grupo es capaz de construir oraciones y párrafos cortos, pero presenta dificultades para organizar ideas en una secuencia narrativa coherente. Algunos estudiantes escriben de forma impulsiva sin planificar, mientras que otros se bloquean al iniciar el texto o no revisan lo escrito. El docente desea acompañar el proceso de producción de cuentos breves respetando los distintos ritmos y promoviendo la mejora progresiva. ¿Qué pasos didácticos debería implementar para guiar la planificación, la escritura y la revisión con apoyos diferenciados?`,
+  o:[`Pedirles que libremente escriban un cuento como les parezca y luego lo lean para que los demás den sus impresiones. Corregir ortografía.`,
+     `Explicar la estructura del cuento con una lámina resumen y proporcionar una plantilla fija para que todos completen el mismo esquema narrativo, revisando al final si cumplieron los pasos establecidos.`,
+     `Presentar ejemplos de cuentos ya terminados y pedir que identifiquen sus partes; luego, asignar la escritura de forma individual siguiendo el modelo, con una corrección final del docente.`,
+     `Modelar la estructura con un minicuento, usar un organizador gráfico y dar tiempo de escritura independiente con apoyos puntuales; finalizar con una revisión sencilla.`], correct:3},
+
+ {n:21, q:`Al inicio del año escolar, un docente necesita conocer el nivel de conocimientos previos, habilidades y concepciones erróneas de sus estudiantes en matemáticas para ajustar su planificación didáctica. Busca información que le permita tomar decisiones pedagógicas (agrupamientos flexibles, apoyos diferenciados, secuencias de aprendizaje), más allá de asignar una calificación. ¿Qué tipo de evaluación le proporcionaría información relevante para orientar su planificación y atender la diversidad del grupo?`,
+  o:[`Evaluación formativa, ya que se aplica durante todo el proceso de aprendizaje y no antes de iniciar un tema nuevo.`,
+     `Evaluación diagnóstica, ya que permite identificar fortalezas y áreas de oportunidad del estudiantado antes de iniciar la enseñanza de nuevos contenidos.`,
+     `Evaluación diagnóstica, aplicada durante el desarrollo de la unidad para identificar dificultades emergentes y ajustar las actividades.`,
+     `Evaluación sumativa, ya que busca medir el rendimiento final de los estudiantes y asignar calificaciones.`], correct:1},
+
+ {n:22, q:`En un grupo de 3.er grado, la docente tiene cuatro estudiantes en condición de sobredotación. A nivel académico alcanzan los aprendizajes esperados del curso; sin embargo, muestran menor interés por algunas actividades, tienden a aislarse en los trabajos en grupo y expresan que las dinámicas del aula no siempre conectan con sus vivencias e intereses. Esto ha generado dificultades en la convivencia y en su sentido de pertenencia al grupo. ¿Qué estrategia favorecería una integración efectiva de estos estudiantes sin afectar el clima del aula?`,
+  o:[`Distribuir a los estudiantes en el aula para que puedan apoyarse en otros compañeros, evitando además que se distraigan conversando sobre temas distintos de la clase.`,
+     `Colocar a esos estudiantes en un espacio cercano a la docente, desde donde pueda monitorear de cerca su trabajo (trabajo personalizado) y brindar acompañamiento puntual, para asegurar que vayan a la par con el grupo.`,
+     `Incluir en la dinámica de la clase el trabajo en pequeños grupos y aprovechar esos espacios para integrar recursos y materiales seleccionados de acuerdo con las necesidades de los estudiantes.`,
+     `Adaptar los materiales disponibles a temáticas que resulten interesantes para estos cuatro estudiantes, distintas de las de los demás, y asignarles actividades y trabajos diferenciados a partir de las explicaciones grupales.`], correct:2},
+
+ {n:23, q:`En una escuela pública con acceso limitado a internet, el docente quiere integrar tecnología para fortalecer el pensamiento crítico y la resolución de problemas. Sin embargo, no todos los recursos digitales propuestos en el currículo son accesibles en tiempo real y el acceso a dispositivos es intermitente. El docente busca una alternativa que aproveche la tecnología disponible sin depender de una conectividad permanente. ¿Qué estrategia permitiría integrar la tecnología de manera pertinente para desarrollar habilidades de pensamiento crítico en este contexto?`,
+  o:[`Incorporar la tecnología principalmente como apoyo ocasional, articulándola con tareas estructuradas y con secuencias didácticas orientadas al desarrollo de habilidades de pensamiento.`,
+     `Sustituir la mediación presencial por videos y presentaciones en línea como recurso principal, reduciendo la interacción docente y limitando la retroalimentación durante el proceso.`,
+     `Destinar el uso de dispositivos a la visualización de diapositivas con información teórica, priorizando la transmisión de contenidos por encima de actividades prácticas o interactivas.`,
+     `Integrar recursos tecnológicos que funcionen sin conexión permanente para explorar problemas del entorno, formular hipótesis y sustentar soluciones con evidencia.`], correct:3},
+
+ {n:24, q:`El docente identifica que el estudiantado incorpora de manera acrítica expresiones de canciones populares en su comunicación cotidiana, lo que empobrece el registro lingüístico en contextos académicos. El docente no busca censurar, sino ampliar el repertorio lingüístico y favorecer el uso adecuado de distintos registros según el contexto. ¿Qué intervención pedagógica permitiría enriquecer el lenguaje oral y promover el uso consciente de los registros lingüísticos?`,
+  o:[`Realizar correcciones puntuales cuando surjan dichas expresiones, orientando a los estudiantes hacia alternativas más apropiadas para el contexto escolar, sin interrumpir de forma prolongada la dinámica de clase.`,
+     `Delimitar explícitamente el uso de determinadas expresiones dentro del aula, recordando periódicamente que el espacio académico requiere un registro lingüístico específico acorde con las normas institucionales.`,
+     `Integrar momentos breves de análisis del lenguaje utilizado en clase, invitando a los estudiantes a identificar matices de significado y posibles equivalencias en distintos registros comunicativos.`,
+     `Tolerar el uso de estas expresiones en el intercambio cotidiano, entendiendo que forman parte del repertorio sociolingüístico del estudiantado y que su regulación puede darse de manera gradual.`], correct:2},
+
+ {n:25, q:`Un docente de tercer grado quiere fortalecer la comunicación efectiva de sus estudiantes en distintos contextos: presentaciones académicas, resolución de conflictos cotidianos y simulaciones de situaciones profesionales sencillas (entrevistas, atención al público, etc.). ¿Qué estrategia de aula permitiría desarrollar habilidades comunicativas transferibles a diversos contextos de interacción?`,
+  o:[`Evitar la enseñanza explícita de estrategias de comunicación, permitiendo que los estudiantes aprendan a expresarse por sí mismos sin guía.`,
+     `Enseñar a los estudiantes a comunicarse utilizando un solo registro formal, sin importar el contexto en el que se encuentren.`,
+     `Instruir a los estudiantes para que utilicen frases memorizadas en sus interacciones, sin enfatizar la construcción del significado en el diálogo.`,
+     `Fomentar el uso de un lenguaje claro, estructurado y adaptado a cada contexto, promoviendo la escucha activa y el respeto en la interacción oral y escrita.`], correct:3},
+
+ {n:26, q:`En una clase de matemáticas de primaria, el docente propone que los estudiantes formulen problemas a partir de situaciones cotidianas, los resuelvan y luego expliquen cómo pensaron para llegar a la solución. Observa que algunos llegan al resultado, pero no logran verbalizar ni representar las estrategias utilizadas; otros se limitan a repetir procedimientos sin justificar sus decisiones. El docente busca una dinámica que estimule el pensamiento crítico y creativo y, además, haga visible el proceso de razonamiento de cada estudiante. ¿Qué estrategia de aula permitiría promover la metacognición y evidenciar los procesos de pensamiento?`,
+  o:[`Presentar un problema y acordar en plenaria una única forma de resolverlo; después, todos aplican esa misma estrategia en otro ejercicio y comparten resultados para verificar que siguieron el proceso.`,
+     `Presentar un problema y pedir que propongan varias maneras de resolverlo, usando una tabla, dibujo u organizador; registran pasos y razones; al final comparan enfoques y explican cuál fue más claro y eficiente.`,
+     `Modelar un ejemplo paso a paso y dejar visibles en una cartulina los pasos a seguir; luego, pedir que resuelvan problemas similares aplicando ese procedimiento y comparen si obtienen el mismo resultado.`,
+     `Organizar grupos pequeños para resolver problemas de forma colaborativa, promoviendo que se apoyen entre sí; al finalizar, cada grupo presenta su respuesta y explica brevemente cómo llegó a ella.`], correct:1},
+
+ {n:27, q:`En el aula, un estudiante con discapacidad visual presenta dificultades para acceder a textos impresos, consignas escritas en la pizarra y fichas de trabajo. Aunque el docente repite las instrucciones de forma oral, el estudiante depende constantemente de sus compañeros para completar las actividades, lo que limita su autonomía y participación. El docente busca una respuesta pedagógica que promueva el acceso directo a la información curricular en condiciones de equidad. ¿Qué estrategia de adaptación sería más adecuada para garantizar su inclusión, autonomía y acceso efectivo a los contenidos?`,
+  o:[`Utilizar los mismos materiales con ajustes puntuales de acceso, esperando que el estudiante desarrolle progresivamente estrategias compensatorias propias, con apoyos específicos cuando sea necesario y sin modificar los indicadores de logro.`,
+     `Incorporar algunos apoyos y formatos alternativos de acceso al contenido, como recursos auditivos o herramientas tecnológicas de lectura, facilitando que el estudiante pueda seguir el desarrollo de las actividades junto al resto del grupo.`,
+     `Eximir al estudiante de actividades centradas en la lectura escrita, priorizando su participación en tareas orales y evaluaciones alternativas, de manera que pueda demostrar la apropiación de los contenidos conforme a sus posibilidades.`,
+     `Asignar un compañero tutor que apoye la lectura de textos durante la clase, complementando ocasionalmente con recursos tecnológicos adaptativos, a fin de facilitar la comprensión dentro de la dinámica regular del aula.`], correct:1},
+
+ {n:28, q:`En una escuela multigrado, el docente atiende a estudiantes de distintos niveles en el mismo espacio. Busca diseñar actividades que fortalezcan la memoria (recuperación de información, secuencias, conceptos clave) sin limitar la creatividad, y que promuevan la participación activa y el aprendizaje entre pares de diferentes edades. ¿Qué tipo de estrategia didáctica permitiría estimular simultáneamente la memoria y la creatividad en este contexto multigrado?`,
+  o:[`Solicitar a los estudiantes que copien definiciones de manera repetitiva sin aplicar los conceptos en actividades prácticas o creativas.`,
+     `Utilizar mapas mentales y esquemas visuales para organizar la información, junto con actividades de creación de historias o representaciones teatrales basadas en los conceptos aprendidos.`,
+     `Repetir información en voz alta múltiples veces, esperando que los estudiantes la memoricen sin necesidad de establecer conexiones con el conocimiento previo.`,
+     `Utilizar pruebas de opción múltiple para evaluar la memorización, sin incluir actividades de aplicación o resolución de problemas.`], correct:1},
+
+ {n:29, q:`En una comunidad rural de Monte Plata, el docente cuenta con acceso limitado a internet y con pocos materiales impresos actualizados. Al revisar su planificación trimestral, identifica actividades del currículo nacional que implican el uso de plataformas digitales, videos en línea y recursos interactivos. El docente busca alternativas que mantengan la intencionalidad pedagógica y los aprendizajes esperados, sin depender de la conectividad. ¿Qué ajuste curricular permitiría garantizar aprendizajes de calidad en este contexto, sin desvirtuar el enfoque por competencias?`,
+  o:[`Solicitar a los estudiantes que busquen información en internet y ofrecerles alternativas cuando no tengan acceso a dispositivos o conectividad.`,
+     `Reducir los contenidos del currículo y evitar la enseñanza de temas complejos, para que los estudiantes no enfrenten dificultades.`,
+     `Seguir estrictamente los materiales digitales sugeridos en el currículo sin hacer adaptaciones, aunque los estudiantes no tengan acceso a ellos.`,
+     `Diseñar estrategias didácticas que utilicen recursos disponibles en la comunidad, como la observación del entorno, la experimentación y la narración oral para reforzar los aprendizajes.`], correct:3},
+
+ {n:30, q:`En una actividad de lectura guiada en parejas, el docente conforma parejas con niveles de desempeño distintos para favorecer el apoyo entre pares. Durante el proceso, observa que el estudiante con mayor dominio de la lectura corrige de forma directa y descalificadora a su compañero, realiza las correcciones por él y avanza sin explicitar estrategias ni modelar el proceso. Esto ha generado desmotivación en el estudiante con mayores dificultades y una relación asimétrica que limita su participación y su autonomía. ¿Cuál debería ser el rol del docente y qué tipo de intervención favorecería un apoyo entre pares respetuoso, formativo y orientado a la autonomía lectora?`,
+  o:[`Modelar la lectura guiada entre pares, ejemplificando preguntas de profundización, tipos de comentarios constructivos y conductas a evitar, además de establecer roles rotativos que promuevan la equidad en la participación y el desarrollo progresivo de habilidades colaborativas.`,
+     `Reorganizar temporalmente la actividad en parejas, asumiendo el docente un rol más directivo en la mediación del proceso de lectura, ofreciendo retroalimentación inmediata y modelando estrategias de interacción que favorezcan la concentración y el cumplimiento de la tarea.`,
+     `Observar sistemáticamente los comportamientos, registrando incidencias relevantes para posteriormente realizar orientaciones generales al grupo, enfatizando expectativas conductuales compartidas y criterios comunes sobre el comportamiento adecuado.`,
+     `Permitir que entre ellos puedan resolver sus conflictos como compañeros, promoviendo la autonomía en la resolución de problemas.`], correct:0},
+
+ {n:31, q:`De acuerdo con el marco normativo del Sistema Educativo Dominicano, el docente busca garantizar la equidad educativa en su aula, reconociendo la diversidad de condiciones sociales, culturales y de aprendizaje de su estudiantado. ¿Qué práctica docente se alinea con el principio de equidad educativa establecido en las leyes y políticas educativas dominicanas?`,
+  o:[`Priorizar el reconocimiento del esfuerzo individual y la participación, valorando las propuestas del estudiantado y reduciendo la corrección de errores para preservar la motivación, independientemente del nivel de logro alcanzado.`,
+     `Aplicar el mismo enfoque metodológico y los mismos criterios de evaluación para todo el grupo, bajo el principio de trato igualitario, evitando ajustes diferenciados que puedan interpretarse como trato preferencial.`,
+     `Adaptar las estrategias de enseñanza y evaluación a partir de la evaluación diagnóstica y del conocimiento de intereses y necesidades del grupo, priorizando un mismo plan de actividades para todo el estudiantado sin realizar ajustes diferenciados.`,
+     `Adaptar la enseñanza y la evaluación según la evaluación diagnóstica y las necesidades del grupo, incorporando apoyos diferenciados y ajustes razonables para garantizar oportunidades reales de aprendizaje.`], correct:3},
+
+ {n:32, q:`En un aula del primer ciclo, el docente identifica que un estudiante con dislexia se esfuerza por seguir las actividades, pero se cansa rápidamente al leer consignas extensas, omite información clave y requiere apoyo constante para iniciar las tareas. Aunque comprende mejor cuando las explicaciones se presentan de forma oral o visual, las evaluaciones y materiales del aula están mayormente basados en textos largos y escritos continuos. Esto ha impactado su autonomía, su ritmo de trabajo y su participación en actividades colaborativas. ¿Qué adaptación pedagógica y de recursos favorecería de manera más efectiva su acceso al aprendizaje y su participación activa?`,
+  o:[`Mantener la misma metodología y realizar ajustes mínimos, asegurando que todos trabajen con los mismos materiales, e incorporar apoyos específicos en momentos clave para facilitar la comprensión sin modificar la estructura general de la clase.`,
+     `Mantener la misma metodología: se promovería la lectura frecuente en voz alta y la adaptación gradual de textos, incorporando apoyos visuales complementarios en momentos específicos.`,
+     `Mantener la coherencia del proceso, integrando apoyos como tipografías accesibles, textos adaptados y recursos audiovisuales para facilitar la comprensión y la participación del estudiante.`,
+     `Mantener la misma metodología: se propondrían actividades adicionales individuales, complementadas con apoyos concretos durante la actividad principal.`], correct:2},
+
+ {n:33, q:`En la asignatura de Ciencias Sociales, el docente propone actividades de trabajo en equipo para analizar situaciones del entorno. Sin embargo, varios estudiantes evitan participar, algunos por conflictos interpersonales no resueltos y otros por desinterés en la temática. Esto genera equipos desbalanceados, baja corresponsabilidad y productos grupales de poca calidad. El docente busca una estrategia que no solo reactive la participación, sino que también promueva habilidades genuinas de convivencia y colaboración. ¿Qué estrategia favorecería la implicación progresiva del estudiantado y la construcción de un trabajo cooperativo productivo?`,
+  o:[`Permitir que los estudiantes decidan libremente su nivel de participación y dirección del proceso, delegando en ellos la gestión del aprendizaje bajo el principio de autonomía, aun cuando esto implique niveles de compromiso diferenciados.`,
+     `Realizar actividades grupales manteniendo la metodología previamente establecida, priorizando la estabilidad organizativa del aula, la prevención de conflictos y la correcta ejecución del currículo.`,
+     `Organizar actividades grupales estructuradas y motivadoras, asignando roles definidos según fortalezas e intereses, promoviendo la interdependencia positiva, la corresponsabilidad y el aprendizaje colaborativo.`,
+     `Proponer recompensas individuales que incentiven una competencia saludable, orientando a cada estudiante a asumir metas personales de logro y autorregulación como vía principal para alcanzar su máximo rendimiento.`], correct:2},
+
+ {n:34, q:`En una clase de matemáticas del primer ciclo, la docente observa que un estudiante con discalculia presenta dificultades persistentes para reconocer números, establecer correspondencias uno a uno y comprender el sentido de las operaciones básicas. A pesar de recibir explicaciones repetidas, tiende a memorizar los pasos sin entenderlos y se frustra cuando las actividades avanzan hacia representaciones simbólicas. Además, le cuesta transferir lo aprendido a situaciones cotidianas (contar materiales, repartir objetos, comparar cantidades). ¿Qué tipo de apoyo pedagógico permitiría fortalecer la comprensión numérica y promover avances sostenidos?`,
+  o:[`Darle más tiempo para realizar las actividades que involucren el trabajo con números o la resolución de problemas, revisando y retroalimentando su trabajo de manera constante para asegurarse de que utilice los números adecuadamente.`,
+     `Facilitar material fotocopiado o preparado previamente para ayudarle a agilizar las asignaciones en el aula, favoreciendo su participación en el trabajo del grupo.`,
+     `Ofrecer materiales concretos para que el estudiante pueda realizar conteo y agrupación de cantidades como apoyo a las actividades matemáticas.`,
+     `Mantener su planificación de acuerdo con los lineamientos del diseño curricular para el grado, asegurando el principio de equidad y permitiendo que el estudiante, igual que los demás, tenga acceso a todos los recursos disponibles.`], correct:2},
+
+ {n:35, q:`Tras revisar un texto producido por sus estudiantes, el docente observa avances en la organización de ideas, pero también errores recurrentes en el uso de conectores y en la coherencia entre párrafos. Hasta ahora, la retroalimentación se ha centrado en señalar errores y asignar una calificación, lo que no siempre se traduce en mejoras en los trabajos posteriores. El docente busca una forma de retroalimentar que ayude a los estudiantes a comprender qué están logrando, qué necesitan mejorar y cómo pueden hacerlo por sí mismos. ¿Qué tipo de retroalimentación favorecería la autorregulación y el aprendizaje autónomo?`,
+  o:[`"Lograste organizar las ideas principales; ahora revisa el uso de conectores entre párrafos (por ejemplo, 'además', 'por eso') y corrige dos fragmentos específicos para mejorar la coherencia de tu texto."`,
+     `"Buen trabajo. Continúa así, se nota tu esfuerzo en la organización del texto y en mantener la idea principal a lo largo del escrito."`,
+     `"La próxima vez intenta hacerlo mejor; con más práctica podrás superar estas dificultades. Cuenta con mi apoyo para seguir avanzando."`,
+     `"El texto presenta varios errores y falta coherencia entre párrafos; necesitas esforzarte más para mejorar tus resultados en esta actividad."`], correct:0},
+
+ {n:36, q:`Un docente implementa una plataforma de aprendizaje en línea para reforzar los contenidos fuera del aula. Tras algunas semanas de uso, percibe que ciertos estudiantes acceden con frecuencia y completan las actividades, mientras que otros presentan baja participación o dificultades para interactuar con los recursos digitales. El docente desea evaluar si la plataforma realmente cumple con el objetivo de garantizar el acceso equitativo y la accesibilidad a la información curricular para todo el grupo. ¿Qué enfoque de evaluación permitiría valorar de manera más pertinente la equidad en el acceso, la usabilidad de la plataforma y su impacto en los aprendizajes?`,
+  o:[`Registrar la cantidad de veces que los estudiantes ingresan a la plataforma y analizar su participación, recogiendo ocasionalmente información sobre sus experiencias para contabilizar la utilización.`,
+     `Promover actividades lúdicas dentro de la plataforma para mantener el interés de los estudiantes, sin aplicar evaluaciones para que no se desmotiven, pero sí instrumentos de retroalimentación.`,
+     `Usar la plataforma principalmente como una alternativa para quienes deseen utilizarla (ya que algunos no tienen acceso a la tecnología), sin integrarla en la planificación ni evaluar su impacto en el aprendizaje.`,
+     `Realizar un seguimiento del uso de la plataforma, observando la participación de los estudiantes y aplicando encuestas para conocer sus experiencias y dificultades.`], correct:3},
+
+ {n:37, q:`El docente observa que algunos estudiantes tienen dificultades para organizar ideas, usar vocabulario preciso y estructurar textos tanto orales como escritos. Aunque participan en clase, sus producciones carecen de claridad y coherencia. ¿Qué estrategia didáctica permitiría fortalecer progresivamente la expresión oral y escrita de estos estudiantes?`,
+  o:[`Permitir que solo los estudiantes con mayor fluidez verbal participen en actividades de expresión oral, para no presionar al resto y que vayan a su propio ritmo.`,
+     `Fomentar la escritura creativa y la práctica de la expresión oral mediante presentaciones, debates y actividades de escritura reflexiva, involucrando a todos según sus niveles y posibilidades.`,
+     `Reducir la cantidad de actividades escritas y orales en el aula para evitar que los estudiantes se sientan presionados.`,
+     `Pedir a los estudiantes que memoricen textos sin necesidad de analizarlos ni producir sus propias ideas.`], correct:1},
+
+ {n:38, q:`En un aula de primer ciclo, la docente cuenta con un estudiante con discapacidad auditiva que se esfuerza por seguir las explicaciones orales, pero con frecuencia pierde información clave durante las consignas, las discusiones grupales y los momentos de retroalimentación. Esto ha comenzado a afectar su participación en actividades colaborativas y su autonomía para resolver tareas, ya que depende constantemente de la ayuda de sus compañeros. ¿Cuál sería la adaptación pedagógica más pertinente para garantizar el acceso al contenido, la participación activa y la equidad en el aprendizaje de este estudiante?`,
+  o:[`Ubicar al estudiante cerca del docente y reforzar la proyección de la voz, incorporando apoyos visuales puntuales en la pizarra para aclarar consignas específicas y promoviendo instancias breves de verificación de comprensión.`,
+     `Incorporar apoyos multimodales de forma ocasional (consignas visuales y resúmenes escritos), manteniendo la dinámica habitual de la clase sin ajustar las interacciones colaborativas, para dar autonomía al grupo.`,
+     `Regular temporalmente su participación en actividades grupales para no afectar el ritmo del curso, compensando con ejercicios de refuerzo adaptados fuera del trabajo colaborativo.`,
+     `Incorporar apoyos multimodales de forma sistemática (consignas visuales, resúmenes escritos y videos con subtítulos o apoyo en lengua de señas) y ajustar las interacciones para favorecer su participación activa.`], correct:3},
+
+ {n:39, q:`En distintas asignaturas, el docente ofrece comentarios generales como "bien" o "debes esforzarte más", pero nota que los estudiantes no saben exactamente qué cambiar ni cómo mejorar su desempeño en tareas futuras. Además, algunos repiten los mismos errores a pesar de haber recibido observaciones previas. El docente desea aplicar una estrategia de retroalimentación que se traduzca en acciones concretas para mejorar el desempeño. ¿Qué enfoque de retroalimentación permitiría orientar con claridad los próximos pasos de aprendizaje?`,
+  o:[`Corregir los errores, explicar las razones y ofrecer orientación sobre cómo mejorar, así podrá adquirir las competencias necesarias.`,
+     `Dar principalmente calificaciones numéricas y comentarios adicionales sobre el desempeño, solo a los que tuvieron dificultades, para que puedan mejorar su aprendizaje.`,
+     `Esperar hasta la evaluación final para dar retroalimentación, y así tendrán las oportunidades de mejora durante el proceso de aprendizaje.`,
+     `Brindar retroalimentación en sesiones individuales o grupales, resaltando aspectos positivos y proporcionando sugerencias claras para mejorar.`], correct:3},
+
+ {n:40, q:`La profesora observa que, durante los proyectos grupales, su grupo muestra un bajo nivel de compromiso: algunos cumplen de manera mínima, otros delegan en sus compañeros y la mayoría percibe las tareas como poco relevantes para su vida cotidiana. Aunque se cumplen los pasos del proyecto, no se evidencia apropiación de los aprendizajes ni entusiasmo por el trabajo colaborativo. Lucía desea rediseñar su enfoque para aumentar la motivación y fortalecer la colaboración. ¿Qué acción pedagógica permitiría incrementar el sentido de propósito del proyecto y favorecer una colaboración más auténtica entre los estudiantes?`,
+  o:[`Seleccionar objetivos que tengan conexión con intereses y situaciones reales de los estudiantes, logrando así que encuentren sentido y valor personal en las actividades.`,
+     `Definir objetivos que se ajusten principalmente a los contenidos del currículo oficial, priorizando la cobertura del programa por encima de la relevancia para el estudiante.`,
+     `Seleccionar objetivos uniformes para todo el grupo, adaptados a los intereses, ritmos y contextos de los estudiantes y alineados al currículo.`,
+     `Seleccionar objetivos enfocados en la adquisición de información, asegurando que los estudiantes adquieran datos relevantes que se relacionen con su vida cotidiana.`], correct:0}
+];
+
+/* === CONFIGURACIÓN: URL de tu Google Apps Script (termina en /exec) === */
+const SHEETS_URL="https://script.google.com/macros/s/AKfycbwIqHCCooMY9JNVQ9hb3llEAf7T9jMqTuNaBJfaQ93AVW5z32-N8OEs1NOUWYnsSM4vng/exec";
+
+const LETTERS=["A","B","C","D"];
+const TOTAL=QUESTIONS.length;
+const DURATION=2*60*60; // 2 horas en segundos
+
+let answers=new Array(TOTAL).fill(null);
+let current=0;
+let remaining=DURATION;
+let timerId=null;
+let userEmail="";
+let finished=false;
+
+/* ---------- INICIO / EMAIL ---------- */
+const emailInput=document.getElementById("email");
+const startBtn=document.getElementById("startBtn");
+const emailErr=document.getElementById("emailErr");
+const emailRe=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+emailInput.addEventListener("input",()=>{
+  const ok=emailRe.test(emailInput.value.trim());
+  startBtn.disabled=!ok;
+  if(ok) emailErr.style.display="none";
+});
+emailInput.addEventListener("keydown",e=>{ if(e.key==="Enter" && !startBtn.disabled) startBtn.click(); });
+
+startBtn.addEventListener("click",()=>{
+  const val=emailInput.value.trim();
+  if(!emailRe.test(val)){ emailErr.style.display="block"; return; }
+  userEmail=val;
+  document.getElementById("userTag").textContent=userEmail;
+  document.getElementById("inicio").style.display="none";
+  document.getElementById("examen").style.display="block";
+  buildNav();
+  render();
+  startTimer();
+  window.scrollTo(0,0);
+});
+
+/* ---------- TIMER ---------- */
+function fmt(s){
+  const h=Math.floor(s/3600);
+  const m=Math.floor((s%3600)/60);
+  const sec=s%60;
+  return h+":"+String(m).padStart(2,"0")+":"+String(sec).padStart(2,"0");
+}
+function startTimer(){
+  const clock=document.getElementById("clock");
+  const box=document.getElementById("timerBox");
+  clock.textContent=fmt(remaining);
+  timerId=setInterval(()=>{
+    remaining--;
+    clock.textContent=fmt(remaining);
+    if(remaining<=600 && remaining>120) box.classList.add("warn");
+    if(remaining<=120){ box.classList.remove("warn"); box.classList.add("danger"); }
+    if(remaining<=0){ clearInterval(timerId); finish(true); }
+  },1000);
+}
+
+/* ---------- NAVEGACIÓN ---------- */
+function buildNav(){
+  const g=document.getElementById("navgrid");
+  g.innerHTML="";
+  for(let i=0;i<TOTAL;i++){
+    const c=document.createElement("button");
+    c.className="nav-cell";
+    c.textContent=i+1;
+    c.addEventListener("click",()=>{current=i;render();});
+    g.appendChild(c);
+  }
+}
+function refreshNav(){
+  const cells=document.querySelectorAll(".nav-cell");
+  let count=0;
+  cells.forEach((c,i)=>{
+    c.classList.toggle("answered",answers[i]!==null);
+    c.classList.toggle("current",i===current);
+    if(answers[i]!==null) count++;
+  });
+  document.getElementById("answeredCount").textContent=count;
+}
+
+/* ---------- RENDER PREGUNTA ---------- */
+function render(){
+  const item=QUESTIONS[current];
+  document.getElementById("qnum").textContent="Ítem "+(current+1)+" de "+TOTAL;
+  document.getElementById("qtext").textContent=item.q;
+  const opts=document.getElementById("opts");
+  opts.innerHTML="";
+  item.o.forEach((txt,i)=>{
+    const d=document.createElement("div");
+    d.className="opt"+(answers[current]===i?" sel":"");
+    d.innerHTML='<span class="radio"></span><span class="opt-txt"><span class="ltr">'+LETTERS[i]+'.</span> '+txt+'</span>';
+    d.addEventListener("click",()=>{ answers[current]=i; render(); });
+    opts.appendChild(d);
+  });
+  document.getElementById("prevBtn").disabled=(current===0);
+  const nextBtn=document.getElementById("nextBtn");
+  nextBtn.textContent=(current===TOTAL-1)?"Ir al resumen":"Siguiente";
+  refreshNav();
+}
+document.getElementById("prevBtn").addEventListener("click",()=>{ if(current>0){current--;render();window.scrollTo(0,0);} });
+document.getElementById("nextBtn").addEventListener("click",()=>{
+  if(current<TOTAL-1){current++;render();window.scrollTo(0,0);}
+  else{ document.querySelector(".side .panel").scrollIntoView({behavior:"smooth"}); }
+});
+document.getElementById("finishBtn").addEventListener("click",()=>{
+  const pending=answers.filter(a=>a===null).length;
+  let msg="¿Deseas finalizar y ver tu calificación?";
+  if(pending>0) msg="Tienes "+pending+" ítem(s) sin responder (se contarán como incorrectos). ¿Finalizar de todos modos?";
+  if(confirm(msg)) finish(false);
+});
+
+/* ---------- RESULTADOS ---------- */
+function finish(byTime){
+  if(finished) return;
+  finished=true;
+  if(timerId) clearInterval(timerId);
+
+  let correct=0;
+  QUESTIONS.forEach((item,i)=>{ if(answers[i]===item.correct) correct++; });
+  const score=Math.round(correct*0.5*10)/10; // 0-20
+  const pct=Math.round((correct/TOTAL)*100);
+  const usedSec=DURATION-Math.max(remaining,0);
+
+  // Enviar resultados a Google Sheets (si está configurado)
+  sendToSheets({
+    correo:userEmail,
+    nota:(Number.isInteger(score)?score:score.toFixed(1)),
+    aciertos:correct,
+    total:TOTAL,
+    porcentaje:pct+"%",
+    tiempo:fmt(usedSec)+(byTime?" (tiempo agotado)":""),
+    respuestas:answers.map((a,i)=>(i+1)+":"+(a===null?"-":LETTERS[a])).join(" ")
+  });
+
+  document.getElementById("examen").style.display="none";
+  document.getElementById("resultados").style.display="block";
+
+  document.getElementById("resEmail").textContent=userEmail;
+  document.getElementById("scoreNum").textContent=Number.isInteger(score)?score:score.toFixed(1);
+  document.getElementById("correctNum").textContent=correct;
+  document.getElementById("pctNum").textContent=pct+"%";
+  document.getElementById("timeUsed").textContent=fmt(usedSec)+(byTime?" (tiempo agotado)":"");
+
+  // anillo
+  const circ=402;
+  document.getElementById("ringFg").style.strokeDashoffset=circ-(circ*score/20);
+
+  // mensaje por rango
+  let title,tag,tagColor,tagBg,body;
+  if(score>=18){
+    title="¡Excelente desempeño!"; tag="Sobresaliente"; tagColor="#1F7A5A"; tagBg="#E4F3EC";
+    body="Dominas con solidez el enfoque por competencias del MINERD: evaluación diagnóstica y formativa, ajustes razonables, inclusión y retroalimentación accionable. Estás muy bien preparado para la Evaluación de Rendimiento Profesional.";
+  }else if(score>=14){
+    title="¡Muy buen resultado!"; tag="Aprobado sólido"; tagColor="#0B3B47"; tagBg="#E2EEF0";
+    body="Tienes un buen manejo del marco pedagógico. Revisa la retroalimentación de los ítems fallados —sobre todo los de diferenciación, inclusión y tipo de evaluación— para afinar los detalles antes de la prueba oficial.";
+  }else if(score>=10){
+    title="Aprobado: hay camino por recorrer"; tag="Suficiente"; tagColor="#8A5A12"; tagBg="#F3E4CE";
+    body="Alcanzas el umbral, pero quedan aspectos clave por reforzar. Concéntrate en distinguir equidad de igualdad, en los ajustes razonables para necesidades específicas y en la retroalimentación que orienta los próximos pasos. La revisión de abajo te muestra exactamente dónde reforzar.";
+  }else{
+    title="A reforzar los fundamentos"; tag="En desarrollo"; tagColor="#B23B3B"; tagBg="#F8E7E5";
+    body="Conviene volver sobre los fundamentos del enfoque por competencias: evaluación formativa, atención a la diversidad, inclusión y mediación pedagógica. No te desanimes: usa la revisión detallada de cada ítem como guía de estudio y repite la prueba.";
+  }
+  document.getElementById("scoreTitle").textContent=title;
+  const mb=document.getElementById("msgBox");
+  mb.innerHTML='<span class="tag" style="color:'+tagColor+';background:'+tagBg+'">'+tag+'</span><div>'+body+'</div>';
+
+  buildReview();
+  window.scrollTo(0,0);
+}
+
+function sendToSheets(payload){
+  if(!SHEETS_URL) return; // sin configurar: el test funciona igual
+  try{
+    fetch(SHEETS_URL,{
+      method:"POST",
+      mode:"no-cors",
+      headers:{"Content-Type":"text/plain;charset=utf-8"},
+      body:JSON.stringify(payload)
+    });
+  }catch(err){ /* envío silencioso, no interrumpe al usuario */ }
+}
+
+function buildReview(){
+  const box=document.getElementById("review");
+  box.innerHTML="";
+  QUESTIONS.forEach((item,i)=>{
+    const ua=answers[i];
+    const ok=ua===item.correct;
+    const rev=document.createElement("div");
+    rev.className="rev";
+    let html='<div class="rev-head"><div class="rev-badge '+(ok?"ok":"bad")+'">'+(i+1)+'</div>'
+            +'<div class="rev-q">'+item.q+'</div></div>';
+    item.o.forEach((txt,j)=>{
+      let cls="rev-opt", mk="";
+      if(j===item.correct){ cls+=" correct"; mk='<span class="mk">Respuesta correcta</span>'; }
+      else if(j===ua && ua!==item.correct){ cls+=" wrong"; mk='<span class="mk">Tu respuesta</span>'; }
+      html+='<div class="'+cls+'"><span class="ltr">'+LETTERS[j]+'.</span><span>'+txt+'</span>'+mk+'</div>';
+    });
+    if(ua===null){ html+='<div style="font-size:13px;color:var(--bad);margin-top:6px">No respondiste este ítem.</div>'; }
+    rev.innerHTML=html;
+    box.appendChild(rev);
+  });
+}
+
+document.getElementById("retryBtn").addEventListener("click",()=>{
+  answers=new Array(TOTAL).fill(null);
+  current=0; remaining=DURATION; finished=false;
+  document.getElementById("timerBox").classList.remove("warn","danger");
+  document.getElementById("resultados").style.display="none";
+  document.getElementById("examen").style.display="block";
+  render(); startTimer(); window.scrollTo(0,0);
+});
+
+/* aviso al salir durante el examen */
+window.addEventListener("beforeunload",e=>{
+  if(document.getElementById("examen").style.display==="block" && !finished){
+    e.preventDefault(); e.returnValue="";
+  }
+});
+</script>
+</body>
+</html>
