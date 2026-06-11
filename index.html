@@ -96,7 +96,36 @@
   .exam-card .meta b{display:block;font-family:"Fraunces",serif;font-size:19px;color:var(--ink)}
   .exam-card .btn{width:100%}
   .sel-back{display:block;margin:26px auto 0;background:none;border:none;color:var(--muted);font-size:13.5px;cursor:pointer;text-decoration:underline;font-family:inherit}
-  @media (max-width:680px){ .sel-grid{grid-template-columns:1fr} #seleccion{padding:34px 16px} }
+  /* ---- Tarjeta de la Guía Práctica (ocupa toda la fila) ---- */
+  .guide-card{grid-column:1 / -1;flex-direction:row;align-items:center;gap:22px;flex-wrap:wrap}
+  .guide-card .gc-icon{width:58px;height:58px;border-radius:16px;background:var(--amber-soft);color:var(--amber);display:flex;align-items:center;justify-content:center;font-family:"Fraunces",serif;font-size:30px;font-weight:600;flex-shrink:0}
+  .guide-card .gc-body{flex:1;min-width:240px;display:flex;flex-direction:column}
+  .guide-card .desc{flex:none}
+  .guide-card .btn{width:auto;align-self:flex-start;padding-left:26px;padding-right:26px}
+  /* ---- Pantalla de la Guía Práctica ---- */
+  #guia{display:none;min-height:100vh;padding:48px 18px}
+  .guia-wrap{max-width:760px;margin:0 auto}
+  .guia-head{margin:0 auto 26px;text-align:center;max-width:640px}
+  .guia-head h1{font-family:"Fraunces",serif;font-size:29px;font-weight:600;line-height:1.16;margin:6px 0 10px}
+  .guia-head p{color:var(--muted);font-size:15px;margin:0}
+  .guia-card{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:24px 26px;margin:0 0 16px}
+  .guia-card h2{font-family:"Fraunces",serif;font-size:19px;font-weight:600;color:var(--ink);margin:0 0 10px;display:flex;align-items:center;gap:11px;line-height:1.25}
+  .guia-card h2 .num{font-size:13px;font-weight:700;color:#fff;background:var(--amber);min-width:25px;height:25px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;font-family:inherit}
+  .guia-card p{color:var(--ink);font-size:14.5px;line-height:1.6;margin:0 0 11px}
+  .guia-card p:last-child{margin-bottom:0}
+  .guia-card p.lead{color:var(--muted)}
+  .guia-card ul{margin:0 0 11px;padding-left:20px}
+  .guia-card li{font-size:14px;line-height:1.6;color:var(--ink);margin:0 0 5px}
+  .guia-card .label{font-weight:600;color:var(--ink);font-size:13.5px;margin:13px 0 8px}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 4px}
+  .chip{font-size:12.5px;padding:5px 12px;border-radius:20px;font-weight:500;line-height:1.2}
+  .chip.kw{background:var(--amber-soft);color:#8a5318}
+  .chip.good{background:var(--ok-bg);color:var(--ok)}
+  .chip.bad{background:var(--bad-bg);color:var(--bad)}
+  .guia-card.highlight{border-color:var(--amber)}
+  .guia-card .quote{font-family:"Fraunces",serif;font-size:17px;font-style:italic;color:var(--ink);line-height:1.4;margin:0 0 10px}
+  .guia-foot{display:flex;justify-content:center;margin:6px 0 0}
+  @media (max-width:680px){ .sel-grid{grid-template-columns:1fr} #seleccion{padding:34px 16px} .guide-card{flex-direction:column;align-items:flex-start} #guia{padding:34px 16px} }
 
   /* ---------- BARRA SUPERIOR EXAMEN ---------- */
   #examen{display:none}
@@ -277,8 +306,8 @@
   <div class="sel-wrap">
     <div class="sel-head">
       <p class="eyebrow">Paso 2 de 2 · Selecciona tu práctica</p>
-      <h1>¿Qué examen deseas realizar?</h1>
-      <p>Elige uno de los simulacros disponibles. Cada uno es independiente, con su propio tiempo y calificación en escala 0–20.</p>
+      <h1>¿Qué deseas realizar?</h1>
+      <p>Elige un simulacro de examen o repasa la guía práctica para aprender a resolver los estudios de caso. Cada examen es independiente, con su propio tiempo y calificación en escala 0–20.</p>
     </div>
     <div class="sel-grid">
       <div class="exam-card">
@@ -303,8 +332,138 @@
         </div>
         <button class="btn btn-primary" data-exam="2">Comenzar Examen 2</button>
       </div>
+      <div class="exam-card guide-card">
+        <div class="gc-icon">✦</div>
+        <div class="gc-body">
+          <span class="tagchip">Recurso de estudio</span>
+          <h2 class="display">Guía Práctica · Estudios de Caso</h2>
+          <p class="desc">Aprende estrategias para resolver los casos pedagógicos: el método de los cuatro filtros, la técnica de eliminación rápida, el análisis de los verbos de cada opción y la regla de oro.</p>
+          <button class="btn btn-primary" id="openGuide">Abrir la guía práctica</button>
+        </div>
+      </div>
     </div>
     <button class="sel-back" id="backToEmail">← Volver a cambiar el correo</button>
+  </div>
+</section>
+
+<!-- ============ PANTALLA: GUÍA PRÁCTICA ============ -->
+<section id="guia">
+  <div class="guia-wrap">
+    <div class="guia-head">
+      <p class="eyebrow" style="justify-content:center">Recurso de estudio</p>
+      <h1>Guía Práctica para Resolver Estudios de Caso</h1>
+      <p>Estrategias para analizar y responder los casos pedagógicos de las evaluaciones de desempeño docente.</p>
+    </div>
+
+    <div class="guia-card">
+      <h2>Método de los Cuatro Filtros</h2>
+      <p class="lead">Cuando analices una pregunta basada en un caso pedagógico, evalúa cada alternativa pasándola por estos cuatro filtros.</p>
+    </div>
+
+    <div class="guia-card">
+      <h2><span class="num">1</span>¿La opción considera el contexto?</h2>
+      <p>Las respuestas más adecuadas suelen partir de la realidad donde ocurre la situación educativa. Pregúntate:</p>
+      <ul>
+        <li>¿Toma en cuenta las necesidades de los estudiantes?</li>
+        <li>¿Considera los recursos disponibles?</li>
+        <li>¿Reconoce las características del centro educativo y la comunidad?</li>
+      </ul>
+      <div class="label">Palabras clave que suelen indicar una buena respuesta:</div>
+      <div class="chips">
+        <span class="chip kw">Contexto</span><span class="chip kw">Necesidades</span><span class="chip kw">Recursos disponibles</span><span class="chip kw">Características del estudiantado</span><span class="chip kw">Comunidad</span><span class="chip kw">Entorno educativo</span>
+      </div>
+    </div>
+
+    <div class="guia-card">
+      <h2><span class="num">2</span>¿Promueve la inclusión y la equidad?</h2>
+      <p>Las evaluaciones docentes suelen valorar las acciones que garantizan oportunidades de aprendizaje para todos los estudiantes. Pregúntate:</p>
+      <ul>
+        <li>¿La propuesta beneficia a todos?</li>
+        <li>¿Respeta las diferencias individuales?</li>
+        <li>¿Favorece la participación de todos los estudiantes?</li>
+      </ul>
+      <div class="label">Palabras clave favorables:</div>
+      <div class="chips">
+        <span class="chip kw">Inclusión</span><span class="chip kw">Participación</span><span class="chip kw">Equidad</span><span class="chip kw">Diversificación</span><span class="chip kw">Accesibilidad</span><span class="chip kw">Atención a la diversidad</span>
+      </div>
+    </div>
+
+    <div class="guia-card">
+      <h2><span class="num">3</span>¿Propone una acción pedagógica concreta?</h2>
+      <p>Una buena respuesta generalmente implica que el docente actúe para mejorar la situación. Desconfía de opciones que:</p>
+      <ul>
+        <li>Esperan sin intervenir.</li>
+        <li>Posponen la solución del problema.</li>
+        <li>Ignoran la situación presentada.</li>
+        <li>Trasladan completamente la responsabilidad a otras personas.</li>
+        <li>Evitan tomar decisiones pedagógicas.</li>
+      </ul>
+      <p><strong>Recuerda:</strong> el docente es un agente activo en la mejora de los procesos de aprendizaje.</p>
+    </div>
+
+    <div class="guia-card">
+      <h2><span class="num">4</span>¿Favorece el aprendizaje?</h2>
+      <p>La alternativa correcta suele ser aquella que contribuye al desarrollo y aprendizaje de los estudiantes sin excluir a nadie. Pregúntate:</p>
+      <ul>
+        <li>¿Ayuda a que los estudiantes aprendan mejor?</li>
+        <li>¿Promueve la participación activa?</li>
+        <li>¿Favorece el desarrollo de competencias?</li>
+      </ul>
+      <p>Si la respuesta es sí, probablemente estás ante una opción fuerte.</p>
+    </div>
+
+    <div class="guia-card">
+      <h2>Técnica de Eliminación Rápida</h2>
+      <p>Antes de seleccionar una respuesta, elimina aquellas opciones que contengan expresiones extremas como:</p>
+      <div class="chips">
+        <span class="chip bad">Siempre</span><span class="chip bad">Nunca</span><span class="chip bad">Exclusivamente</span><span class="chip bad">Únicamente</span><span class="chip bad">Sin considerar</span><span class="chip bad">Esperar</span><span class="chip bad">Eliminar</span><span class="chip bad">Reducir contenidos</span>
+      </div>
+      <p style="margin-top:11px">Estas expresiones suelen indicar respuestas poco flexibles y alejadas de las buenas prácticas educativas (salvo que exista una justificación pedagógica válida).</p>
+    </div>
+
+    <div class="guia-card">
+      <h2>Analiza los verbos de cada opción</h2>
+      <p class="lead">Los verbos suelen revelar la intención pedagógica de la respuesta.</p>
+      <div class="label">Verbos que generalmente indican respuestas más sólidas:</div>
+      <div class="chips">
+        <span class="chip good">Adaptar</span><span class="chip good">Diseñar</span><span class="chip good">Implementar</span><span class="chip good">Promover</span><span class="chip good">Integrar</span><span class="chip good">Diversificar</span><span class="chip good">Facilitar</span><span class="chip good">Favorecer</span><span class="chip good">Orientar</span><span class="chip good">Acompañar</span><span class="chip good">Fortalecer</span>
+      </div>
+      <div class="label">Verbos que suelen indicar respuestas más débiles:</div>
+      <div class="chips">
+        <span class="chip bad">Mantener</span><span class="chip bad">Esperar</span><span class="chip bad">Evitar</span><span class="chip bad">Limitar</span><span class="chip bad">Reducir</span><span class="chip bad">Suspender</span><span class="chip bad">Ignorar</span>
+      </div>
+    </div>
+
+    <div class="guia-card highlight">
+      <h2>Pregunta clave para resolver casos</h2>
+      <p>Antes de elegir una alternativa, pregúntate:</p>
+      <p class="quote">«¿Qué haría un docente reflexivo, inclusivo y centrado en el aprendizaje de sus estudiantes?»</p>
+      <p>Con frecuencia, la respuesta correcta será la que mejor responda a esta pregunta.</p>
+    </div>
+
+    <div class="guia-card">
+      <h2>Regla de oro</h2>
+      <p>La respuesta correcta rara vez es la más rápida, la más sencilla o la menos costosa. Por lo general, será la que:</p>
+      <ul>
+        <li>Parte de un diagnóstico de la situación.</li>
+        <li>Considera el contexto educativo.</li>
+        <li>Atiende la diversidad de los estudiantes.</li>
+        <li>Promueve la participación activa.</li>
+        <li>Favorece aprendizajes significativos.</li>
+        <li>Propone acciones pedagógicas concretas.</li>
+        <li>Utiliza la evaluación para mejorar los procesos de enseñanza y aprendizaje.</li>
+      </ul>
+    </div>
+
+    <div class="guia-card">
+      <h2>Consejo final</h2>
+      <p>En los estudios de caso, evita pensar únicamente en normas o procedimientos. Analiza la situación desde una perspectiva pedagógica y selecciona la alternativa que genere mayores oportunidades de aprendizaje, participación e inclusión para todos los estudiantes.</p>
+    </div>
+
+    <div class="guia-foot">
+      <button class="btn btn-primary" id="guiaToExam">Ir a elegir un examen</button>
+    </div>
+    <button class="sel-back" id="guiaBack">← Volver a la selección</button>
   </div>
 </section>
 
@@ -728,11 +887,11 @@ const QUESTIONS_2 = [
       `Flexibilizar la planificación diseñando actividades que puedan realizarse de manera autónoma y en distintos momentos, manteniendo las evaluaciones grupales presenciales en las fechas previstas para conservar el seguimiento común del avance del grupo.`,
       `Flexibilizar la planificación grabando o resumiendo las clases presenciales y compartiéndolas con los estudiantes que falten, dándoles seguimiento individual para que recuperen los contenidos perdidos y se pongan al día con el ritmo del grupo.`
     ], correct:0 },
-  { n:11, q:`En una clase de Lengua Española, el maestro pide a los estudiantes memorizar definiciones gramaticales para una prueba. Durante la revisión, nota que la mayoría repite las respuestas sin comprender los conceptos ni aplicarlos en la redacción de textos. Algunos estudiantes comentan que no entienden la utilidad práctica de lo que estudia. ¿Qué hacer el maestro para promover el desarrollo del pensamiento crítico y la comprensión significativa, en lugar de limitar el aprendizaje a la memorización mecánica?`, o:[
-      `Reorganizar la clase proponiendo prácticas frecuentes de aplicación después de cada definición, asegurando que los estudiantes utilicen correctamente las normas antes de la evaluación escrita.`,
-      `Reorganizar la clase acompañando cada definición con ejercicios de identificación y clasificación de las reglas, asegurando que los estudiantes las reconozcan con seguridad antes de la prueba escrita.`,
-      `Reorganizar la clase pidiendo que los estudiantes elaboren ejemplos propios de cada regla y los expliquen al grupo, comprobando oralmente que comprendieron las definiciones antes de la prueba escrita.`,
-      `Reorganizar la clase sustituyendo la prueba de definiciones por una redacción final donde apliquen lo aprendido, corrigiendo después los errores gramaticales que hayan cometido en el texto.`
+  { n:11, q:`En una clase de Ciencias Naturales, el maestro pide a los estudiantes memorizar las partes de la célula y sus funciones para una prueba. Durante la revisión, nota que la mayoría repite los términos sin comprender los procesos ni relacionarlos con ejemplos de la vida real. Algunos comentan que no entienden para qué sirve lo que estudian. ¿Qué hacer el maestro para promover el desarrollo del pensamiento crítico y la comprensión significativa, en lugar de limitar el aprendizaje a la memorización mecánica?`, o:[
+      `Reorganizar la clase proponiendo, después de cada concepto, actividades de aplicación que relacionen las funciones celulares con ejemplos y fenómenos reales, asegurando que los estudiantes comprendan los procesos antes de la evaluación escrita.`,
+      `Reorganizar la clase dedicando más tiempo a explicar las funciones celulares con esquemas adicionales y ejercicios guiados de identificación, asegurando que los estudiantes reconozcan correctamente cada parte antes de la evaluación escrita.`,
+      `Reorganizar la clase proponiendo ejercicios de relacionar y completar sobre las partes de la célula después de cada concepto, asegurando que los estudiantes apliquen los términos en actividades controladas antes de la evaluación escrita.`,
+      `Reorganizar la clase solicitando al final de la unidad un esquema donde apliquen lo aprendido sobre la célula y corrigiendo después los errores, asegurando que los estudiantes comprueben dónde fallaron antes de la evaluación escrita.`
     ], correct:0 },
   { n:12, q:`En una clase de Ciencias Sociales, los estudiantes debaten sobre una problemática local, pero el docente interrumpe con frecuencia para imponer su punto de vista. Al finalizar, varios expresan que no se sienten escuchados ni motivados a compartir sus opiniones. ¿Qué hacer el maestro para fomentar la expresión crítica y argumentativa de los estudiantes, reconociendo sus perspectivas y promoviendo un diálogo respetuoso y constructivo?`, o:[
       `Reorganizar la dinámica del debate promoviendo turnos equitativos de intervención, validando las distintas perspectivas y guiando la discusión mediante preguntas que impulsen la argumentación fundamentada.`,
@@ -752,11 +911,11 @@ const QUESTIONS_2 = [
       `Adaptar los materiales reemplazando los textos escritos por explicaciones orales y audios de los contenidos, de modo que la estudiante no dependa de la lectura y pueda seguir el ritmo general de la clase.`,
       `Adaptar los materiales ampliando los textos y solicitando a un compañero que la apoye leyéndole las actividades escritas cuando lo necesite, para favorecer su participación en el desarrollo de la clase.`
     ], correct:0 },
-  { n:15, q:`Durante una clase de Lengua Española, el maestro explica los tipos de texto con ejemplos extensos y vocabulario técnico, demostrando dominio del tema. Sin embargo, los estudiantes no logran relacionar la información con sus prácticas comunicativas diarias, y el aprendizaje se vuelve memorístico. ¿Qué hacer el maestro para transformar su conocimiento del contenido en experiencias de aprendizaje significativas que conecten con la vida cotidiana de los estudiantes?`, o:[
-      `Solicitar que los estudiantes elaboren ejemplos propios de cada tipo de texto explicado en clase, siguiendo los modelos presentados, con el fin de consolidar la comprensión de las características formales trabajadas.`,
-      `Ampliar la explicación incorporando más ejemplos formales y comparaciones entre los distintos tipos de texto, de modo que los estudiantes comprendan con mayor claridad las diferencias y consoliden la comprensión de sus características formales.`,
-      `Entregar a los estudiantes ejemplos ya elaborados de cada tipo de texto para que los analicen e identifiquen sus características formales, con el fin de consolidar la comprensión de los modelos trabajados antes de la evaluación.`,
-      `Solicitar que los estudiantes copien y repasen los modelos de cada tipo de texto presentados en clase, siguiendo su estructura, con el fin de familiarizarse con las características formales trabajadas durante la unidad.`
+  { n:15, q:`Durante una clase de Matemática, el maestro explica las fracciones con definiciones formales y numerosos ejemplos abstractos, demostrando dominio del tema. Sin embargo, los estudiantes no logran relacionar las fracciones con situaciones de su vida diaria y el aprendizaje se vuelve mecánico. ¿Qué hacer el maestro para transformar su conocimiento del contenido en experiencias de aprendizaje significativas que conecten con la vida cotidiana de los estudiantes?`, o:[
+      `Reorganizar la secuencia didáctica partiendo de situaciones cotidianas donde se usan fracciones —recetas, compras, mediciones— y, a partir de esas experiencias, construir con los estudiantes los conceptos, promoviendo la reflexión sobre su uso y su utilidad real.`,
+      `Reorganizar la secuencia didáctica incorporando más ejemplos formales y comparaciones entre distintos tipos de fracciones, de modo que los estudiantes comprendan con mayor claridad las diferencias y dominen mejor los procedimientos.`,
+      `Reorganizar la secuencia didáctica presentando situaciones cotidianas con fracciones ya resueltas para que los estudiantes las analicen e identifiquen el procedimiento aplicado, relacionando así la teoría con ejemplos de su realidad.`,
+      `Reorganizar la secuencia didáctica explicando primero las fracciones con ejemplos y proponiendo después ejercicios ambientados en compras y recetas, para que los estudiantes apliquen lo aprendido en situaciones cercanas a su vida.`
     ], correct:0 },
   { n:16, q:`En un grupo de alfabetización inicial de EPJA, una estudiante de 30 años muestra un ritmo de aprendizaje más rápido que el resto. Aprende a leer con fluidez en pocas semanas y comienza a apoyar espontáneamente a sus compañeros. Sin embargo, la maestra mantiene el mismo ritmo y actividades para todo el grupo, lo que provoca que la estudiante pierda motivación y empiece a ausentarse. ¿Qué hacer el maestro para aprovechar las altas capacidades de la estudiante y promover su desarrollo, manteniendo a la vez la equidad y el interés del grupo?`, o:[
       `Ajustar la planificación ofreciendo actividades más desafiantes y significativas para ella, permitiéndole trabajar de manera más autónoma y apoyar a sus compañeros de forma organizada, de modo que continúe avanzando sin afectar el ritmo ni el equilibrio del grupo.`,
@@ -788,11 +947,11 @@ const QUESTIONS_2 = [
       `Organizar el apoyo entre pares de forma estructurada, con consignas claras y materiales diferenciados por nivel, manteniendo fijos los agrupamientos durante todo el proceso para que cada pareja se consolide y avance de manera estable sin generar desigualdad.`,
       `Organizar el apoyo entre pares asignando a los estudiantes avanzados, con consignas claras, la tarea de revisar y corregir el trabajo de los principiantes, supervisando que lo hagan correctamente para que la colaboración fortalezca a todo el grupo.`
     ], correct:0 },
-  { n:21, q:`En un centro EPJA, los docentes trabajan de manera aislada. Cada uno planifica sus clases sin coordinación con los demás, lo que genera duplicación de contenidos y desmotivación en los estudiantes. El maestro de Lengua observa la situación, pero no propone reuniones ni estrategias conjuntas para mejorar la coherencia pedagógica del equipo. ¿Qué hacer el maestro para fomentar la colaboración entre colegas y contribuir a la consolidación de un equipo de trabajo integrado que beneficie los aprendizajes de los estudiantes?`, o:[
-      `Proponer espacios periódicos de encuentro orientados a revisar la secuencia curricular, coordinar contenidos y acordar estrategias comunes que den mayor coherencia al proceso formativo.`,
-      `Proponer espacios de encuentro orientados a revisar la secuencia curricular y coordinar contenidos cuando surjan duplicaciones puntuales, sin establecer reuniones periódicas que den coherencia continua al proceso formativo.`,
-      `Compartir su planificación con los demás docentes por escrito para que cada uno revise la secuencia y coordine sus contenidos por su cuenta, sin necesidad de reunirse de forma periódica como equipo.`,
-      `Solicitar a la dirección que distribuya los contenidos entre los docentes y coordine la secuencia curricular, evitando así la duplicación sin requerir espacios de coordinación entre pares.`
+  { n:21, q:`En un centro EPJA, cada docente evalúa con criterios distintos y los estudiantes reciben mensajes contradictorios sobre lo que se espera de ellos en cada asignatura. Una maestra observa esta falta de acuerdos comunes, pero no impulsa reuniones ni estrategias conjuntas para unificar los criterios del equipo. ¿Qué hacer la maestra para fomentar la colaboración entre colegas y construir un equipo de trabajo integrado que dé coherencia a la evaluación y beneficie los aprendizajes de los estudiantes?`, o:[
+      `Proponer espacios periódicos de encuentro orientados a acordar criterios e indicadores de evaluación comunes y a compartir estrategias, de modo que el equipo dé mayor coherencia al proceso formativo y a lo que se espera de los estudiantes.`,
+      `Proponer encuentros con los colegas únicamente cuando los estudiantes reclamen por las diferencias de criterios, para resolver esos casos puntuales, sin establecer espacios periódicos que unifiquen la evaluación de todo el equipo.`,
+      `Acordar criterios e indicadores de evaluación comunes solo con los docentes de su misma área y compartir esos acuerdos con el resto del equipo por escrito, sin integrarlos al trabajo conjunto del centro.`,
+      `Solicitar a la dirección que defina los criterios e indicadores de evaluación para todas las asignaturas y los entregue a los docentes, de modo que sea esta quien dé coherencia al proceso sin requerir coordinación entre pares.`
     ], correct:0 },
   { n:22, q:`En una clase nocturna de EPJA, varios estudiantes llegan cansados del trabajo y muestran poco interés en participar. Durante las actividades en grupo, algunos prefieren trabajar solos, mientras que otros no aportan al equipo. El maestro nota que el ambiente se vuelve pasivo y el progreso es lento. ¿Qué hacer el maestro para motivar a los estudiantes y fomentar la cooperación entre ellos, aprovechando sus experiencias laborales y de vida?`, o:[
       `Reorganizar las actividades proponiendo tareas relacionadas con sus experiencias laborales y situaciones reales, asignando roles claros dentro de los equipos y promoviendo espacios de diálogo donde puedan compartir saberes, de modo que se sientan valorados y aumenten la cooperación y el compromiso.`,
@@ -806,11 +965,11 @@ const QUESTIONS_2 = [
       `Incluir los temas de seguridad y desempleo como ejemplos al desarrollar los contenidos de educación ciudadana, relacionándolos con la unidad, sin abrir espacios para que los estudiantes los analicen ni propongan ideas desde su propia realidad.`,
       `Sugerir que los estudiantes investiguen los temas de seguridad y desempleo y los relacionen con los contenidos de educación ciudadana como tarea, revisando los resultados en una sesión de cierre sin modificar la planificación de la unidad.`
     ], correct:0 },
-  { n:24, q:`En un centro EPJA nocturno, varios estudiantes han comenzado a faltar con frecuencia debido a nuevos horarios laborales. El maestro sigue aplicando la misma planificación, que incluye actividades grupales presenciales y evaluaciones semanales. Como resultado, algunos estudiantes se atrasan y pierden el hilo de los contenidos. ¿Qué hacer el maestro para ajustar su planificación y garantizar la continuidad del aprendizaje de los estudiantes que enfrentan cambios en sus circunstancias personales y laborales?`, o:[
-      `Flexibilizar la planificación incorporando materiales de apoyo y actividades que puedan realizarse de manera autónoma o en distintos momentos, estableciendo mecanismos de seguimiento para que los estudiantes continúen aprendiendo aunque no asistan regularmente.`,
-      `Flexibilizar la planificación incorporando materiales de apoyo para que los estudiantes que falten repasen los contenidos por su cuenta, manteniendo las actividades previstas del grupo y atendiendo sus dudas cuando logren asistir a clase.`,
-      `Flexibilizar la planificación rediseñando algunas actividades para que puedan realizarse a distancia y en distintos momentos, conservando las evaluaciones grupales presenciales en las fechas establecidas para mantener el seguimiento común del grupo.`,
-      `Flexibilizar la planificación acordando con cada estudiante que falta un plan personal de recuperación de los contenidos perdidos, con materiales de apoyo, para que se ponga al día por su cuenta cuando regrese a las clases.`
+  { n:24, q:`En un centro EPJA rural, un grupo de estudiantes trabaja en labores agrícolas de temporada y debe ausentarse durante varias semanas en época de cosecha. El maestro mantiene su planificación habitual, con actividades presenciales secuenciadas y evaluaciones en fechas fijas, por lo que estos estudiantes pierden continuidad y se atrasan. ¿Qué hacer el maestro para ajustar su planificación y garantizar la continuidad del aprendizaje de los estudiantes que enfrentan ausencias prolongadas por su trabajo?`, o:[
+      `Flexibilizar la planificación incorporando materiales de apoyo y actividades que puedan realizarse de manera autónoma o en distintos momentos, estableciendo mecanismos de seguimiento para que los estudiantes continúen aprendiendo durante sus ausencias por la cosecha.`,
+      `Flexibilizar la planificación entregando materiales de apoyo para que los estudiantes que se ausenten repasen los contenidos por su cuenta, manteniendo las actividades y evaluaciones del grupo y atendiendo sus dudas cuando regresen de la cosecha.`,
+      `Flexibilizar la planificación diseñando actividades que puedan realizarse de manera autónoma durante las ausencias, manteniendo las evaluaciones presenciales en las fechas previstas para conservar el seguimiento común del avance del grupo.`,
+      `Flexibilizar la planificación acordando con cada estudiante un plan de recuperación de los contenidos trabajados durante su ausencia, con materiales de apoyo, para que se ponga al día por su cuenta cuando regrese a las clases.`
     ], correct:0 },
   { n:25, q:`En una clase, los alumnos llevan a cabo un proyecto de creación de productos artesanales como parte de una estrategia de aprendizaje activo. El docente indica que está implementando el enfoque por competencias; sin embargo, su enfoque se centra principalmente en la calidad del producto final y en el cumplimiento de la tarea, sin acompañar de forma sistemática el proceso, detallar los desempeños esperados ni fomentar espacios de reflexión sobre lo aprendido, las decisiones tomadas y las dificultades encontradas. ¿Qué acciones tomar el docente para aplicar adecuadamente el enfoque por competencias, guiando el proceso formativo, promoviendo la metacognición y favoreciendo la transferencia de lo aprendido a nuevas circunstancias?`, o:[
       `Acompañar sistemáticamente el proceso, explicitando los desempeños esperados, incorporando momentos de reflexión sobre lo aprendido, las decisiones y las dificultades, y proponiendo situaciones nuevas donde los estudiantes transfieran las competencias a otros contextos.`,
@@ -824,17 +983,17 @@ const QUESTIONS_2 = [
       `Dar continuidad y seguimiento a los apoyos registrando periódicamente los avances de los estudiantes y ajustando las adaptaciones según sus necesidades, aplicando de forma autónoma las recomendaciones recibidas sin volver a articular con el equipo psicopedagógico y de orientación.`,
       `Dar continuidad a los apoyos coordinando reuniones periódicas con el equipo psicopedagógico para revisar los casos y registrar los avances, delegando en ese equipo el seguimiento dentro del aula y las adaptaciones que requieren los estudiantes a lo largo del proceso.`
     ], correct:0 },
-  { n:27, q:`En una clase de Ciencias Sociales, los estudiantes tienden a depender totalmente del maestro para resolver los ejercicios. Ante un trabajo en equipo, uno de los grupos no logra organizarse: algunos esperan instrucciones y otros no participan. El docente observa que los estudiantes no valoran su propio papel en el proceso de aprendizaje. ¿Qué hacer el maestro para fortalecer la autonomía y el sentido de corresponsabilidad de los estudiantes, promoviendo que reconozcan su rol activo en el aprendizaje individual y grupal?`, o:[
+  { n:27, q:`En una clase de Formación Integral, los estudiantes esperan que el maestro les indique cada paso y no toman decisiones por sí mismos. Cuando se les da libertad para organizar una actividad en equipo, se muestran inseguros, algunos no participan y el grupo no logra avanzar. El docente observa que no reconocen su propio papel en el aprendizaje. ¿Qué hacer el maestro para fortalecer la autonomía y el sentido de corresponsabilidad de los estudiantes, promoviendo que reconozcan su rol activo en el aprendizaje individual y grupal?`, o:[
       `Organizar el trabajo con roles definidos, metas claras y momentos de autoevaluación grupal, promoviendo que los estudiantes asuman responsabilidad y reflexionen sobre su papel en el aprendizaje.`,
-      `Organizar el trabajo con roles definidos y metas claras, manteniendo el trabajo en equipo pero interviniendo con mayor frecuencia para orientar las decisiones del grupo y recordarles que deben participar activamente en la tarea.`,
-      `Organizar el trabajo con metas claras y resolver junto al grupo los primeros ejercicios como modelo, para que luego los estudiantes imiten el procedimiento de manera independiente y asuman su papel en el aprendizaje.`,
-      `Organizar el trabajo con roles definidos y metas claras, evaluando al final el resultado de cada grupo para reconocer a quienes más participaron, de modo que los estudiantes se esfuercen por asumir un rol activo en la tarea.`
+      `Organizar el trabajo con roles definidos y metas claras, interviniendo con mayor frecuencia para orientar las decisiones del grupo y recordarles que deben participar, hasta asegurar que todos cumplan su parte de la actividad.`,
+      `Organizar el trabajo con metas claras y resolver junto al grupo los primeros pasos de la actividad como modelo, para que luego los estudiantes imiten el procedimiento de manera independiente y asuman su papel.`,
+      `Organizar el trabajo con roles definidos y metas claras, evaluando al final el resultado de cada grupo para reconocer a quienes más participaron, de modo que los estudiantes se esfuercen por asumir un rol activo.`
     ], correct:0 },
-  { n:28, q:`En un centro EPJA nocturno, varios estudiantes han comenzado a faltar con frecuencia debido a nuevos horarios laborales. El maestro sigue aplicando la misma planificación, que incluye actividades grupales presenciales y evaluaciones semanales. Como resultado, algunos estudiantes se atrasan y pierden el hilo de los contenidos. ¿Qué hacer el maestro para ajustar su planificación y garantizar la continuidad del aprendizaje de los estudiantes que enfrentan cambios en sus circunstancias personales y laborales?`, o:[
-      `Flexibilizar la planificación incorporando materiales de apoyo y actividades que puedan realizarse de manera autónoma o en distintos momentos, estableciendo mecanismos de seguimiento para que los estudiantes continúen aprendiendo aunque no asistan regularmente.`,
-      `Flexibilizar las evaluaciones ofreciendo oportunidades adicionales de recuperación a quienes falten, manteniendo las evaluaciones semanales y las actividades grupales presenciales con los mismos requisitos establecidos para el resto del grupo.`,
-      `Mantener la planificación prevista e incorporar materiales de apoyo para que los estudiantes que falten recuperen los contenidos revisando sus cuadernos o con apoyo de sus compañeros cuando logren asistir nuevamente a clase.`,
-      `Flexibilizar la planificación incorporando materiales de apoyo para el estudio autónomo de quienes falten, manteniendo las actividades grupales presenciales como eje central del curso y el seguimiento del avance en las clases.`
+  { n:28, q:`En un centro EPJA nocturno, una estudiante cambió de turno en su empleo y ahora llega tarde a varias clases, perdiéndose las actividades grupales del inicio. El maestro mantiene la misma dinámica y la secuencia de contenidos tal como están, por lo que ella se va quedando rezagada respecto al grupo. ¿Qué hacer el maestro para ajustar su planificación y garantizar la continuidad del aprendizaje de los estudiantes que enfrentan cambios en sus horarios laborales?`, o:[
+      `Flexibilizar la organización de las actividades para que la estudiante pueda incorporarse y trabajar los contenidos en distintos momentos, ofreciéndole materiales de apoyo y un seguimiento que le permita continuar aprendiendo pese a sus cambios de horario.`,
+      `Mantener la dinámica de la clase e incorporar materiales de apoyo para que la estudiante repase por su cuenta las actividades del inicio que se pierde, atendiendo sus dudas cuando logre llegar a tiempo a clase.`,
+      `Diseñar algunas actividades que la estudiante pueda realizar de manera autónoma antes de llegar a clase, manteniendo sin cambios las actividades grupales del inicio para no afectar la dinámica del resto del grupo.`,
+      `Grabar o resumir las actividades del inicio de la clase y compartirlas con la estudiante, dándole seguimiento individual para que recupere lo que se pierde y se ponga al día con el ritmo del grupo.`
     ], correct:0 },
   { n:29, q:`En una clase de Ciencias Naturales, el docente utiliza un video descargado de internet para explicar el tema de los ecosistemas. Durante la proyección, algunos estudiantes señalan que la información parece desactualizada y que ciertas imágenes no corresponden al contenido explicado. A pesar de ello, el maestro continúa con la actividad sin verificar la fuente ni abrir un espacio para analizar la confiabilidad del recurso. ¿Qué hacer el docente para evaluar previamente la calidad, actualidad y exactitud de los recursos tecnológicos que emplea, y cómo podría convertir esta situación en una oportunidad para fortalecer la alfabetización informacional y el pensamiento crítico de los estudiantes?`, o:[
       `Establecer criterios para seleccionar y verificar previamente los recursos (fuente, autoría, actualidad y exactitud) y aprovechar la situación para enseñar a los estudiantes a contrastar la información y valorar la confiabilidad de las fuentes, fortaleciendo su alfabetización informacional y su pensamiento crítico.`,
@@ -842,11 +1001,11 @@ const QUESTIONS_2 = [
       `Detener el video y aprovechar la situación para comentar con los estudiantes los datos que parecen desactualizados, aclarando él mismo cuál es la información correcta y por qué, de modo que el grupo reciba contenidos exactos sin que sean ellos quienes contrasten y valoren la confiabilidad de las fuentes.`,
       `Aprovechar la situación para pedir a los estudiantes que busquen otros videos sobre el tema y elijan el que les parezca de mejor calidad, comparando distintas versiones del contenido, sin establecer criterios claros que orienten la verificación de la fuente, la autoría y la actualidad.`
     ], correct:0 },
-  { n:30, q:`En un centro EPJA, los docentes trabajan de manera aislada. Cada uno planifica sus clases sin coordinación con los demás, lo que genera duplicación de contenidos y desmotivación en los estudiantes. El maestro de Lengua observa la situación, pero no propone reuniones ni estrategias conjuntas para mejorar la coherencia pedagógica del equipo. ¿Qué hacer el maestro para fomentar la colaboración entre colegas y contribuir a la consolidación de un equipo de trabajo integrado que beneficie los aprendizajes de los estudiantes?`, o:[
-      `Proponer espacios periódicos de encuentro orientados a revisar la secuencia curricular, coordinar contenidos y acordar estrategias comunes que den mayor coherencia al proceso formativo del equipo.`,
-      `Ajustar su propia planificación para diferenciar los contenidos que trabaja y revisar por su cuenta la secuencia, resolviendo la duplicación desde su práctica individual sin promover reuniones ni cambios en la dinámica de trabajo del centro.`,
-      `Elaborar un cronograma con la secuencia de contenidos y entregarlo a los colegas para que coordinen sus temas, confiando en que cada uno lo seguirá por su cuenta sin necesidad de espacios periódicos de encuentro del equipo.`,
-      `Plantear la revisión de la secuencia curricular y la coordinación de contenidos únicamente cuando surjan conflictos por la duplicación, para no generar incomodidad entre los colegas ni alterar la dinámica habitual del centro.`
+  { n:30, q:`En un centro EPJA, los docentes rara vez comparten sus prácticas ni conversan sobre las dificultades del aula; cada uno las resuelve por su cuenta y se pierden oportunidades de aprender unos de otros. Un maestro valora esas experiencias del equipo, pero no impulsa espacios de intercambio ni de observación entre colegas. ¿Qué hacer el maestro para fomentar la colaboración entre pares y contribuir a la consolidación de un equipo de trabajo integrado que beneficie los aprendizajes de los estudiantes?`, o:[
+      `Proponer espacios periódicos de intercambio de prácticas y de observación entre pares, orientados a analizar las experiencias del aula, aprender unos de otros y acordar estrategias comunes que fortalezcan al equipo y al proceso formativo.`,
+      `Proponer el intercambio de prácticas entre los docentes solo cuando alguno enfrente una dificultad concreta en el aula, para resolver ese caso puntual, sin establecer espacios periódicos de observación y análisis entre pares.`,
+      `Compartir por escrito con los colegas las estrategias que mejor le funcionan en el aula para que cada uno las adapte por su cuenta, sin necesidad de reunirse a observar ni analizar las prácticas en equipo.`,
+      `Solicitar a la dirección que organice jornadas de intercambio entre los docentes y defina qué prácticas deben compartirse, de modo que sea esta quien impulse la colaboración sin requerir el compromiso directo de los pares.`
     ], correct:0 },
   { n:31, q:`En una clase de Educación Cívica, los estudiantes participan en un debate sobre los derechos laborales. La información utilizada proviene exclusivamente del libro de texto, cuyos ejemplos resultan desactualizados y poco conectados con la realidad actual. Durante la discusión, algunos estudiantes mencionan casos recientes que han visto en redes sociales y medios digitales; sin embargo, el maestro no integra estas referencias en el análisis, limitándose al contenido formal del texto. ¿Qué hacer el maestro para integrar recursos digitales actualizados de manera pedagógicamente pertinente y promover un aprendizaje significativo que articule los contenidos curriculares con la realidad social de los estudiantes, fortaleciendo el pensamiento crítico y la alfabetización digital?`, o:[
       `Seleccionar e integrar de manera planificada recursos digitales actualizados y confiables, articulando los contenidos del currículo con casos reales del contexto actual y guiando el análisis crítico y la contrastación de fuentes, para promover un aprendizaje significativo y fortalecer la alfabetización digital.`,
@@ -854,11 +1013,11 @@ const QUESTIONS_2 = [
       `Seleccionar e integrar de manera planificada videos y noticias recientes sobre derechos laborales para complementar el libro y articularlos con los contenidos del currículo, presentándolos él mismo al grupo sin guiar el análisis crítico ni la contrastación de las fuentes con los estudiantes.`,
       `Actualizar de manera planificada el material del libro con ejemplos y casos más recientes del contexto seleccionados por el docente, articulándolos con los contenidos del currículo, pero manteniendo el texto como única fuente del análisis sin promover la contrastación digital de la información.`
     ], correct:0 },
-  { n:32, q:`En un grupo de EPJA de segundo ciclo, los estudiantes tienen diferentes experiencias laborales: algunos trabajan en comercio, otros en construcción o gastronomía. El docente enseña nociones de medidas y proporciones, pero no aprovecha los saberes previos de los estudiantes ni sus contextos laborales. ¿Qué hacer el maestro para integrar los conocimientos previos y las experiencias de los estudiantes en la enseñanza de los contenidos curriculares, favoreciendo un aprendizaje funcional y contextualizado?`, o:[
-      `Partir de las experiencias laborales de los estudiantes y proponer actividades del comercio, la construcción o la cocina, para que apliquen las medidas y proporciones en situaciones reales que conocen, favoreciendo un aprendizaje funcional y contextualizado.`,
-      `Dividir el grupo según el ritmo de cada estudiante y asignar ejercicios diferenciados del contenido de medidas y proporciones, para que cada uno avance a su nivel, sin partir de las experiencias laborales ni proponer situaciones reales de sus oficios.`,
-      `Continuar explicando las medidas y proporciones siguiendo el libro y asegurándose de que todos comprendan bien las fórmulas, para relacionarlas después con prácticas reales del comercio, la construcción o la cocina cuando el contenido esté dominado.`,
-      `Partir de las experiencias laborales de los estudiantes y proponer una evaluación práctica al final de la unidad, para comprobar si aplican correctamente las medidas y proporciones en situaciones reales del comercio, la construcción o la cocina.`
+  { n:32, q:`En un grupo de EPJA, el maestro enseña el cálculo de porcentajes y descuentos únicamente con ejercicios del libro, sin considerar que varios estudiantes trabajan en ventas y manejan a diario descuentos, ofertas y comisiones. Como resultado, no relacionan lo que aprenden con lo que ya saben hacer en su trabajo. ¿Qué hacer el maestro para integrar los conocimientos previos y las experiencias de los estudiantes en la enseñanza de los contenidos curriculares, favoreciendo un aprendizaje funcional y contextualizado?`, o:[
+      `Partir de las experiencias laborales de los estudiantes y proponer actividades con descuentos, ofertas y comisiones reales de su trabajo, para que apliquen el cálculo de porcentajes en situaciones que ya conocen, favoreciendo un aprendizaje funcional y contextualizado.`,
+      `Partir de las experiencias de los estudiantes y explicar los porcentajes con ejemplos de descuentos y comisiones del comercio, para que vean cómo se aplican en ese tipo de trabajo antes de resolver los ejercicios del libro.`,
+      `Pedir a los estudiantes que comenten cómo calculan los descuentos y comisiones en su trabajo y, a partir de ese intercambio inicial, continuar con los ejercicios del libro para que dominen el procedimiento de los porcentajes.`,
+      `Dividir el grupo según el nivel de cada estudiante y asignar ejercicios de porcentajes del libro diferenciados por dificultad, para que cada uno avance a su ritmo aplicando el contenido a situaciones cercanas a su trabajo.`
     ], correct:0 },
   { n:33, q:`Durante una clase, el profesor revisa los ejercicios en la pizarra y señala los errores que han cometido los estudiantes, pero no proporciona una explicación del procedimiento correcto ni ofrece orientación sobre cómo mejorar. Algunos estudiantes se sienten desalentados y reducen su participación en la práctica siguiente, interpretando la corrección como un indicativo de fracaso en lugar de una oportunidad para aprender. Frente a esta situación, ¿qué acciones tomar el docente para convertir la corrección en una experiencia educativa, brindando una retroalimentación clara, orientadora y motivadora que fortalezca la comprensión y fomente la mejora continua?`, o:[
       `Acompañar la corrección con explicaciones del proceso y ofrecer orientaciones específicas sobre cómo mejorar, convirtiendo la retroalimentación en una experiencia clara, orientadora y motivadora que fomente la mejora continua.`,
@@ -878,11 +1037,11 @@ const QUESTIONS_2 = [
       `Vincular el lenguaje técnico del área con situaciones cotidianas ilustrando cada concepto de voltaje, resistencia o circuito con ejemplos de instalaciones eléctricas reales, para que los estudiantes asocien la teoría con prácticas conocidas, sin partir de los saberes empíricos que ya dominan para sistematizarlos.`,
       `Vincular el lenguaje técnico del área reforzando primero el vocabulario formal mediante repaso y ejercicios para que los estudiantes dominen los conceptos, relacionándolos después con algunas situaciones prácticas del oficio que conocen de su experiencia laboral cotidiana.`
     ], correct:0 },
-  { n:36, q:`En una clase, los alumnos llevan a cabo un proyecto de creación de productos artesanales como parte de una estrategia de aprendizaje activo. El docente indica que está implementando el enfoque por competencias; sin embargo, su enfoque se centra principalmente en la calidad del producto final y en el cumplimiento de la tarea, sin acompañar de forma sistemática el proceso, detallar los desempeños esperados ni fomentar espacios de reflexión sobre lo aprendido, las decisiones tomadas y las dificultades encontradas. ¿Qué acciones tomar el docente para aplicar adecuadamente el enfoque por competencias, guiando el proceso formativo, promoviendo la metacognición y favoreciendo la transferencia de lo aprendido a nuevas circunstancias?`, o:[
+  { n:36, q:`En una clase, los estudiantes desarrollan un huerto escolar como parte de una estrategia de aprendizaje activo. El docente afirma estar aplicando el enfoque por competencias; sin embargo, se centra principalmente en que el huerto quede bien y en cumplir las tareas, sin explicitar los desempeños esperados, acompañar de forma sistemática el proceso ni generar espacios de reflexión sobre lo aprendido, las decisiones tomadas y las dificultades. ¿Qué acciones tomar el docente para aplicar adecuadamente el enfoque por competencias, guiando el proceso formativo, promoviendo la metacognición y favoreciendo la transferencia de lo aprendido a nuevas circunstancias?`, o:[
       `Acompañar el proceso de manera sistemática, explicitando los desempeños esperados, generando espacios de reflexión sobre lo aprendido y las dificultades, y proponiendo nuevas situaciones donde los estudiantes transfieran las competencias a contextos distintos.`,
-      `Acompañar el proceso de manera sistemática solicitando que los estudiantes expliquen oralmente cómo elaboraron el producto y qué pasos siguieron, para comprobar que comprendieron el procedimiento, sin explicitar los desempeños esperados ni proponer situaciones nuevas de transferencia.`,
-      `Acompañar el proceso de manera sistemática manteniendo el proyecto tal como está y añadiendo una rúbrica final que evalúe la calidad y la presentación del producto terminado, sin generar espacios de reflexión sobre lo aprendido y las dificultades encontradas.`,
-      `Acompañar el proceso de manera sistemática dedicando las siguientes sesiones a perfeccionar los productos y mejorar su presentación, priorizando el resultado final sobre los espacios de reflexión y la transferencia de lo aprendido a contextos distintos.`
+      `Acompañar el proceso de manera sistemática solicitando que los estudiantes expliquen cómo organizaron el huerto y qué pasos siguieron, para comprobar que comprendieron el procedimiento, sin explicitar los desempeños esperados ni proponer situaciones de transferencia.`,
+      `Acompañar el proceso de manera sistemática manteniendo el proyecto tal como está y añadiendo una rúbrica final que evalúe el estado del huerto y la presentación del trabajo, sin generar espacios de reflexión sobre lo aprendido y las dificultades.`,
+      `Acompañar el proceso de manera sistemática dedicando las siguientes sesiones a mejorar el huerto y su presentación, priorizando el resultado final sobre los espacios de reflexión y la transferencia de lo aprendido a contextos distintos.`
     ], correct:0 },
   { n:37, q:`Al concluir el ciclo académico, el profesor debe otorgar las calificaciones finales. No obstante, se da cuenta de que carece de evidencias organizadas y completas sobre el avance de algunos alumnos, dado que no registró de manera sistemática los resultados de las evaluaciones formativas ni los productos que forman parte del portafolio. Esto complica la tarea de emitir un juicio evaluativo basado en criterios definidos y coherentes con el currículo. ¿Qué acciones tomar el docente para llevar a cabo una evaluación sumativa de manera adecuada, garantizando que las calificaciones reflejen el verdadero progreso de los estudiantes, el cumplimiento de las competencias y los criterios establecidos?`, o:[
       `Revisar los productos y registros disponibles, aplicar instrumentos alineados con los criterios curriculares y organizar la evidencia conforme a las competencias evaluadas, para emitir una calificación que refleje el progreso real de cada estudiante.`,
@@ -890,11 +1049,11 @@ const QUESTIONS_2 = [
       `Revisar las evidencias disponibles y organizarlas conforme a las competencias evaluadas, completando los vacíos con una estimación del desempeño habitual de cada estudiante en clase, para emitir una calificación que se aproxime a su progreso real.`,
       `Asignar a todo el grupo una valoración basada en el desempeño general observado durante el ciclo y en los criterios del currículo, de modo que la calificación refleje el progreso del grupo sin perjudicar a quienes cuentan con menos evidencias registradas.`
     ], correct:0 },
-  { n:38, q:`Durante una unidad sobre educación ciudadana, los estudiantes plantean inquietudes sobre los recientes cambios en su comunidad (problemas de seguridad y desempleo). Sin embargo, el maestro continúa con las actividades previstas en la planificación sin incorporar estos temas que motivan al grupo. ¿Qué hacer el maestro para revisar y adaptar la planificación tomando en cuenta los intereses, preocupaciones y características del contexto social actual de los estudiantes?`, o:[
-      `Revisar la planificación e incluir actividades que traten los temas de seguridad y desempleo, relacionándolos con los contenidos de educación ciudadana y fomentando que los estudiantes los analicen y propongan ideas desde su propia realidad.`,
-      `Organizar una charla adicional sobre los cambios en la comunidad a partir de las inquietudes del grupo, de modo que se sientan escuchados, sin modificar las actividades centrales de la unidad de educación ciudadana ya establecida en la planificación.`,
-      `Sugerir que los estudiantes investiguen los temas de seguridad y desempleo que les interesan como tarea complementaria y los relacionen con la unidad, manteniendo el desarrollo de los contenidos de educación ciudadana planificados en clase.`,
-      `Dedicar unos minutos al inicio de cada clase para comentar las noticias sobre seguridad y desempleo que motivan al grupo, sin integrarlas a los contenidos de educación ciudadana ni a las actividades previstas en la unidad.`
+  { n:38, q:`Durante una unidad de Ciencias, los estudiantes manifiestan preocupación por la contaminación del río cercano y la acumulación de basura en su barrio. Sin embargo, el maestro continúa con las actividades previstas en la planificación sin incorporar estas situaciones que movilizan al grupo. ¿Qué hacer el maestro para revisar y adaptar la planificación tomando en cuenta los intereses, preocupaciones y características del contexto socioambiental de los estudiantes?`, o:[
+      `Revisar la planificación e incluir actividades que aborden la contaminación del río y los residuos del barrio, relacionándolas con los contenidos de la unidad y fomentando que los estudiantes los analicen y propongan acciones desde su propia realidad.`,
+      `Organizar una charla adicional sobre los problemas ambientales del barrio a partir de las inquietudes del grupo, de modo que se sientan escuchados, sin modificar las actividades centrales de la unidad de Ciencias ya establecida.`,
+      `Sugerir que los estudiantes investiguen la contaminación del río y la basura del barrio como tarea complementaria y la relacionen con la unidad, manteniendo el desarrollo de los contenidos planificados en clase.`,
+      `Dedicar unos minutos al inicio de cada clase para comentar los problemas ambientales que motivan al grupo, sin integrarlos a los contenidos de la unidad ni a las actividades previstas.`
     ], correct:0 },
   { n:39, q:`Durante una clase de Matemática Aplicada, el maestro propone ejercicios sobre el uso del dinero. Al observar, nota que una estudiante con experiencia laboral ayuda espontáneamente a sus compañeros a resolver los cálculos. El grupo avanza con entusiasmo, pero el docente no aprovecha esta dinámica para formalizar una estrategia de pares que consolide el aprendizaje colaborativo. ¿Qué hacer el maestro para aprovechar la disposición de los estudiantes y convertirla en una estrategia sistemática de aprendizaje entre pares que potencie la participación y la comprensión de todos?`, o:[
       `Organizar el trabajo en parejas o pequeños grupos definiendo roles, alternando quién explica y quién resuelve, con momentos de puesta en común y seguimiento docente, para sistematizar el aprendizaje entre pares y consolidar la comprensión de todos.`,
@@ -902,11 +1061,11 @@ const QUESTIONS_2 = [
       `Organizar el trabajo en parejas o pequeños grupos permitiendo que la estudiante con experiencia siga ayudando de manera espontánea a sus compañeros mientras resuelven los ejercicios, sin definir roles ni formalizar una estrategia sistemática de aprendizaje entre pares.`,
       `Felicitar a la estudiante por su disposición a ayudar a sus compañeros y continuar con los ejercicios previstos en parejas, para aprovechar el entusiasmo del grupo sin alterar la dinámica de la clase ni formalizar una estrategia adicional.`
     ], correct:0 },
-  { n:40, q:`Durante una unidad sobre educación ciudadana, los estudiantes plantean inquietudes sobre los recientes cambios en su comunidad (problemas de seguridad y desempleo). Sin embargo, el maestro continúa con las actividades previstas en la planificación sin incorporar estos temas que motivan al grupo. ¿Qué hacer el maestro para revisar y adaptar la planificación tomando en cuenta los intereses, preocupaciones y características del contexto social actual de los estudiantes?`, o:[
-      `Revisar la planificación e incluir actividades que traten los temas de seguridad y desempleo, relacionándolos con los contenidos de educación ciudadana y fomentando que los estudiantes los analicen y propongan ideas desde su propia realidad.`,
-      `Organizar una charla adicional sobre los cambios en la comunidad a partir de las inquietudes del grupo, manteniendo sin cambios las actividades centrales de la unidad de educación ciudadana ya planificadas para no afectar la secuencia prevista.`,
-      `Asignar a los estudiantes un trabajo de investigación sobre seguridad y desempleo para entregar al final de la unidad, relacionándolo con los contenidos de educación ciudadana, sin discutirlo en clase ni modificar las actividades previstas en la planificación.`,
-      `Mencionar brevemente los temas de seguridad y desempleo como ejemplos al desarrollar los contenidos de educación ciudadana, continuando con la secuencia de la unidad prevista sin abrir espacios para que los estudiantes los analicen desde su propia realidad.`
+  { n:40, q:`Durante una unidad de Formación Integral, los estudiantes plantean inquietudes sobre el aumento del costo de la vida y su impacto en las familias de la comunidad. Sin embargo, el maestro continúa con las actividades previstas en la planificación sin incorporar estos temas que interesan al grupo. ¿Qué hacer el maestro para revisar y adaptar la planificación tomando en cuenta los intereses, preocupaciones y características del contexto social y económico de los estudiantes?`, o:[
+      `Revisar la planificación e incluir actividades que aborden el aumento del costo de la vida y su impacto en las familias, relacionándolas con los contenidos de la unidad y fomentando que los estudiantes los analicen y propongan ideas desde su propia realidad.`,
+      `Organizar una charla adicional sobre el aumento del costo de la vida a partir de las inquietudes del grupo, de modo que se sientan escuchados, sin modificar las actividades centrales de la unidad ya establecida en la planificación.`,
+      `Asignar a los estudiantes un trabajo de investigación sobre el costo de la vida en la comunidad para entregar al final de la unidad, relacionándolo con los contenidos, sin discutirlo en clase ni modificar las actividades previstas.`,
+      `Mencionar brevemente el aumento del costo de la vida como ejemplo al desarrollar los contenidos de la unidad y continuar con la secuencia prevista, sin abrir espacios para que los estudiantes lo analicen desde su propia realidad.`
     ], correct:0 },
 ];
 
@@ -986,6 +1145,7 @@ function launchExam(id){
   document.getElementById("seleccion").style.display="none";
   document.getElementById("inicio").style.display="none";
   document.getElementById("resultados").style.display="none";
+  document.getElementById("guia").style.display="none";
   document.getElementById("examen").style.display="block";
   buildNav();
   render();
@@ -1000,6 +1160,21 @@ document.getElementById("backToEmail").addEventListener("click",()=>{
   document.getElementById("inicio").style.display="flex";
   window.scrollTo(0,0);
 });
+
+/* ---------- GUÍA PRÁCTICA ---------- */
+function showGuide(){
+  document.getElementById("seleccion").style.display="none";
+  document.getElementById("guia").style.display="block";
+  window.scrollTo(0,0);
+}
+function backToSeleccion(){
+  document.getElementById("guia").style.display="none";
+  document.getElementById("seleccion").style.display="block";
+  window.scrollTo(0,0);
+}
+document.getElementById("openGuide").addEventListener("click",showGuide);
+document.getElementById("guiaBack").addEventListener("click",backToSeleccion);
+document.getElementById("guiaToExam").addEventListener("click",backToSeleccion);
 
 /* ---------- TIMER ---------- */
 function fmt(s){
