@@ -103,7 +103,6 @@
   .guide-card .desc{flex:none}
   .guide-card .btn{width:auto;align-self:flex-start;padding-left:26px;padding-right:26px}
   /* ---- Pantalla de la Guía Práctica ---- */
-  #guia{display:none;min-height:100vh;padding:48px 18px}
   .guia-wrap{max-width:760px;margin:0 auto}
   .guia-head{margin:0 auto 26px;text-align:center;max-width:640px}
   .guia-head h1{font-family:"Fraunces",serif;font-size:29px;font-weight:600;line-height:1.16;margin:6px 0 10px}
@@ -125,7 +124,17 @@
   .guia-card.highlight{border-color:var(--amber)}
   .guia-card .quote{font-family:"Fraunces",serif;font-size:17px;font-style:italic;color:var(--ink);line-height:1.4;margin:0 0 10px}
   .guia-foot{display:flex;justify-content:center;margin:6px 0 0}
-  @media (max-width:680px){ .sel-grid{grid-template-columns:1fr} #seleccion{padding:34px 16px} .guide-card{flex-direction:column;align-items:flex-start} #guia{padding:34px 16px} }
+  /* ---- Tablas comparativas dentro de la guía ---- */
+  .tbl-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:4px 0 4px}
+  .guia-card table{width:100%;border-collapse:collapse;font-size:13px;min-width:420px}
+  .guia-card th,.guia-card td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top;line-height:1.45}
+  .guia-card th{background:var(--bg);font-weight:600;color:var(--ink);font-size:12.5px}
+  .guia-card td{color:var(--ink)}
+  .guia-card td strong{color:var(--ink)}
+  .guia-card .formula{font-family:"Fraunces",serif;font-size:15px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:11px 14px;margin:0 0 10px;line-height:1.5}
+  .guia-card .formula b{color:var(--amber);font-weight:700}
+  #guia,#guiaElementos{display:none;min-height:100vh;padding:48px 18px}
+  @media (max-width:680px){ .sel-grid{grid-template-columns:1fr} #seleccion{padding:34px 16px} .guide-card{flex-direction:column;align-items:flex-start} #guia,#guiaElementos{padding:34px 16px} }
 
   /* ---------- BARRA SUPERIOR EXAMEN ---------- */
   #examen{display:none}
@@ -341,6 +350,15 @@
           <button class="btn btn-primary" id="openGuide">Abrir la guía práctica</button>
         </div>
       </div>
+      <div class="exam-card guide-card">
+        <div class="gc-icon">◆</div>
+        <div class="gc-body">
+          <span class="tagchip">Recurso de estudio</span>
+          <h2 class="display">Guía Práctica · Elementos Curriculares</h2>
+          <p class="desc">Aprende a distinguir cada elemento del diseño curricular del MINERD: competencias, contenidos, indicadores, situación de aprendizaje, estrategias y evaluación. Incluye el método de los 5 pasos, la firma del verbo, la escalera del alcance y tablas de referencia rápida.</p>
+          <button class="btn btn-primary" id="openGuideElementos">Abrir la guía de elementos</button>
+        </div>
+      </div>
     </div>
     <button class="sel-back" id="backToEmail">← Volver a cambiar el correo</button>
   </div>
@@ -464,6 +482,315 @@
       <button class="btn btn-primary" id="guiaToExam">Ir a elegir un examen</button>
     </div>
     <button class="sel-back" id="guiaBack">← Volver a la selección</button>
+  </div>
+</section>
+
+<!-- ============ PANTALLA: GUÍA DE ELEMENTOS CURRICULARES ============ -->
+<section id="guiaElementos">
+  <div class="guia-wrap">
+    <div class="guia-head">
+      <p class="eyebrow" style="justify-content:center">Recurso de estudio</p>
+      <h1>Guía Práctica de los Elementos Curriculares</h1>
+      <p>Cómo distinguir cada elemento del diseño curricular del MINERD: competencias, contenidos, indicadores, situación de aprendizaje, estrategias y evaluación.</p>
+    </div>
+
+    <div class="guia-card">
+      <h2>Por qué estos ítems son difíciles</h2>
+      <p class="lead">La EDD no solo mide si conoces tu área: evalúa si dominas el lenguaje técnico del currículo dominicano.</p>
+      <p>El truco es que las cuatro opciones suelen ser verdaderas «a medias»: cada distractor describe bien <em>algún</em> elemento, pero solo uno corresponde al enunciado que te presentan. La pregunta real no es «¿qué es un indicador?», sino «¿<em>este</em> enunciado es un indicador, una competencia o un contenido?».</p>
+      <p><strong>Idea central:</strong> para acertar no basta con memorizar definiciones. Hay que leer el enunciado, detectar su forma gramatical y medir su alcance. La respuesta casi siempre está en cómo está redactado, no en cuál opción «suena más bonita».</p>
+    </div>
+
+    <div class="guia-card">
+      <h2>El método de los 5 pasos</h2>
+      <p class="lead">Aplica esta secuencia a cada ítem de clasificación hasta que se vuelva automática.</p>
+    </div>
+
+    <div class="guia-card">
+      <h2><span class="num">1</span>Aísla el enunciado (ignora el caso)</h2>
+      <p>Tapa mentalmente el contexto («Una coordinadora le muestra…»). Solo ambienta, no cambia la respuesta. Quédate con el enunciado entre comillas y léelo dos veces.</p>
+    </div>
+
+    <div class="guia-card">
+      <h2><span class="num">2</span>Identifica la forma gramatical</h2>
+      <p>La forma en que está escrito el enunciado revela qué tipo de elemento es. Es la pista más poderosa:</p>
+      <div class="tbl-scroll">
+        <table>
+          <thead><tr><th>Si el enunciado…</th><th>Suele ser…</th></tr></thead>
+          <tbody>
+            <tr><td>Es una frase nominal: «Características de…», «Resolución de…», «Valoración de…»</td><td>Un <strong>contenido</strong> (mira la primera palabra para el tipo)</td></tr>
+            <tr><td>Empieza con «El estudiante será capaz de…» y es muy amplio</td><td>Una <strong>competencia</strong> (fundamental o específica)</td></tr>
+            <tr><td>Empieza con un verbo observable en presente: «Identifica», «Resuelve», «Reconoce»</td><td>Un <strong>indicador de logro</strong></td></tr>
+            <tr><td>Describe un escenario o problema del entorno</td><td>Una <strong>situación de aprendizaje</strong></td></tr>
+            <tr><td>Nombra un método o tarea de aula</td><td>Una <strong>estrategia</strong> o actividad</td></tr>
+            <tr><td>Habla de medir, valorar o calificar el aprendizaje</td><td><strong>Evaluación</strong> (diagnóstica / formativa / sumativa)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="guia-card">
+      <h2><span class="num">3</span>Mide el alcance</h2>
+      <p>Cuando dudes entre competencia, indicador y propósito, pregúntate: ¿hasta dónde llega este enunciado? El alcance los ordena como una escalera, de lo más amplio a lo más puntual.</p>
+      <div class="tbl-scroll">
+        <table>
+          <thead><tr><th>Alcance</th><th>Elemento</th><th>Pista</th></tr></thead>
+          <tbody>
+            <tr><td>Toda la formación, transversal a todas las áreas</td><td>Competencia fundamental</td><td>No menciona ningún área; abarca la vida entera.</td></tr>
+            <tr><td>Todo un área o asignatura</td><td>Competencia específica</td><td>Menciona o implica un área (Lengua, Matemática…).</td></tr>
+            <tr><td>Una unidad de aprendizaje</td><td>Indicador de logro</td><td>Evidencia concreta y medible al cerrar una unidad.</td></tr>
+            <tr><td>Una sola sesión de clase</td><td>Propósito del encuentro</td><td>Se delimita a una clase puntual.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="guia-card">
+      <h2><span class="num">4</span>Si es contenido, aplica la prueba del saber</h2>
+      <p>Cuando la pregunta es «¿de qué tipo de contenido se trata?», fíjate en la primera palabra del enunciado:</p>
+      <ul>
+        <li><strong>¿Pide CONOCER</strong> (hechos, conceptos, características)? → Conceptual.</li>
+        <li><strong>¿Pide HACER</strong> (un procedimiento, aplicar, resolver, construir)? → Procedimental.</li>
+        <li><strong>¿Pide VALORAR, RESPETAR, ASUMIR</strong> (una actitud o valor)? → Actitudinal.</li>
+      </ul>
+      <p>Y recuerda: «metodológico» y «transversal» <em>no</em> son tipos de contenido. Si aparecen, descártalos.</p>
+    </div>
+
+    <div class="guia-card">
+      <h2><span class="num">5</span>Confirma eliminando por el «porque»</h2>
+      <p>Cada opción trae una justificación («…porque describe lo que se espera en una sesión»). La opción correcta es aquella cuya <em>etiqueta</em> y cuya <em>justificación</em> coinciden con la forma y el alcance que detectaste. Descarta las que describen bien un elemento que NO corresponde al enunciado: son verdaderas como definición, pero falsas para este enunciado.</p>
+    </div>
+
+    <div class="guia-card highlight">
+      <h2>La firma del verbo</h2>
+      <p>Quizá la pista más rentable de todo el examen. El mismo tema cambia de elemento según cómo se redacte el verbo:</p>
+      <div class="formula">«Resolución de…» (nominal) = <b>CONTENIDO</b><br>«Resuelve…» (presente observable) = <b>INDICADOR</b><br>«Será capaz de resolver…» (amplio) = <b>COMPETENCIA</b></div>
+      <p>Ejemplo: «Resolución de problemas…» es un contenido procedimental; «Resuelve problemas…» es un indicador de logro; «Será capaz de resolver problemas en cualquier área…» es una competencia fundamental. La forma del verbo decide.</p>
+    </div>
+
+    <div class="guia-card">
+      <h2>La escalera del alcance</h2>
+      <div class="formula">Vida entera ▸ <b>Competencia fundamental</b><br>Área ▸ <b>Competencia específica</b><br>Unidad ▸ <b>Indicador de logro</b><br>Sesión ▸ <b>Propósito del encuentro</b></div>
+      <p>A mayor amplitud, más arriba en la escalera. Es la herramienta que resuelve casi todas las confusiones competencia–indicador–propósito.</p>
+    </div>
+
+    <div class="guia-head" style="margin-top:34px">
+      <h1 style="font-size:24px">Los siete elementos, uno por uno</h1>
+      <p>Para cada uno: qué es, las palabras señal que lo delatan, un ejemplo tipo prueba y con qué se confunde.</p>
+    </div>
+
+    <div class="guia-card">
+      <h2>1 · Competencias fundamentales</h2>
+      <p><strong>Qué es.</strong> Las grandes capacidades que el sistema quiere desarrollar en todos los estudiantes, en todas las áreas y niveles. Son transversales, amplias e integrales: no pertenecen a una asignatura. Funcionan como la brújula del currículo.</p>
+      <p>Son siete: Comunicativa; Pensamiento Lógico, Creativo y Crítico; Resolución de Problemas; Científica y Tecnológica; Ética y Ciudadana; Desarrollo Personal y Espiritual; Ambiental y de la Salud.</p>
+      <div class="label">Palabras señal:</div>
+      <div class="chips">
+        <span class="chip kw">de manera efectiva</span><span class="chip kw">en diversas situaciones de su vida</span><span class="chip kw">a lo largo de su vida</span><span class="chip kw">en cualquier contexto</span><span class="chip kw">será capaz de…</span>
+      </div>
+      <p class="quote">«El estudiante será capaz de comunicarse de manera efectiva, oral y por escrito, en diversas situaciones de su vida personal, académica y social.»</p>
+      <p><strong>Con qué se confunde.</strong> Con la específica (la fundamental es transversal a todo; la específica vive dentro de un área) y con el indicador (la fundamental es amplia y no medible en una unidad).</p>
+    </div>
+
+    <div class="guia-card">
+      <h2>2 · Competencias específicas</h2>
+      <p><strong>Qué es.</strong> Las competencias fundamentales concretadas dentro de un área (Lengua, Matemática, Sociales, Naturaleza…). Integran conocimientos, habilidades y actitudes propios del área. Son el puente entre lo general y lo concreto.</p>
+      <div class="label">Palabras señal:</div>
+      <div class="chips">
+        <span class="chip kw">nombre de un área</span><span class="chip kw">comprensión lectora</span><span class="chip kw">resolución de problemas matemáticos</span><span class="chip kw">integra varios saberes</span><span class="chip kw">aplicar… relacionando…</span>
+      </div>
+      <p class="quote">«El estudiante aplica estrategias de comprensión lectora para identificar los elementos de textos narrativos, relacionándolos con su vida cotidiana.»</p>
+      <p><strong>Con qué se confunde.</strong> Con la fundamental (si menciona o implica un área, es específica) y con el indicador (la específica integra varios saberes con alcance amplio; el indicador es una evidencia puntual y medible).</p>
+    </div>
+
+    <div class="guia-card">
+      <h2>3 · Contenidos: los tres tipos</h2>
+      <p>Los contenidos son los saberes que median el desarrollo de las competencias. Es la clasificación que más se pregunta en la EDD.</p>
+      <div class="tbl-scroll">
+        <table>
+          <thead><tr><th>Tipo</th><th>Saber</th><th>Qué incluye</th><th>Palabras señal</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Conceptual</strong></td><td>Conocer</td><td>Hechos, datos, conceptos, principios, características, clasificaciones.</td><td>«Características de…», «Concepto de…», «Tipos de…», «Diferencias entre…».</td></tr>
+            <tr><td><strong>Procedimental</strong></td><td>Hacer</td><td>Procedimientos, técnicas, estrategias, destrezas, operaciones.</td><td>«Aplicación de…», «Uso de…», «Resolución de…», «Construcción de…», «Elaboración de…».</td></tr>
+            <tr><td><strong>Actitudinal</strong></td><td>Ser / convivir</td><td>Actitudes, valores, normas, disposiciones.</td><td>«Valoración de…», «Respeto a…», «Apreciación de…», «Disposición para…».</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>La pregunta de oro:</strong> ¿el enunciado pide CONOCER (conceptual), HACER (procedimental) o VALORAR (actitudinal)? La primera palabra casi siempre lo dice.</p>
+      <p><strong>Trampa frecuente.</strong> «Valoración y práctica del respeto…» sigue siendo actitudinal: la palabra «valoración» pesa más que «práctica». El núcleo es el valor que se asume.</p>
+    </div>
+
+    <div class="guia-card">
+      <h2>4 · Indicadores de logro</h2>
+      <p><strong>Qué es.</strong> Las señales observables y evaluables de que el estudiante está desarrollando una competencia. Son concretos, medibles y se redactan describiendo lo que el estudiante hace, normalmente al cerrar una unidad. Son el «termómetro» del aprendizaje.</p>
+      <div class="label">Palabras señal (verbos observables en presente):</div>
+      <div class="chips">
+        <span class="chip kw">Identifica…</span><span class="chip kw">Resuelve…</span><span class="chip kw">Reconoce…</span><span class="chip kw">Clasifica…</span><span class="chip kw">Explica…</span><span class="chip kw">Construye…</span>
+      </div>
+      <p class="quote">«Resuelve problemas de su entorno aplicando las propiedades de las operaciones con números racionales.»</p>
+      <p><strong>Con qué se confunde.</strong> Con la competencia específica (el indicador es más puntual y medible) y con el propósito del encuentro (el indicador cubre una unidad; el propósito, una sola sesión).</p>
+    </div>
+
+    <div class="guia-card">
+      <h2>5 · Situación de aprendizaje</h2>
+      <p><strong>Qué es.</strong> Un contexto o situación —real o simulada, cercana al estudiante— que da sentido y motiva los aprendizajes. Articula todos los demás elementos alrededor de un problema, reto o tema con significado.</p>
+      <div class="label">Palabras señal:</div>
+      <div class="chips">
+        <span class="chip kw">En la comunidad se ha detectado…</span><span class="chip kw">Los estudiantes organizan…</span><span class="chip kw">Ante el problema de…</span><span class="chip kw">escenario del entorno</span>
+      </div>
+      <p class="quote">«En el barrio se acumula basura; los estudiantes investigan las causas y proponen un plan de manejo de residuos para la escuela.»</p>
+      <p><strong>Con qué se confunde.</strong> Con las actividades (la situación es el marco que les da sentido; la actividad es la tarea concreta dentro de ese marco).</p>
+    </div>
+
+    <div class="guia-card">
+      <h2>6 · Estrategias y actividades</h2>
+      <p><strong>Qué es.</strong> Las estrategias son los caminos metodológicos que usa el <em>docente</em> para enseñar (ABP, indagación dialógica, descubrimiento, aprendizaje cooperativo…). Las actividades son las tareas concretas que realizan los <em>estudiantes</em>.</p>
+      <div class="label">Palabras señal:</div>
+      <div class="chips">
+        <span class="chip kw">aprendizaje basado en proyectos</span><span class="chip kw">estudio de casos</span><span class="chip kw">debate dirigido</span><span class="chip kw">tareas de aula</span>
+      </div>
+      <p class="quote">«Organización de los estudiantes en equipos para investigar y exponer mediante un proyecto de aula.»</p>
+      <p><strong>Con qué se confunde.</strong> Con el contenido procedimental (la estrategia es lo que hace el DOCENTE para enseñar; el contenido procedimental es el saber-hacer que debe aprender el ESTUDIANTE).</p>
+    </div>
+
+    <div class="guia-card">
+      <h2>7 · Evaluación (y el propósito del encuentro)</h2>
+      <p><strong>Qué es.</strong> El proceso de recoger evidencias para valorar y mejorar el aprendizaje. Según su momento y función:</p>
+      <div class="tbl-scroll">
+        <table>
+          <thead><tr><th>Tipo</th><th>Cuándo</th><th>Para qué</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Diagnóstica</strong></td><td>Al inicio</td><td>Conocer saberes previos y planificar.</td></tr>
+            <tr><td><strong>Formativa</strong></td><td>Durante el proceso</td><td>Acompañar, retroalimentar y ajustar la enseñanza.</td></tr>
+            <tr><td><strong>Sumativa</strong></td><td>Al final del período</td><td>Verificar logros y certificar / calificar.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>El propósito del encuentro</strong> es lo que se espera lograr en UNA sesión de clase: el elemento de menor alcance temporal. Pistas: «durante una sesión de clase», «en este encuentro», «al finalizar la clase de hoy».</p>
+    </div>
+
+    <div class="guia-head" style="margin-top:34px">
+      <h1 style="font-size:24px">Tablas de referencia rápida</h1>
+      <p>Las confusiones más frecuentes, resumidas para repasar antes del examen.</p>
+    </div>
+
+    <div class="guia-card">
+      <h2>Fundamental vs. específica vs. indicador</h2>
+      <div class="tbl-scroll">
+        <table>
+          <thead><tr><th>Rasgo</th><th>C. fundamental</th><th>C. específica</th><th>Indicador</th></tr></thead>
+          <tbody>
+            <tr><td>Alcance</td><td>Todo el sistema</td><td>Un área</td><td>Una unidad</td></tr>
+            <tr><td>¿Menciona un área?</td><td>No</td><td>Sí</td><td>Sí, dentro de la competencia</td></tr>
+            <tr><td>¿Medible directamente?</td><td>No</td><td>Parcial</td><td>Sí, observable</td></tr>
+            <tr><td>Redacción típica</td><td>«será capaz de…» amplio</td><td>integra saberes del área</td><td>verbo observable en presente</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="guia-card">
+      <h2>Propósito vs. indicador vs. competencia</h2>
+      <div class="tbl-scroll">
+        <table>
+          <thead><tr><th>Rasgo</th><th>Propósito</th><th>Indicador</th><th>Competencia</th></tr></thead>
+          <tbody>
+            <tr><td>Tiempo</td><td>Una clase</td><td>Una unidad</td><td>Área o todo el sistema</td></tr>
+            <tr><td>Foco</td><td>Lo que se busca hoy</td><td>Evidencia del avance</td><td>Capacidad integral</td></tr>
+            <tr><td>Pista</td><td>«durante la sesión»</td><td>verbo observable</td><td>«capaz de…» / integra saberes</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="guia-card">
+      <h2>Tipos de evaluación</h2>
+      <div class="tbl-scroll">
+        <table>
+          <thead><tr><th>Diagnóstica</th><th>Formativa</th><th>Sumativa</th></tr></thead>
+          <tbody>
+            <tr><td>Al inicio</td><td>Durante el proceso</td><td>Al cierre del período</td></tr>
+            <tr><td>Mide saberes previos</td><td>Retroalimenta y ajusta</td><td>Certifica y califica</td></tr>
+            <tr><td>«antes de empezar…»</td><td>«mientras se desarrolla…»</td><td>«como resultado final…»</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="guia-head" style="margin-top:34px">
+      <h1 style="font-size:24px">Ejemplos resueltos</h1>
+      <p>El razonamiento que debes interiorizar. Tapa la respuesta, aplica los 5 pasos y compara.</p>
+    </div>
+
+    <div class="guia-card">
+      <h2>Ejemplo · «Resuelve…» vs «Resolución de…»</h2>
+      <p class="quote">«Resuelve problemas de su entorno aplicando las propiedades de las operaciones con números racionales.»</p>
+      <p><strong>Análisis:</strong> verbo observable en presente «Resuelve…» = firma de un <strong>indicador de logro</strong>. Aunque el saber es procedimental, la redacción «Resuelve…» (no «Resolución de…») lo convierte en indicador, no en contenido. No es transversal a todo ni un escenario.</p>
+      <div class="chips"><span class="chip good">✓ Indicador de logro</span></div>
+    </div>
+
+    <div class="guia-card">
+      <h2>Ejemplo · El mismo saber, distinta forma</h2>
+      <p class="quote">«Identifica las partes de la célula y explica la función de cada una.»</p>
+      <p><strong>Análisis:</strong> verbos observables en presente «Identifica… explica…» = <strong>indicador</strong>. El saber evaluado es conceptual, pero la redacción manda. «Partes de la célula» (frase nominal) sería el contenido; «Identifica las partes…» es el indicador.</p>
+      <div class="chips"><span class="chip good">✓ Indicador (de saber conceptual)</span></div>
+    </div>
+
+    <div class="guia-card">
+      <h2>Ejemplo · Medir el alcance</h2>
+      <p class="quote">«El estudiante será capaz de resolver problemas de la vida cotidiana razonando con lógica y creatividad, en cualquier área del conocimiento.»</p>
+      <p><strong>Análisis:</strong> «en cualquier área del conocimiento» = transversal a todo el sistema → <strong>competencia fundamental</strong> (Resolución de Problemas / Pensamiento Lógico). La frase «cualquier área» descarta que sea específica de un área.</p>
+      <div class="chips"><span class="chip good">✓ Competencia fundamental</span></div>
+    </div>
+
+    <div class="guia-card highlight">
+      <h2>Errores comunes y trampas</h2>
+      <ul>
+        <li><strong>Confundir el saber con el elemento.</strong> Un saber actitudinal puede ser contenido («Valoración del respeto…») o indicador («Reconoce y respeta…»). El saber responde al «qué»; el elemento, a «qué función cumple».</li>
+        <li><strong>Dejarse llevar por una palabra suelta.</strong> «Práctica» dentro de «Valoración y práctica…» no vuelve procedimental el contenido. Lee el enunciado completo.</li>
+        <li><strong>Categorías inventadas.</strong> «Metodológico» y «transversal» NO son tipos de contenido. Descártalos automáticamente.</li>
+        <li><strong>No medir el alcance.</strong> La confusión competencia–indicador–propósito se resuelve con la escalera.</li>
+        <li><strong>Olvidar la firma del verbo.</strong> «Resolución de…» = contenido; «Resuelve…» = indicador; «Será capaz de…» = competencia.</li>
+        <li><strong>Responder antes de leer las 4 opciones.</strong> A veces dos opciones tienen la etiqueta correcta pero solo una tiene la justificación correcta.</li>
+      </ul>
+    </div>
+
+    <div class="guia-card">
+      <h2>El mismo tema, distintos elementos</h2>
+      <p class="lead">Un mismo tema genera elementos distintos según su función. Reconocer esto es exactamente lo que te piden en la EDD.</p>
+      <div class="tbl-scroll">
+        <table>
+          <thead><tr><th>Elemento</th><th>Ejemplo (áreas y perímetros)</th></tr></thead>
+          <tbody>
+            <tr><td>Situación de aprendizaje</td><td>La escuela quiere rediseñar su patio; los estudiantes calculan áreas y perímetros para proponerlo.</td></tr>
+            <tr><td>Competencia específica</td><td>Resuelve situaciones de su entorno mediante el cálculo de áreas y perímetros.</td></tr>
+            <tr><td>Contenido conceptual</td><td>Fórmulas de área de figuras planas.</td></tr>
+            <tr><td>Contenido procedimental</td><td>Cálculo del área de figuras planas.</td></tr>
+            <tr><td>Indicador de logro</td><td>Calcula el área de figuras planas; justifica el procedimiento usado.</td></tr>
+            <tr><td>Estrategia / actividad</td><td>ABP: medir, calcular y presentar la propuesta del patio.</td></tr>
+            <tr><td>Evaluación</td><td>Diagnóstica al inicio; formativa con rúbrica durante el proyecto; sumativa al cierre.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="guia-card highlight">
+      <h2>Chuleta final (repaso de 1 minuto)</h2>
+      <div class="label">El método</div>
+      <p>1) Aísla el enunciado. 2) Mira su forma gramatical. 3) Mide su alcance. 4) Si es contenido, ¿conocer/hacer/valorar? 5) Confirma eliminando por el «porque».</p>
+      <div class="label">La firma del verbo</div>
+      <p>«Resolución de…» = contenido · «Resuelve…» = indicador · «Será capaz de…» = competencia.</p>
+      <div class="label">La escalera del alcance</div>
+      <p>Vida entera ▸ fundamental · Área ▸ específica · Unidad ▸ indicador · Sesión ▸ propósito.</p>
+      <div class="label">Los tres contenidos</div>
+      <p>Conceptual = CONOCER · Procedimental = HACER · Actitudinal = VALORAR.</p>
+      <div class="label">Las trampas</div>
+      <p>«Metodológico» y «transversal» no son contenidos. «Práctica» no vuelve procedimental lo actitudinal. Lee SIEMPRE las 4 opciones.</p>
+    </div>
+
+    <div class="guia-foot">
+      <button class="btn btn-primary" id="guiaElementosToExam">Ir a elegir un examen</button>
+    </div>
+    <button class="sel-back" id="guiaElementosBack">← Volver a la selección</button>
   </div>
 </section>
 
@@ -1146,6 +1473,7 @@ function launchExam(id){
   document.getElementById("inicio").style.display="none";
   document.getElementById("resultados").style.display="none";
   document.getElementById("guia").style.display="none";
+  document.getElementById("guiaElementos").style.display="none";
   document.getElementById("examen").style.display="block";
   buildNav();
   render();
@@ -1161,20 +1489,29 @@ document.getElementById("backToEmail").addEventListener("click",()=>{
   window.scrollTo(0,0);
 });
 
-/* ---------- GUÍA PRÁCTICA ---------- */
+/* ---------- GUÍAS PRÁCTICAS ---------- */
 function showGuide(){
   document.getElementById("seleccion").style.display="none";
   document.getElementById("guia").style.display="block";
   window.scrollTo(0,0);
 }
+function showGuideElementos(){
+  document.getElementById("seleccion").style.display="none";
+  document.getElementById("guiaElementos").style.display="block";
+  window.scrollTo(0,0);
+}
 function backToSeleccion(){
   document.getElementById("guia").style.display="none";
+  document.getElementById("guiaElementos").style.display="none";
   document.getElementById("seleccion").style.display="block";
   window.scrollTo(0,0);
 }
 document.getElementById("openGuide").addEventListener("click",showGuide);
+document.getElementById("openGuideElementos").addEventListener("click",showGuideElementos);
 document.getElementById("guiaBack").addEventListener("click",backToSeleccion);
 document.getElementById("guiaToExam").addEventListener("click",backToSeleccion);
+document.getElementById("guiaElementosBack").addEventListener("click",backToSeleccion);
+document.getElementById("guiaElementosToExam").addEventListener("click",backToSeleccion);
 
 /* ---------- TIMER ---------- */
 function fmt(s){
