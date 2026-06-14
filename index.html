@@ -185,7 +185,7 @@
   /* ---------- TARJETA PREGUNTA ---------- */
   .qcard{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:30px 32px;min-height:60vh;display:flex;flex-direction:column}
   .qnum{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);font-weight:600;margin:0 0 12px}
-  .qtext{font-size:18px;line-height:1.5;margin:0 0 24px;font-weight:500;color:var(--ink)}
+  .qtext{font-size:18px;line-height:1.5;margin:0 0 24px;font-weight:500;color:var(--ink);white-space:pre-wrap}
   .opts{display:flex;flex-direction:column;gap:12px;flex:1}
   .opt{
     display:flex;gap:14px;align-items:flex-start;padding:15px 17px;border:1.5px solid var(--line);
@@ -231,7 +231,7 @@
   .rev-badge{flex:none;width:30px;height:30px;border-radius:8px;display:grid;place-items:center;font-weight:700;font-size:13px;color:#fff}
   .rev-badge.ok{background:var(--ok)}
   .rev-badge.bad{background:var(--bad)}
-  .rev-q{font-weight:500;font-size:15px;line-height:1.45}
+  .rev-q{font-weight:500;font-size:15px;line-height:1.45;white-space:pre-wrap}
   .rev-opt{padding:11px 14px;border-radius:10px;font-size:14px;line-height:1.45;margin-bottom:8px;border:1px solid var(--line);display:flex;gap:10px}
   .rev-opt .ltr{font-weight:600}
   .rev-opt.correct{background:var(--ok-bg);border-color:#BFE3D1}
@@ -785,6 +785,15 @@
       <p>Conceptual = CONOCER · Procedimental = HACER · Actitudinal = VALORAR.</p>
       <div class="label">Las trampas</div>
       <p>«Metodológico» y «transversal» no son contenidos. «Práctica» no vuelve procedimental lo actitudinal. Lee SIEMPRE las 4 opciones.</p>
+    </div>
+
+    <div class="guia-card highlight" style="text-align:center">
+      <h2 style="justify-content:center">Pon a prueba lo aprendido</h2>
+      <p>20 ítems de clasificación con enunciados reales de las Mallas Curriculares de Matemática (1.º a 6.º). Tu tarea: identificar a qué elemento de la planificación corresponde cada uno. Calificación en escala 0–20 y, al terminar, el porqué de cada respuesta.</p>
+      <div class="chips" style="justify-content:center;margin:6px 0 16px">
+        <span class="chip kw">20 ítems</span><span class="chip kw">30 min</span><span class="chip kw">Opciones barajadas</span><span class="chip kw">Repaso explicado</span>
+      </div>
+      <button class="btn btn-primary" id="practicaElementos" style="width:auto;padding-left:30px;padding-right:30px">Practicar los 20 ítems →</button>
     </div>
 
     <div class="guia-foot">
@@ -1396,6 +1405,154 @@ const QUESTIONS_2 = [
     ], correct:0 },
 ];
 
+/* ===================== BANCO DE ÍTEMS — EXAMEN 3 ===================== */
+/* Clasificación de elementos del diseño curricular del MINERD.
+   Cada ítem presenta un enunciado real (tomado de las Mallas Curriculares de
+   Matemática, 1.º a 6.º de secundaria) y pide identificar a qué elemento de la
+   planificación corresponde. La opción correcta está en la posición 0 y se
+   baraja en tiempo de ejecución. El campo "exp" muestra el porqué en el repaso. */
+const QUESTIONS_3 = [
+  { n:1, q:`¿A qué elemento del diseño curricular corresponde el siguiente enunciado?\n\n«Cálculo del volumen de un cono recto, de un cilindro recto y de una esfera.»`, o:[
+      `Contenido procedimental`,
+      `Contenido conceptual`,
+      `Indicador de logro`,
+      `Situación de aprendizaje`
+    ], correct:0, exp:`«Cálculo de…» es la firma de un contenido procedimental (saber HACER). Ojo con la trampa: si dijera «Calcula el volumen…» (verbo observable en presente) sería un indicador de logro, no un contenido.` },
+
+  { n:2, q:`¿A qué elemento del diseño curricular corresponde el siguiente enunciado?\n\n«Polinomios, clasificación y operatoria.»`, o:[
+      `Contenido conceptual`,
+      `Contenido procedimental`,
+      `Contenido actitudinal`,
+      `Indicador de logro`
+    ], correct:0, exp:`Es una frase nominal que nombra un saber (CONOCER), sin verbo de acción ni disposición de valor. Esa es la firma del contenido conceptual.` },
+
+  { n:3, q:`¿A qué elemento del diseño curricular corresponde el siguiente enunciado?\n\n«Valoración del uso de los números reales en el desarrollo de su vida cotidiana.»`, o:[
+      `Contenido actitudinal`,
+      `Contenido conceptual`,
+      `Contenido procedimental`,
+      `Competencia específica`
+    ], correct:0, exp:`«Valoración de…» apunta al saber SER/convivir: actitudes, valores y disposiciones. Es un contenido actitudinal.` },
+
+  { n:4, q:`¿A qué elemento del diseño curricular corresponde el siguiente enunciado?\n\n«Resuelve problemas por medio de modelos geométricos, incluidas aplicaciones del Teorema de Pitágoras.»`, o:[
+      `Indicador de logro`,
+      `Contenido procedimental`,
+      `Competencia específica`,
+      `Situación de aprendizaje`
+    ], correct:0, exp:`Verbo observable en presente «Resuelve…» = indicador de logro: evidencia concreta y medible al cerrar la unidad. Aunque el saber sea procedimental, la redacción manda.` },
+
+  { n:5, q:`¿A qué elemento del diseño curricular corresponde el siguiente enunciado?\n\n«El estudiante genera soluciones y estrategias en situaciones de problemas nuevos, de pasos múltiples y no rutinarias, en las diferentes áreas de la matemática y fuera de esta.»`, o:[
+      `Competencia fundamental`,
+      `Competencia específica`,
+      `Indicador de logro`,
+      `Propósito del encuentro`
+    ], correct:0, exp:`El alcance es transversal: «en las diferentes áreas… y fuera de esta». Eso lo ubica en todo el sistema → competencia fundamental (Resolución de Problemas). Si solo viviera dentro de Matemática, sería específica.` },
+
+  { n:6, q:`¿A qué elemento del diseño curricular corresponde el siguiente enunciado?\n\n«Construcción de diagramas de árbol, polígonos de frecuencia y gráficos circulares.»`, o:[
+      `Contenido procedimental`,
+      `Contenido conceptual`,
+      `Indicador de logro`,
+      `Contenido actitudinal`
+    ], correct:0, exp:`«Construcción de…» = saber HACER. Es contenido procedimental. Si dijera «Construye diagramas…» sería un indicador.` },
+
+  { n:7, q:`¿A qué elemento del diseño curricular corresponde el siguiente enunciado?\n\n«Curiosidad al aplicar los conceptos y principios de los ángulos en situaciones diversas.»`, o:[
+      `Contenido actitudinal`,
+      `Contenido procedimental`,
+      `Indicador de logro`,
+      `Contenido conceptual`
+    ], correct:0, exp:`El núcleo es una disposición: «Curiosidad al…». Es contenido actitudinal. La palabra «aplicar» no lo vuelve procedimental; lo que se evalúa es la actitud.` },
+
+  { n:8, q:`¿A qué elemento del diseño curricular corresponde el siguiente enunciado?\n\n«En la comunidad se detecta un alto consumo de agua; los estudiantes miden tanques cilíndricos, calculan su volumen y proponen un plan de ahorro para la escuela.»`, o:[
+      `Situación de aprendizaje`,
+      `Estrategia de enseñanza`,
+      `Indicador de logro`,
+      `Competencia específica`
+    ], correct:0, exp:`Es un escenario del entorno («En la comunidad…») que da sentido y articula los aprendizajes alrededor de un problema real. Esa es la situación de aprendizaje.` },
+
+  { n:9, q:`¿A qué elemento del diseño curricular corresponde el siguiente enunciado?\n\n«Ecuaciones de las cónicas: recta, circunferencia, parábola, elipse, hipérbola y sus elementos.»`, o:[
+      `Contenido conceptual`,
+      `Contenido procedimental`,
+      `Indicador de logro`,
+      `Competencia específica`
+    ], correct:0, exp:`Frase nominal que nombra los saberes a CONOCER, sin verbo de acción. Es contenido conceptual.` },
+
+  { n:10, q:`¿A qué elemento del diseño curricular corresponde el siguiente enunciado?\n\n«Resolución de problemas referidos a préstamos bancarios aplicando sucesiones aritméticas y geométricas.»`, o:[
+      `Contenido procedimental`,
+      `Indicador de logro`,
+      `Situación de aprendizaje`,
+      `Contenido conceptual`
+    ], correct:0, exp:`«Resolución de…» (sustantivo, no «Resuelve…») es la firma del contenido procedimental. La forma gramatical decide: «Resolución de…» = contenido; «Resuelve…» = indicador.` },
+
+  { n:11, q:`¿A qué elemento de la planificación corresponde la siguiente acción del docente?\n\n«Al iniciar la unidad de funciones, aplica un cuestionario breve para conocer qué recuerdan los estudiantes sobre dominio y rango.»`, o:[
+      `Evaluación diagnóstica`,
+      `Evaluación formativa`,
+      `Evaluación sumativa`,
+      `Situación de aprendizaje`
+    ], correct:0, exp:`Se realiza al inicio y busca conocer saberes previos para planificar. Esa es la función de la evaluación diagnóstica.` },
+
+  { n:12, q:`¿A qué elemento de la planificación corresponde la siguiente acción del docente?\n\n«Mientras los estudiantes resuelven ejercicios de factorización, revisa sus procedimientos, da retroalimentación y ajusta su explicación.»`, o:[
+      `Evaluación formativa`,
+      `Evaluación diagnóstica`,
+      `Evaluación sumativa`,
+      `Estrategia de enseñanza`
+    ], correct:0, exp:`Ocurre durante el proceso y sirve para acompañar, retroalimentar y ajustar la enseñanza: evaluación formativa.` },
+
+  { n:13, q:`¿A qué elemento de la planificación corresponde la siguiente acción del docente?\n\n«Al cierre del período aplica una prueba escrita para certificar el dominio de los contenidos de geometría y asignar la calificación final.»`, o:[
+      `Evaluación sumativa`,
+      `Evaluación formativa`,
+      `Evaluación diagnóstica`,
+      `Indicador de logro`
+    ], correct:0, exp:`Se aplica al final del período para verificar logros y certificar/calificar. Esa es la evaluación sumativa.` },
+
+  { n:14, q:`¿A qué elemento del diseño curricular corresponde el siguiente enunciado?\n\n«El estudiante será capaz de comunicar ideas y argumentos con claridad, de forma oral y escrita, en cualquier situación de su vida personal, académica y social.»`, o:[
+      `Competencia fundamental`,
+      `Competencia específica`,
+      `Indicador de logro`,
+      `Propósito del encuentro`
+    ], correct:0, exp:`«Será capaz de…» con alcance amplio («cualquier situación de su vida») = competencia fundamental (Comunicativa). Es transversal y no medible en una sola unidad.` },
+
+  { n:15, q:`¿A qué elemento del diseño curricular corresponde el siguiente enunciado?\n\n«El estudiante resuelve situaciones de su entorno mediante el análisis de la ecuación de la recta y el estudio de las cónicas.»`, o:[
+      `Competencia específica`,
+      `Competencia fundamental`,
+      `Indicador de logro`,
+      `Contenido procedimental`
+    ], correct:0, exp:`Integra varios saberes propios del área de Matemática con alcance de área (no de todo el sistema, ni de una sola unidad). Esa es una competencia específica.` },
+
+  { n:16, q:`¿A qué elemento del diseño curricular corresponde el siguiente enunciado?\n\n«Interés por crear y utilizar representaciones gráficas del teorema de Pitágoras y de figuras en el eje cartesiano.»`, o:[
+      `Contenido actitudinal`,
+      `Contenido procedimental`,
+      `Indicador de logro`,
+      `Contenido conceptual`
+    ], correct:0, exp:`«Interés por…» señala una disposición o actitud: contenido actitudinal. Las palabras «crear» y «utilizar» no lo vuelven procedimental; el núcleo es el interés.` },
+
+  { n:17, q:`¿A qué elemento de la planificación corresponde la siguiente acción del docente?\n\n«Para enseñar las transformaciones geométricas, organiza un aprendizaje basado en proyectos en el que los equipos diseñan el plano de un mural escolar.»`, o:[
+      `Estrategia de enseñanza`,
+      `Situación de aprendizaje`,
+      `Actividad del estudiante`,
+      `Contenido procedimental`
+    ], correct:0, exp:`El ABP es el camino metodológico que usa el DOCENTE para enseñar: una estrategia de enseñanza. (La situación sería el escenario que da sentido; la actividad, la tarea concreta que hace el estudiante.)` },
+
+  { n:18, q:`¿A qué elemento del diseño curricular corresponde el siguiente enunciado?\n\n«Calcula el área de figuras planas y justifica el procedimiento empleado.»`, o:[
+      `Indicador de logro`,
+      `Contenido procedimental`,
+      `Competencia específica`,
+      `Propósito del encuentro`
+    ], correct:0, exp:`Verbos observables en presente «Calcula… justifica…» = indicador de logro: evidencia medible del aprendizaje. «Cálculo del área…» (sustantivo) sería el contenido procedimental.` },
+
+  { n:19, q:`¿A qué elemento de la planificación corresponde el siguiente enunciado?\n\n«Lo que se espera lograr durante la sesión de hoy: que los estudiantes representen gráficamente una parábola a partir de su ecuación.»`, o:[
+      `Propósito del encuentro`,
+      `Indicador de logro`,
+      `Competencia específica`,
+      `Situación de aprendizaje`
+    ], correct:0, exp:`Su alcance es UNA sola sesión («durante la sesión de hoy»): es el propósito del encuentro, el elemento de menor alcance temporal. El indicador cubre toda una unidad.` },
+
+  { n:20, q:`¿A qué elemento del diseño curricular corresponde el siguiente enunciado?\n\n«Resuelve triángulos rectángulos y oblicuángulos aplicando las leyes de seno y coseno.»`, o:[
+      `Indicador de logro`,
+      `Contenido procedimental`,
+      `Competencia específica`,
+      `Contenido actitudinal`
+    ], correct:0, exp:`«Resuelve…» (verbo observable en presente) = indicador de logro. La firma del verbo lo distingue del contenido «Resolución de triángulos…».` },
+];
+
 /* Banco activo (se asigna al elegir el examen) */
 let QUESTIONS = QUESTIONS_1;
 
@@ -1409,7 +1566,9 @@ const EXAMS={
   1:{ id:1, name:"Examen 1 · Competencias docentes", short:"Examen 1",
       questions:QUESTIONS_1, duration:2*60*60 },
   2:{ id:2, name:"Examen 2 · Casos de aula y EPJA", short:"Examen 2",
-      questions:QUESTIONS_2, duration:2*60*60 }
+      questions:QUESTIONS_2, duration:2*60*60, shuffle:true },
+  3:{ id:3, name:"Examen 3 · Identifica el elemento curricular", short:"Examen 3",
+      questions:QUESTIONS_3, duration:30*60, shuffle:true }
 };
 
 let TOTAL=QUESTIONS.length;
@@ -1454,7 +1613,7 @@ function shuffleOptions(questions){
   return questions.map(item=>{
     const idx=item.o.map((_,i)=>i);
     for(let i=idx.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [idx[i],idx[j]]=[idx[j],idx[i]]; }
-    return { n:item.n, q:item.q, o:idx.map(i=>item.o[i]), correct:idx.indexOf(item.correct) };
+    return { n:item.n, q:item.q, o:idx.map(i=>item.o[i]), correct:idx.indexOf(item.correct), exp:item.exp };
   });
 }
 function launchExam(id){
@@ -1462,7 +1621,7 @@ function launchExam(id){
   if(!cfg) return;
   examId=id;
   examName=cfg.name;
-  QUESTIONS=(id===2)?shuffleOptions(cfg.questions):cfg.questions;
+  QUESTIONS=cfg.shuffle?shuffleOptions(cfg.questions):cfg.questions;
   TOTAL=QUESTIONS.length;
   DURATION=cfg.duration;
   answers=new Array(TOTAL).fill(null);
@@ -1512,6 +1671,7 @@ document.getElementById("guiaBack").addEventListener("click",backToSeleccion);
 document.getElementById("guiaToExam").addEventListener("click",backToSeleccion);
 document.getElementById("guiaElementosBack").addEventListener("click",backToSeleccion);
 document.getElementById("guiaElementosToExam").addEventListener("click",backToSeleccion);
+document.getElementById("practicaElementos").addEventListener("click",()=>launchExam(3));
 
 /* ---------- TIMER ---------- */
 function fmt(s){
@@ -1678,6 +1838,7 @@ function buildReview(){
       html+='<div class="'+cls+'"><span class="ltr">'+LETTERS[j]+'.</span><span>'+txt+'</span>'+mk+'</div>';
     });
     if(ua===null){ html+='<div style="font-size:13px;color:var(--bad);margin-top:6px">No respondiste este ítem.</div>'; }
+    if(item.exp){ html+='<div style="font-size:13px;color:var(--muted);line-height:1.55;margin-top:9px;padding:11px 13px;background:var(--bg);border:1px solid var(--line);border-radius:11px"><strong style="color:var(--ink)">Por qué:</strong> '+item.exp+'</div>'; }
     rev.innerHTML=html;
     box.appendChild(rev);
   });
