@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Prueba de Rendimiento Profesional Docente — MINERD</title>
+<meta name="description" content="Simulador gratuito para preparar la Evaluación de Rendimiento Profesional Docente (ERP) del MINERD en República Dominicana: cuatro exámenes con enfoque por competencias, casos de aula, EPJA, elementos curriculares, psicología escolar y guías prácticas de estudio.">
+<meta name="author" content="Francisco Luis Yean">
+<link rel="canonical" href="https://registrodocente.online/">
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3889117121292163" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -263,6 +266,22 @@
     .res-actions,.topbar,.ad-slot{display:none}
     body{background:#fff}
   }
+  /* ---------- FOOTER GLOBAL + ENLACES LEGALES ---------- */
+  .site-footer{border-top:1px solid var(--line);margin-top:40px;padding:24px 16px 8px;text-align:center}
+  .legal-links{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;font-size:14px}
+  .legal-links a{color:var(--ink);text-decoration:none;font-weight:600;padding:4px 2px}
+  .legal-links a:hover{color:var(--amber);text-decoration:underline}
+  .legal-links span{color:var(--line)}
+  .site-footer .footer-credit{margin:12px 0 0}
+  /* ---------- PÁGINAS LEGALES ---------- */
+  #privacidad,#acercaDe,#contacto{display:none}
+  .legal-wrap{max-width:760px;margin:0 auto;padding:40px 20px 64px}
+  .legal-wrap h1{font-family:'Fraunces',serif;color:var(--ink);font-size:30px;margin:0 0 6px}
+  .legal-wrap h2{font-family:'Fraunces',serif;color:var(--ink);font-size:20px;margin:28px 0 8px}
+  .legal-wrap p,.legal-wrap li{color:var(--ink-2);line-height:1.7;font-size:15.5px}
+  .legal-wrap ul{padding-left:20px}
+  .legal-wrap a{color:var(--amber);font-weight:600}
+  .legal-updated{color:var(--muted);font-size:13px;margin-bottom:24px}
 </style>
 </head>
 <body>
@@ -273,12 +292,12 @@
     <div class="hero-top">
       <p class="eyebrow">Evaluación de Rendimiento Profesional · ERP</p>
       <h1 class="display">Prueba de competencias docentes</h1>
-      <p class="hero-sub">Simulacros alineados al marco pedagógico del Sistema Educativo Dominicano (MINERD). Dos exámenes de situaciones de aula con enfoque por competencias. Identifícate con tu correo y elige cuál realizar.</p>
+      <p class="hero-sub">Simulacros alineados al marco pedagógico del Sistema Educativo Dominicano (MINERD). Cuatro exámenes de situaciones de aula con enfoque por competencias, más guías prácticas de estudio. Identifícate con tu correo y elige cuál realizar.</p>
     </div>
     <div class="hero-body">
       <div class="facts">
-        <div class="fact"><b>2</b><span>exámenes disponibles</span></div>
-        <div class="fact"><b>80</b><span>ítems en total</span></div>
+        <div class="fact"><b>4</b><span>exámenes disponibles</span></div>
+        <div class="fact"><b>129</b><span>ítems en total</span></div>
         <div class="fact"><b>0–20</b><span>escala de calificación</span></div>
       </div>
       <label class="lbl" for="email">Correo electrónico</label>
@@ -308,6 +327,16 @@
       <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
   </div>
+  <footer class="site-footer">
+    <nav class="legal-links">
+      <a href="#" onclick="showLegal('acercaDe');return false;">Acerca de</a>
+      <span>·</span>
+      <a href="#" onclick="showLegal('privacidad');return false;">Política de Privacidad</a>
+      <span>·</span>
+      <a href="#" onclick="showLegal('contacto');return false;">Contacto</a>
+    </nav>
+    <p class="footer-credit">© <span id="yearNow2"></span> registrodocente.online · Recurso educativo gratuito</p>
+  </footer>
 </section>
 
 <!-- ============ PANTALLA 1.5: SELECCIÓN DE EXAMEN ============ -->
@@ -352,6 +381,17 @@
         </div>
         <button class="btn btn-primary" data-exam="3">Comenzar Examen 3</button>
       </div>
+      <div class="exam-card">
+        <span class="tagchip">Examen 4</span>
+        <h2 class="display">Psicología escolar y Dinamización TIC</h2>
+        <p class="desc">Estudios de caso del rol del psicólogo escolar y del dinamizador TIC: justicia educativa, equidad e inclusión, ruta de protección, convivencia democrática, autoevaluación profesional y uso pedagógico y ético de la tecnología. Cada ítem incluye repaso explicado.</p>
+        <div class="meta">
+          <div><b>19</b>ítems</div>
+          <div><b>1:00 h</b>tiempo</div>
+          <div><b>0–20</b>escala</div>
+        </div>
+        <button class="btn btn-primary" data-exam="4">Comenzar Examen 4</button>
+      </div>
       <div class="exam-card guide-card">
         <div class="gc-icon">✦</div>
         <div class="gc-body">
@@ -372,7 +412,16 @@
       </div>
     </div>
     <button class="sel-back" id="backToEmail">← Volver a cambiar el correo</button>
-    <p class="footer-credit">Creado por <b>Francisco Luis Yean</b></p>
+    <footer class="site-footer">
+      <nav class="legal-links">
+        <a href="#" onclick="showLegal('acercaDe');return false;">Acerca de</a>
+        <span>·</span>
+        <a href="#" onclick="showLegal('privacidad');return false;">Política de Privacidad</a>
+        <span>·</span>
+        <a href="#" onclick="showLegal('contacto');return false;">Contacto</a>
+      </nav>
+      <p class="footer-credit">Creado por <b>Francisco Luis Yean</b> · © <span id="yearNow"></span> registrodocente.online</p>
+    </footer>
   </div>
 </section>
 
@@ -814,6 +863,73 @@
     </div>
     <button class="sel-back" id="guiaElementosBack">← Volver a la selección</button>
     <p class="footer-credit">Creado por <b>Francisco Luis Yean</b></p>
+  </div>
+</section>
+
+<!-- ============ PÁGINA: ACERCA DE ============ -->
+<section id="acercaDe">
+  <div class="legal-wrap">
+    <h1>Acerca de</h1>
+    <p class="legal-updated">registrodocente.online — recurso educativo gratuito</p>
+    <p>Este sitio es una plataforma educativa gratuita creada para apoyar a los docentes de la República Dominicana en su preparación para la <strong>Evaluación de Rendimiento Profesional Docente (ERP)</strong> y demás pruebas del Ministerio de Educación (MINERD).</p>
+    <h2>Qué ofrecemos</h2>
+    <p>Cuatro simuladores de examen con un total de 129 ítems, todos alineados al enfoque por competencias del Sistema Educativo Dominicano: situaciones de aula, casos de Educación de Personas Jóvenes y Adultas (EPJA), identificación de elementos curriculares, y casos de psicología escolar y dinamización TIC. Además, incluimos guías prácticas de estudio para resolver estudios de caso y distinguir los elementos del diseño curricular.</p>
+    <h2>Quién está detrás</h2>
+    <p>El contenido fue elaborado por <strong>Francisco Luis Yean</strong>, docente de educación secundaria del MINERD y autor, a partir de su experiencia en el aula y del estudio del marco curricular dominicano. Todo el material es de elaboración propia y de carácter orientativo: no sustituye los documentos oficiales del MINERD ni garantiza resultados en las evaluaciones reales.</p>
+    <h2>Nuestro propósito</h2>
+    <p>Ofrecer una herramienta de práctica accesible y de calidad para que más docentes puedan prepararse con confianza. El uso del simulador es libre y gratuito; las donaciones voluntarias y la publicidad ayudan a mantener el sitio en línea.</p>
+    <button class="sel-back" onclick="backFromLegal();return false;">← Volver</button>
+  </div>
+</section>
+
+<!-- ============ PÁGINA: POLÍTICA DE PRIVACIDAD ============ -->
+<section id="privacidad">
+  <div class="legal-wrap">
+    <h1>Política de Privacidad</h1>
+    <p class="legal-updated">Última actualización: junio de 2026</p>
+    <p>En <strong>registrodocente.online</strong> respetamos tu privacidad. Esta política explica qué información recopilamos, cómo la usamos y qué opciones tienes. Al utilizar este sitio aceptas las prácticas aquí descritas.</p>
+
+    <h2>Información que recopilamos</h2>
+    <p>Para registrar tu intento y mostrarte tu calificación, el sitio te pide tu <strong>correo electrónico</strong>. Ese correo, junto con tus respuestas y tu puntuación, puede almacenarse mediante servicios de Google (Google Sheets / Apps Script) con el único fin de registrar y mostrar tu resultado. No vendemos ni compartimos tu correo con terceros para fines comerciales.</p>
+    <p>También podemos recopilar, de forma automática y no identificable, datos técnicos de uso como el tipo de navegador, el dispositivo y las páginas visitadas, a través de cookies y tecnologías similares.</p>
+
+    <h2>Cookies</h2>
+    <p>Una cookie es un pequeño archivo que se guarda en tu navegador. Este sitio y sus proveedores utilizan cookies para recordar preferencias, medir el uso y mostrar anuncios.</p>
+
+    <h2>Publicidad de Google (AdSense) y cookies de terceros</h2>
+    <p>Este sitio muestra anuncios a través de <strong>Google AdSense</strong>. Al respecto, te informamos que:</p>
+    <ul>
+      <li>Google, como proveedor externo, utiliza cookies para mostrar anuncios en este sitio.</li>
+      <li>El uso de la cookie de publicidad permite a Google y a sus socios mostrar anuncios a los usuarios basados en sus visitas a este y a otros sitios de Internet.</li>
+      <li>Otros proveedores o redes publicitarias de terceros también pueden usar cookies para publicar anuncios en este sitio.</li>
+      <li>Los usuarios pueden inhabilitar la publicidad personalizada visitando la <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener">Configuración de anuncios de Google</a>, o desactivar las cookies de algunos proveedores externos en <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener">www.aboutads.info/choices</a>.</li>
+    </ul>
+    <p>Para más información sobre cómo Google usa los datos cuando utilizas sitios de sus socios, consulta la <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">política de privacidad de Google</a>.</p>
+
+    <h2>Donaciones</h2>
+    <p>Si decides hacer una donación voluntaria, esta se procesa a través de PayPal. No almacenamos los datos de tu tarjeta ni de tu cuenta; PayPal gestiona ese proceso bajo su propia política de privacidad.</p>
+
+    <h2>Tus derechos</h2>
+    <p>Puedes solicitar el acceso, la corrección o la eliminación de los datos asociados a tu correo escribiéndonos. Atenderemos tu solicitud en un plazo razonable.</p>
+
+    <h2>Contacto</h2>
+    <p>Si tienes preguntas sobre esta política, escríbenos a <a href="mailto:contact@klaso.online">contact@klaso.online</a>.</p>
+
+    <button class="sel-back" onclick="backFromLegal();return false;">← Volver</button>
+  </div>
+</section>
+
+<!-- ============ PÁGINA: CONTACTO ============ -->
+<section id="contacto">
+  <div class="legal-wrap">
+    <h1>Contacto</h1>
+    <p class="legal-updated">Estamos para ayudarte</p>
+    <p>¿Tienes dudas, sugerencias, encontraste un error en alguna pregunta o quieres proponer contenido? Nos encantará leerte.</p>
+    <h2>Correo electrónico</h2>
+    <p>Escríbenos a <a href="mailto:contact@klaso.online">contact@klaso.online</a> y te responderemos lo antes posible.</p>
+    <h2>Sobre el contenido</h2>
+    <p>Si notas que alguna respuesta podría discutirse o mejorar, indícanos el examen y el número de ítem; revisamos y actualizamos el material de forma periódica para mantener su calidad y pertinencia con el marco del MINERD.</p>
+    <button class="sel-back" onclick="backFromLegal();return false;">← Volver</button>
   </div>
 </section>
 
@@ -1639,6 +1755,149 @@ const QUESTIONS_3 = [
     ], correct:0, exp:`«Aplicación de…» (forma nominal) es firma de contenido procedimental. Si dijera «Aplica la ley del seno…» (verbo observable en presente), sería un indicador de logro.` },
 ];
 
+/* ===================== BANCO DE ÍTEMS — EXAMEN 4 ===================== */
+/* Psicología escolar y Dinamización TIC. Reconstruido a partir de capturas
+   de la plataforma de Evaluación de Rendimiento Profesional (ERP) del MINERD.
+   Las capturas estaban desordenadas y con ítems/opciones barajados entre
+   sesiones; se depuraron los escenarios repetidos (de 23 capturas → 19 ítems
+   únicos). La opción correcta se redactó alineada al enfoque por competencias,
+   de justicia educativa, inclusión y convivencia democrática del MINERD, y se
+   baraja en tiempo de ejecución. El campo "exp" muestra el porqué en el repaso. */
+const QUESTIONS_4 = [
+  { n:1, q:`En una escuela técnico-profesional, el psicólogo escolar identifica que los estudiantes provenientes de sectores socioeconómicos vulnerables son sistemáticamente excluidos de los proyectos académicos y técnicos de mayor visibilidad y prestigio institucional. Al indagar, algunos docentes argumentan que dichos estudiantes «no tienen el perfil», señalando supuestas limitaciones en compromiso, habilidades o desempeño previo. El profesional observa que esta práctica podría estar reforzando desigualdades estructurales y afectando la trayectoria formativa y vocacional de estos estudiantes. Desde un enfoque de justicia educativa, altas expectativas y acceso equitativo a oportunidades, ¿cuál sería la acción más pertinente para abordar esta situación y promover prácticas inclusivas dentro de la institución?`, o:[
+      `Desarrollar sesiones individuales con los estudiantes que no fueron incluidos, con el fin de fortalecer su autoestima y motivación, sin intervenir directamente en la estructura ni en los criterios de los proyectos.`,
+      `Reconocer la situación de exclusión, pero considerar que las decisiones sobre la organización académica y los proyectos corresponden principalmente al equipo docente.`,
+      `Revisar los criterios para asegurar la calidad de los proyectos, priorizando el desempeño previamente demostrado por los estudiantes.`,
+      `Proponer una revisión de los criterios y dinámicas de participación en los proyectos, incorporando principios de inclusión, liderazgo colaborativo y atención a la diversidad como parte del fortalecimiento institucional.`
+    ], correct:3, exp:`El problema es estructural: criterios de acceso que reproducen desigualdades. La respuesta de justicia educativa actúa sobre la estructura (criterios y dinámicas de participación) con inclusión y atención a la diversidad; no se limita al estudiante (A) ni delega la decisión (B). Filtrar por «desempeño previo» (C) consolida la barrera que se busca remover.` },
+
+  { n:2, q:`Durante el acompañamiento vocacional a estudiantes de sexto de secundaria, el psicólogo escolar nota que sus orientaciones no están siendo bien recibidas. Decide aplicar una autoevaluación de su práctica y revisar sus estrategias. ¿Cuál sería la acción más adecuada del psicólogo escolar?`, o:[
+      `Realizar una autoevaluación colaborativa y, a partir de ella, decidir ajustes y mejoras en las acciones orientadas al aprendizaje, el bienestar y la participación.`,
+      `Concluir, tras una autoevaluación reflexiva, que existe resistencia en los estudiantes, y contrastar su enfoque con retroalimentación y datos.`,
+      `Realizar una autoevaluación colaborativa en la que se revisen críticamente las decisiones sobre los temas elegidos y se hagan los ajustes pertinentes.`,
+      `Aplicar una evaluación estructurada que confirme que los estudiantes no valoran la orientación vocacional, para replantear el enfoque y ajustar estrategias.`
+    ], correct:0, exp:`La autoevaluación profesional pertinente es colaborativa y se traduce en mejoras de la práctica en sus tres dimensiones clave —aprendizaje, bienestar y participación— (A), en lugar de atribuir el problema al estudiante (B, D) o limitarse a revisar solo los temas elegidos (C).` },
+
+  { n:3, q:`En un centro de nivel inicial, una docente manifiesta que ciertos estudiantes no lograrán avanzar académicamente debido a sus condiciones familiares y a su contexto socioeconómico. El psicólogo escolar observa que esta creencia influye en la planificación y en las expectativas pedagógicas, reflejándose en actividades menos desafiantes y oportunidades limitadas de participación para esos niños. El profesional identifica que estas percepciones pueden generar profecías autocumplidas y reforzar inequidades. Desde un enfoque de equidad, altas expectativas y desarrollo integral, ¿cuál sería la acción más pertinente para transformar esta creencia y fortalecer prácticas pedagógicas inclusivas y potenciadoras del aprendizaje?`, o:[
+      `Sugerir una charla sobre desarrollo infantil, sin vincularla a la misión institucional ni al rol docente.`,
+      `Proponer una jornada de reflexión con el equipo docente sobre la promoción del éxito académico de todos los estudiantes y las prácticas inclusivas como compromiso ético e institucional.`,
+      `Sugerir que se reduzcan las expectativas para evitar la frustración de los estudiantes.`,
+      `Reconocer la preocupación de la docente, pero no sugerir cambios para respetar la autonomía profesional.`
+    ], correct:1, exp:`Las profecías autocumplidas se transforman trabajando las creencias y expectativas del equipo con reflexión colectiva y compromiso ético-institucional (B). Bajar las expectativas (C) o no intervenir (D) consolida la inequidad; una charla desvinculada del rol docente (A) no modifica la práctica.` },
+
+  { n:4, q:`En segundo grado de primaria, una estudiante con discapacidad motora presenta dificultades para completar las evaluaciones escritas en el tiempo establecido. La docente solicita apoyo al psicólogo escolar para ajustar el proceso e intervenir con la familia, que se muestra disgustada. ¿Cuál sería la acción más adecuada del psicólogo escolar?`, o:[
+      `Sugerir una reunión con la familia para hablar sobre la importancia de la evaluación y la necesidad de que la estudiante reciba apoyo externo.`,
+      `Sugerir que se reduzca el contenido evaluado para facilitar la participación de la estudiante y acompañar a la familia con orientación.`,
+      `Sugerir que se mantenga el tiempo estándar, pero permitiendo algunos ajustes razonables y calificando sobre lo completado.`,
+      `Orientar a la docente para organizar —y comunicar a la familia— una adecuación razonable en el tiempo de ejecución y/o en el formato de la evaluación.`
+    ], correct:3, exp:`El ajuste razonable atiende la barrera (tiempo/formato) sin rebajar el aprendizaje esperado: adapta el «cómo», no el «qué» (D). Reducir el contenido (B) baja expectativas; mantener el tiempo estándar y calificar lo incompleto (C) no elimina la barrera; derivar a apoyo externo (A) traslada fuera la responsabilidad del centro.` },
+
+  { n:5, q:`En primero de secundaria, el equipo docente y de gestión identifica que varios estudiantes presentan desmotivación académica, con bajo compromiso con las tareas, escasa participación y disminución del rendimiento, lo que comienza a afectar el clima del aula. La dirección solicita al psicólogo escolar acciones de orientación dirigidas a estudiantes y familias, aprovechando recursos tecnológicos y comunitarios. Desde un enfoque preventivo, participativo y de aprovechamiento de recursos comunitarios, ¿cuál sería la acción más pertinente para favorecer la motivación académica y el acompañamiento familiar?`, o:[
+      `Identificar recursos institucionales y comunitarios que ofrezcan orientación motivacional e informar de estos servicios a estudiantes y familias para que accedan al apoyo.`,
+      `Consultar con el Distrito Educativo experiencias de otras escuelas con problemas similares y las estrategias aplicadas con evidencia de éxito.`,
+      `Realizar sesiones motivacionales con el grupo apoyándose en los muchos recursos de YouTube y páginas de internet con alta valoración de la comunidad.`,
+      `Indicar que los estudiantes deben adaptarse al ritmo escolar y que sus familias busquen apoyo adicional por su cuenta.`
+    ], correct:0, exp:`El enfoque preventivo y comunitario se concreta articulando la red de recursos institucionales y comunitarios y poniéndola al alcance de estudiantes y familias (A). Consultar al Distrito (B) es un insumo, no la acción de orientación; los recursos sueltos de internet (C) no son una estrategia situada; responsabilizar solo a la familia (D) abandona el rol orientador.` },
+
+  { n:6, q:`En cuarto de secundaria se detecta un aumento de la deserción escolar. El psicólogo escolar observa que no hay coordinación entre el centro educativo, las familias y los actores comunitarios. Decide actuar. ¿Cuál sería la acción más adecuada del psicólogo escolar?`, o:[
+      `Sugerir actividades de prevención del acoso escolar y promoción de la sana convivencia.`,
+      `Proponer un plan progresivo que comience por instalar, en escuela, comunidad y familia, la observación sistemática de cambios en conducta, asistencia, rendimiento y participación.`,
+      `Sugerir que el centro refuerce las normas y aplique consecuencias ante la falta de asistencia y el bajo rendimiento, pese a la escasa implicación de familias y comunidad.`,
+      `Convocar a familias y actores comunitarios para que escuchen a un especialista exponer sobre la deserción y sus consecuencias.`
+    ], correct:1, exp:`La deserción exige un sistema de alerta temprana coordinado entre los tres actores que faltaban —escuela, familia y comunidad—, con observación sistemática de señales (asistencia, conducta, rendimiento) (B). Endurecer normas (C) o dar una charla informativa (D) no resuelve la falta de coordinación; la prevención del acoso (A) no responde al problema planteado.` },
+
+  { n:7, q:`Un grupo de estudiantes de sexto de primaria acude a la Unidad de Orientación y Psicología para expresar su inconformidad con las clases de Educación Física: señalan que el docente prioriza a los varones en el uso de las canchas y les asigna a ellas actividades de menor participación o intensidad. Las estudiantes se sienten excluidas y perciben un trato desigual que afecta su motivación, autoestima y sentido de equidad. Desde un enfoque de derechos, equidad de género e inclusión, ¿cuál sería la acción más pertinente para garantizar una participación justa e igualitaria en las clases de Educación Física?`, o:[
+      `Escuchar la queja e indicar a las estudiantes que el asunto se atenderá respetando las decisiones del docente.`,
+      `Practicar la escucha activa y validar sus preocupaciones, y luego organizar una reunión con el docente y la coordinación educativa para revisar las prácticas de uso de los espacios deportivos.`,
+      `Escuchar a las estudiantes explorando sus preocupaciones, necesidades y preferencias, y generar una conversación con el docente sobre los principios curriculares de equidad, inclusión y derechos.`,
+      `Derivar la queja a la dirección para que defina las medidas disciplinarias que correspondan con el docente, sin intervenir directamente.`
+    ], correct:1, exp:`Garantizar la participación equitativa exige validar a las estudiantes y, además, revisar institucionalmente la práctica que genera la inequidad (uso de los espacios), junto con el docente y la coordinación (B). La conversación sobre principios (C) es necesaria pero insuficiente para cambiar la práctica; remitir «a las decisiones del docente» (A) o a sanciones (D) no resuelve la desigualdad.` },
+
+  { n:8, q:`Durante una jornada del Consejo Estudiantil en un centro de secundaria, varios estudiantes manifiestan que no se sienten escuchados por el equipo docente y que perciben poco acompañamiento de sus familias en relación con sus intereses y proyectos académicos. Señalan dificultades de comunicación, escasos espacios de diálogo y limitada participación en las decisiones que les afectan. La dirección convoca al psicólogo escolar para promover la integración y fortalecer la convivencia. Desde un enfoque participativo y de convivencia democrática, ¿cuál sería la acción más pertinente para fortalecer la comunicación y la integración entre los distintos actores de la comunidad educativa?`, o:[
+      `Desarrollar espacios de diálogo entre el Consejo Estudiantil y el Equipo de Gestión, modelando la escucha activa y la integración de intereses, e incorporar luego a las familias.`,
+      `Pedir a los estudiantes que escriban sus inquietudes en una carta anónima para evitar confrontaciones con docentes y familias.`,
+      `Realizar un conversatorio solo con los estudiantes para explorar sus intereses como primer paso, integrando después a docentes y familias.`,
+      `Solicitar a los docentes una encuesta sobre intereses académicos, pero sin compartir los resultados con familias y estudiantes para evitar dificultades relacionales futuras.`
+    ], correct:0, exp:`La convivencia democrática se construye con espacios reales de diálogo entre actores, donde el psicólogo modela la escucha activa y se integra progresivamente a las familias (A). La carta anónima (B) evita el diálogo; el conversatorio solo con estudiantes (C) posterga la integración; ocultar resultados (D) contradice la participación.` },
+
+  { n:9, q:`Una docente de nivel inicial comenta al psicólogo escolar que ha observado comportamientos que podrían indicar negligencia en el hogar de un niño. Sin embargo, teme reportarlo por no estar segura de las implicaciones legales y por un posible conflicto con la familia si se sabe que ella lo comunicó. ¿Cuál sería la acción más adecuada del psicólogo escolar?`, o:[
+      `Validar la preocupación de la docente, exponer la situación al equipo de gestión y esperar nuevos reportes, pidiéndole a la docente estar más atenta.`,
+      `Validar la preocupación, resguardar la confidencialidad de la docente y activar la ruta de actuación en comunicación con el equipo, para la evaluación del caso y los reportes que correspondan.`,
+      `Validar la preocupación de la docente, pero no reportar la situación porque podría generar serios conflictos entre la docente y la familia.`,
+      `Validar la preocupación y proponer observar al niño durante más tiempo antes de documentar y de consultar el protocolo institucional.`
+    ], correct:1, exp:`Ante un indicio de posible negligencia prima el deber de protección de la niñez: se activa el protocolo o ruta de actuación y se canalizan los reportes que correspondan, resguardando a quien informa (B). Esperar (A, D) o no reportar por temor al conflicto (C) incumple ese deber.` },
+
+  { n:10, q:`En cuarto de secundaria, el equipo de gestión detecta un incremento de conflictos entre docentes y estudiantes, con reportes disciplinarios frecuentes y tensiones en el clima escolar. El psicólogo escolar observa que las decisiones disciplinarias se toman de manera aislada, sin criterios compartidos ni coordinación, lo que genera percepciones de incoherencia e injusticia y afecta la convivencia y la confianza. Desde un enfoque de convivencia democrática, gestión institucional y prevención de conflictos, ¿cuál sería la acción más pertinente para fortalecer la coherencia de las decisiones disciplinarias y mejorar el clima escolar?`, o:[
+      `Proponer sesiones de orientación con los comités de curso, articuladas con el equipo de gestión, para la mediación de los conflictos.`,
+      `Orientar la construcción colectiva de estrategias de aula para la convivencia, con responsabilidades recíprocas entre docentes y estudiantes.`,
+      `Establecer un reglamento estricto en cada aula, autorizado por el equipo de gestión e informado a docentes y estudiantes.`,
+      `Dejar que cada docente maneje los conflictos según su propio criterio para preservar su autonomía.`
+    ], correct:1, exp:`El origen del problema es la falta de criterios compartidos. La convivencia democrática se fortalece construyendo colectivamente acuerdos con corresponsabilidad entre docentes y estudiantes (B). La mediación por comités (A) atiende casos puntuales, pero no instala criterios comunes; el reglamento impuesto (C) y la autonomía sin coordinación (D) reproducen la incoherencia.` },
+
+  { n:11, q:`En el foro institucional virtual, las intervenciones del alumnado se caracterizan por respuestas breves, reiterativas y poco fundamentadas, con escaso uso de vocabulario académico y argumentación limitada. Los docentes expresan preocupación, pero continúan formulando preguntas cerradas y poco desafiantes. ¿Qué intervención pedagógico-digital debería liderar el dinamizador TIC para fortalecer la escritura argumentativa, promover el uso progresivo del lenguaje académico y generar procesos de retroalimentación que permitan al profesorado reflexionar sobre el diseño de consignas y la mediación didáctica?`, o:[
+      `Sugerir herramientas digitales que orienten la escritura mediante plantillas estructuradas para construir argumentos y usar conectores lógicos, mientras los docentes realizan comentarios periódicos en las publicaciones.`,
+      `Proponer una rúbrica común para las participaciones del foro, con criterios de extensión, claridad, uso de conectores y vocabulario académico, junto con recomendaciones para que los docentes formulen preguntas más abiertas.`,
+      `Promover la revisión conjunta de las intervenciones del foro, ajustar las consignas hacia preguntas más abiertas, incorporar apoyos digitales para organizar ideas y generar espacios de retroalimentación que mejoren tanto las respuestas del alumnado como la mediación docente.`,
+      `Recomendar aumentar la frecuencia de participación y asignar puntajes a la extensión mínima de las intervenciones, para que los estudiantes desarrollen respuestas más amplias.`
+    ], correct:2, exp:`La consigna pide una intervención de doble alcance: mejorar la escritura del alumnado y, a la vez, la reflexión docente sobre consignas y mediación. Solo C integra ambos planos (revisión conjunta + ajuste de consignas + apoyos + retroalimentación a estudiantes y docentes). A y B son parciales; premiar la extensión (D) confunde cantidad con calidad argumentativa.` },
+
+  { n:12, q:`En un proyecto de Matemática y Ciencias Sociales, los estudiantes deben recolectar datos sobre los hábitos alimenticios de la comunidad escolar mediante encuestas digitales y luego analizarlos con herramientas tecnológicas. Los docentes expresan preocupación por la calidad de los datos, la confidencialidad de la información y el uso adecuado de los resultados, y solicitan acompañamiento del dinamizador TIC. ¿Qué orientaciones y herramientas debería recomendar el dinamizador TIC para garantizar la protección de datos, la validez de la información y el uso responsable de las herramientas digitales en el análisis y la presentación de resultados?`, o:[
+      `Indicar que el docente centralice toda la información obtenida y verifique después la precisión de los datos, para luego organizarlos y presentarlos.`,
+      `Sugerir que los datos se recopilen con fines académicos, sin necesidad de explicar las normas de confidencialidad ni el tratamiento de la información personal.`,
+      `Recomendar que los estudiantes compartan libremente los resultados en redes sociales para fomentar la participación de la comunidad educativa.`,
+      `Orientar al equipo docente y a los estudiantes sobre la protección de datos personales, la validación de la información recolectada y el uso ético de las herramientas digitales para su análisis y presentación.`
+    ], correct:3, exp:`El acompañamiento integra ética y rigor: protección de datos personales, validación de la información y uso responsable de las herramientas (D). Centralizar sin criterios (A), omitir la confidencialidad (B) o difundir datos personales en redes (C) vulneran la privacidad y la validez del proyecto.` },
+
+  { n:13, q:`El centro educativo se propone implementar un plan de mejora para fortalecer la lectura crítica y el pensamiento lógico, articulando las áreas de Lengua, Matemática y Ciencias Sociales, con coherencia metodológica, indicadores comunes y uso estratégico de recursos digitales. ¿Qué liderazgo técnico-pedagógico debe ejercer el dinamizador TIC para diseñar un plan articulado interdepartamental, integrar herramientas digitales que promuevan el análisis crítico y la resolución lógica de problemas, y establecer mecanismos de seguimiento y evaluación compartida?`, o:[
+      `Coordinar jornadas de capacitación en herramientas de edición de texto y cálculo para actualizar las competencias digitales del profesorado.`,
+      `Diseñar un entorno virtual colaborativo donde los docentes de las tres áreas planifiquen, registren evidencias y evalúen conjuntamente el desarrollo de las competencias críticas y lógicas.`,
+      `Organizar espacios de intercambio de materiales digitales entre los departamentos para compartir recursos sobre lectura y lógica.`,
+      `Elaborar presentaciones interactivas con ejemplos de lectura y razonamiento lógico para que los docentes las usen en clase.`
+    ], correct:1, exp:`El liderazgo técnico-pedagógico articulado se materializa en un entorno colaborativo donde se planifica, se registran evidencias y se evalúa en conjunto (B): coherencia, indicadores comunes y seguimiento compartido. Capacitar (A), intercambiar materiales (C) o crear presentaciones (D) son acciones aisladas que no garantizan la articulación interdepartamental.` },
+
+  { n:14, q:`En un curso de cuarto de primaria se evidencia una marcada diversidad de ritmos y estilos de aprendizaje. Un estudiante presenta diagnóstico de TDAH, con dificultades para sostener la atención; otra estudiante está en evaluación psicopedagógica por posibles trastornos del lenguaje, con dificultades en la comprensión de instrucciones escritas y en la producción oral. El docente solicita acompañamiento del dinamizador TIC para integrar recursos que diversifiquen la enseñanza, personalicen las actividades y ajusten la evaluación. ¿Qué orientaciones técnico-pedagógicas debería recomendar el dinamizador TIC para apoyar el diseño de estrategias inclusivas mediadas por tecnología que favorezcan la participación, la accesibilidad curricular y la evaluación formativa de todos los estudiantes?`, o:[
+      `Recomendar que se reduzca la cantidad de actividades digitales para los estudiantes con dificultades, a fin de evitar frustración o desmotivación.`,
+      `Aconsejar centrar el uso de los recursos tecnológicos solo en los estudiantes con necesidades especiales, para optimizar el tiempo y la atención del docente.`,
+      `Sugerir el uso de una única plataforma para toda la clase, garantizando la coherencia de las tareas y de la evaluación.`,
+      `Recomendar herramientas digitales que permitan adaptar las actividades y ofrecer retroalimentación diferenciada a los estudiantes.`
+    ], correct:3, exp:`La inclusión mediada por tecnología se logra con herramientas que adaptan las actividades y permiten retroalimentación diferenciada para todos (D); no segregando a los estudiantes con NEE (B), reduciéndoles oportunidades (A) ni imponiendo una sola plataforma uniforme que ignora la diversidad (C).` },
+
+  { n:15, q:`En las últimas semanas, la participación en debates y trabajos grupales ha disminuido. Algunos estudiantes expresan desmotivación y la sensación de tener poca incidencia en el desarrollo de las clases. El profesorado atribuye el fenómeno a factores actitudinales, pero no ha implementado estrategias sistemáticas de autoevaluación del clima de aula ni del diseño metodológico. ¿Cómo puede el dinamizador TIC promover la incorporación de herramientas digitales de autoevaluación del compromiso y la motivación, junto con estrategias de mejora participativa, para recuperar la implicación activa del estudiantado y fortalecer la reflexión docente?`, o:[
+      `Organizar sesiones de autoevaluación guiada en las que los estudiantes valoren su nivel de participación, identifiquen causas de desmotivación y definan compromisos personales de mejora, con acciones de seguimiento.`,
+      `Realizar un proceso de autoevaluación y cambiar la metodología incorporando dinámicas más competitivas que estimulen el esfuerzo, equilibrando el trabajo grupal con actividades individuales.`,
+      `Solicitar a los estudiantes que completen un cuestionario de autoevaluación y satisfacción general para identificar los temas que les resultan menos interesantes y los más atractivos.`,
+      `Implementar un sistema de puntos o recompensas para quienes participen con mayor frecuencia, con el fin de reactivar el interés grupal.`
+    ], correct:0, exp:`La mejora participativa parte de que el estudiante se autoevalúe, identifique causas y asuma compromisos con seguimiento (A): regula su propio aprendizaje y nutre la reflexión docente. La competencia (B) y las recompensas (D) son motivadores externos que no desarrollan autorregulación; el cuestionario de satisfacción (C) recoge gustos, no compromisos de mejora.` },
+
+  { n:16, q:`El dinamizador TIC advierte que su tono en las retroalimentaciones varía según el grupo: con algunos docentes o estudiantes adopta un estilo más directo y crítico; con otros, uno más diplomático y moderado. Reconoce que esta variación puede generar percepciones de inequidad y debilitar la coherencia de su liderazgo comunicativo. ¿Qué estrategia de autoevaluación y mejora profesional debería implementar para analizar sus patrones comunicativos, asegurar la coherencia ética de la retroalimentación y fortalecer una cultura de comunicación asertiva y equitativa?`, o:[
+      `Usar siempre mensajes escritos para evitar interpretaciones erróneas y mantener una comunicación más formal.`,
+      `Solicitar a un colega que observe una de sus sesiones y le brinde comentarios sobre su forma de comunicarse con docentes y estudiantes.`,
+      `Grabar su voz y practicar para adoptar un tono neutro y uniforme en todas las retroalimentaciones, evitando diferencias según el grupo o el contexto.`,
+      `Grabar y analizar fragmentos de sus propias sesiones de retroalimentación, comparando el tono, el tipo de lenguaje y las reacciones de los participantes, y luego solicitar retroalimentación anónima.`
+    ], correct:3, exp:`La autoevaluación profesional rigurosa usa evidencia de la propia práctica: registrar, analizar patrones y contrastarlos con retroalimentación externa anónima (D). La observación de un colega (B) aporta, pero es puntual; escribirlo todo (A) o forzar un tono «neutro» (C) evitan el problema en lugar de analizarlo.` },
+
+  { n:17, q:`En una clase de primero de secundaria se identifican dos situaciones contrastantes: un grupo manifiesta ansiedad ante las actividades de cálculo numérico, evita participar y presenta bloqueos durante las evaluaciones; otro grupo termina rápidamente las tareas, pierde interés y genera conductas disruptivas por falta de desafíos. El docente solicita orientación al dinamizador TIC para integrar estrategias tecnológicas que personalicen el aprendizaje, regulen los niveles de dificultad y promuevan la autorregulación. ¿Qué recomendaciones debería plantear el dinamizador TIC para incorporar herramientas digitales adaptativas, metodologías diferenciadas y recursos interactivos que disminuyan la ansiedad matemática, aumenten el compromiso y potencien el rendimiento de todos?`, o:[
+      `Proponer la aplicación de una misma guía de ejercicios digitales para toda la clase, sin distinción de niveles ni ritmos de trabajo.`,
+      `Sugerir plataformas que permitan ajustar el nivel de dificultad y ofrecer desafíos progresivos, fomentando la autonomía y la colaboración entre pares.`,
+      `Recomendar que los estudiantes con mayor dominio apoyen a los demás en la resolución de ejercicios, incorporando recursos tecnológicos de manera sistemática.`,
+      `Recomendar que se ajuste la cantidad y la complejidad de los ejercicios solo para los estudiantes con menor desempeño y se mantenga igual para los demás grupos.`
+    ], correct:1, exp:`Las herramientas adaptativas con dificultad ajustable y desafíos progresivos atienden a ambos grupos a la vez —bajan la ansiedad de unos y retan a otros— mientras desarrollan autonomía (B). La guía única (A) ignora la diversidad; la tutoría entre pares (C) es complemento, no eje; ajustar solo a unos (D) deja sin desafío al grupo avanzado.` },
+
+  { n:18, q:`El centro decide implementar un proyecto institucional sobre el uso responsable de la tecnología y la ciudadanía digital, involucrando a docentes, familias y representantes de instituciones locales. Sin embargo, no existe una estructura clara de coordinación ni un plan formativo común. ¿Qué acción de liderazgo colaborativo debería emprender el dinamizador TIC para construir alianzas estratégicas, diseñar un plan formativo participativo y consolidar una cultura de ciudadanía digital basada en la corresponsabilidad social?`, o:[
+      `Coordinar la creación de una red interinstitucional —con docentes, familias y actores locales— que identifique, implemente y evalúe acciones conjuntas de ciudadanía digital.`,
+      `Proponer que cada docente trabaje el tema de la ciudadanía digital en su asignatura según su criterio y comparta los resultados en una reunión final.`,
+      `Diseñar un repositorio de materiales sobre el uso ético de la tecnología y compartirlo con toda la comunidad a través de la plataforma institucional.`,
+      `Organizar un ciclo de charlas presenciales sobre seguridad digital para docentes y familias, con participación voluntaria de instituciones externas.`
+    ], correct:0, exp:`La corresponsabilidad social y el liderazgo colaborativo se concretan en una red interinstitucional que planifica, ejecuta y evalúa en conjunto (A): estructura, plan común y alianzas. El trabajo aislado por asignatura (B), el repositorio (C) o un ciclo de charlas voluntario (D) no construyen la coordinación que el caso reclama.` },
+
+  { n:19, q:`Tras analizar los resultados de las pruebas nacionales, el equipo docente identifica debilidades significativas en la comprensión inferencial en Lengua Española y en el razonamiento proporcional en Matemática. Aunque se han reforzado los contenidos, no se han implementado estrategias basadas en evidencia ni ajustes metodológicos diferenciados. ¿Cuál debería ser el siguiente paso estratégico para abordar las brechas identificadas, integrando el análisis de datos, la planificación focalizada y el uso pedagógico de recursos digitales?`, o:[
+      `Implementar un plan de mejora institucional con ajustes en la planificación, incorporación sistemática de recursos digitales interactivos y aplicación periódica de evaluaciones tipo prueba nacional para medir progresos.`,
+      `Establecer comunidades de práctica por área para revisar metodologías, intercambiar recursos digitales y consensuar criterios comunes de intervención, con seguimiento trimestral de resultados.`,
+      `Realizar un análisis detallado de los resultados por tipo de ítem y competencia, reorganizar la planificación con más situaciones problemáticas y textos complejos, apoyándose en plataformas que monitoreen avances.`,
+      `Profundizar en el análisis de los datos, contrastarlos con evidencias de aula y rediseñar metas de aprendizaje priorizadas, diseñando secuencias didácticas focalizadas con estrategias explícitas para la inferencia lectora y el razonamiento proporcional, junto con herramientas digitales de retroalimentación formativa continua.`
+    ], correct:3, exp:`El paso pide integrar análisis de datos + planificación focalizada + recursos digitales. Solo D los reúne y, además, ataca las dos brechas concretas (inferencia lectora y razonamiento proporcional) con secuencias focalizadas y retroalimentación formativa. A, B y C son valiosas, pero más generales o centradas en un solo componente.` },
+];
+
 /* Banco activo (se asigna al elegir el examen) */
 let QUESTIONS = QUESTIONS_1;
 
@@ -1654,7 +1913,9 @@ const EXAMS={
   2:{ id:2, name:"Examen 2 · Casos de aula y EPJA", short:"Examen 2",
       questions:QUESTIONS_2, duration:2*60*60, shuffle:true },
   3:{ id:3, name:"Examen 3 · Identifica el elemento curricular", short:"Examen 3",
-      questions:QUESTIONS_3, duration:90*60, shuffle:true }
+      questions:QUESTIONS_3, duration:90*60, shuffle:true },
+  4:{ id:4, name:"Examen 4 · Psicología escolar y Dinamización TIC", short:"Examen 4",
+      questions:QUESTIONS_4, duration:60*60, shuffle:true }
 };
 
 let TOTAL=QUESTIONS.length;
@@ -1758,6 +2019,35 @@ document.getElementById("guiaToExam").addEventListener("click",backToSeleccion);
 document.getElementById("guiaElementosBack").addEventListener("click",backToSeleccion);
 document.getElementById("guiaElementosToExam").addEventListener("click",backToSeleccion);
 document.getElementById("practicaElementos").addEventListener("click",()=>launchExam(3));
+
+/* ---------- PÁGINAS LEGALES (Acerca / Privacidad / Contacto) ---------- */
+let prevSection="inicio";
+function hideAllSections(){
+  ["inicio","seleccion","guia","guiaElementos","examen","resultados","privacidad","acercaDe","contacto"].forEach(id=>{
+    const el=document.getElementById(id); if(el) el.style.display="none";
+  });
+}
+function showLegal(id){
+  const visible=["inicio","seleccion"].find(s=>{
+    const e=document.getElementById(s); return e && e.style.display!=="none";
+  });
+  prevSection=visible||"inicio";
+  hideAllSections();
+  const el=document.getElementById(id);
+  if(el) el.style.display="block";
+  window.scrollTo(0,0);
+}
+function backFromLegal(){
+  hideAllSections();
+  const el=document.getElementById(prevSection);
+  if(el) el.style.display=(prevSection==="inicio")?"flex":"block";
+  window.scrollTo(0,0);
+}
+/* Año automático en los footers */
+(function(){
+  const y=new Date().getFullYear();
+  ["yearNow","yearNow2"].forEach(id=>{ const e=document.getElementById(id); if(e) e.textContent=y; });
+})();
 
 /* ---------- TIMER ---------- */
 function fmt(s){
