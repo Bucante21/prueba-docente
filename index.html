@@ -1572,11 +1572,11 @@ const QUESTIONS_3 = [
     ], correct:0, exp:`Verbo observable en presente «Resuelve…» = indicador de logro: evidencia concreta y medible al cerrar la unidad. Aunque el saber sea procedimental, la redacción manda.` },
 
   { n:5, q:`¿A qué elemento del diseño curricular corresponde el siguiente enunciado?\n\n«El estudiante genera soluciones y estrategias en situaciones de problemas nuevos, de pasos múltiples y no rutinarias, en las diferentes áreas de la matemática y fuera de esta.»`, o:[
-      `Competencia fundamental`,
       `Competencia específica`,
+      `Competencia fundamental`,
       `Indicador de logro`,
       `Propósito del encuentro`
-    ], correct:0, exp:`El alcance es transversal: «en las diferentes áreas… y fuera de esta». Eso lo ubica en todo el sistema → competencia fundamental (Resolución de Problemas). Si solo viviera dentro de Matemática, sería específica.` },
+    ], correct:0, exp:`La clave es que el enunciado está anclado a un área: «en las diferentes áreas de la matemática…». Esa es la firma de una competencia específica (la competencia «Resuelve Problemas» del área de Matemática). Una competencia fundamental es transversal a TODO el sistema y nunca se define en términos de un área concreta. El «y fuera de esta» solo indica transferencia (aplicar lo aprendido a otros contextos), no la vuelve fundamental.` },
 
   { n:6, q:`¿A qué elemento del diseño curricular corresponde el siguiente enunciado?\n\n«Construcción de diagramas de árbol, polígonos de frecuencia y gráficos circulares.»`, o:[
       `Contenido procedimental`,
@@ -1642,11 +1642,11 @@ const QUESTIONS_3 = [
     ], correct:0, exp:`«Será capaz de…» con alcance amplio («cualquier situación de su vida») = competencia fundamental (Comunicativa). Es transversal y no medible en una sola unidad.` },
 
   { n:15, q:`¿A qué elemento del diseño curricular corresponde el siguiente enunciado?\n\n«El estudiante resuelve situaciones de su entorno mediante el análisis de la ecuación de la recta y el estudio de las cónicas.»`, o:[
+      `Indicador de logro`,
       `Competencia específica`,
       `Competencia fundamental`,
-      `Indicador de logro`,
       `Contenido procedimental`
-    ], correct:0, exp:`Integra varios saberes propios del área de Matemática con alcance de área (no de todo el sistema, ni de una sola unidad). Esa es una competencia específica.` },
+    ], correct:0, exp:`Dos señales lo delatan: (1) verbo observable en presente «resuelve» y (2) está amarrado a contenidos puntuales de una unidad/grado («la ecuación de la recta», «las cónicas»). Eso es evidencia concreta y medible al cerrar la unidad = indicador de logro. Una competencia específica (Resuelve Problemas, Modela y Representa, Comunica…) NUNCA se amarra a un contenido puntual; describe una capacidad general del área. Compáralo con el ítem 4 («resuelve… por medio de…»): misma estructura, también indicador. La redacción manda.` },
 
   { n:16, q:`¿A qué elemento del diseño curricular corresponde el siguiente enunciado?\n\n«Interés por crear y utilizar representaciones gráficas del teorema de Pitágoras y de figuras en el eje cartesiano.»`, o:[
       `Contenido actitudinal`,
@@ -1913,7 +1913,7 @@ const EXAMS={
   2:{ id:2, name:"Examen 2 · Casos de aula y EPJA", short:"Examen 2",
       questions:QUESTIONS_2, duration:2*60*60, shuffle:true },
   3:{ id:3, name:"Examen 3 · Identifica el elemento curricular", short:"Examen 3",
-      questions:QUESTIONS_3, duration:90*60, shuffle:true },
+      questions:QUESTIONS_3, duration:90*60, shuffle:true, shuffleOrder:true },
   4:{ id:4, name:"Examen 4 · Psicología escolar y Dinamización TIC", short:"Examen 4",
       questions:QUESTIONS_4, duration:60*60, shuffle:true }
 };
@@ -1963,12 +1963,20 @@ function shuffleOptions(questions){
     return { n:item.n, q:item.q, o:idx.map(i=>item.o[i]), correct:idx.indexOf(item.correct), exp:item.exp };
   });
 }
+/* Baraja el ORDEN de los ítems (Fisher-Yates) devolviendo una copia nueva;
+   no muta el banco original. Los números en pantalla siguen siendo secuenciales. */
+function shuffleQuestionOrder(questions){
+  const a=questions.slice();
+  for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
 function launchExam(id){
   const cfg=EXAMS[id];
   if(!cfg) return;
   examId=id;
   examName=cfg.name;
   QUESTIONS=cfg.shuffle?shuffleOptions(cfg.questions):cfg.questions;
+  if(cfg.shuffleOrder) QUESTIONS=shuffleQuestionOrder(QUESTIONS);
   TOTAL=QUESTIONS.length;
   DURATION=cfg.duration;
   answers=new Array(TOTAL).fill(null);
