@@ -296,8 +296,8 @@
     </div>
     <div class="hero-body">
       <div class="facts">
-        <div class="fact"><b>4</b><span>exámenes disponibles</span></div>
-        <div class="fact"><b>129</b><span>ítems en total</span></div>
+        <div class="fact"><b id="statExams">6</b><span>exámenes disponibles</span></div>
+        <div class="fact"><b id="statItems">191</b><span>ítems en total</span></div>
         <div class="fact"><b>0–20</b><span>escala de calificación</span></div>
       </div>
       <label class="lbl" for="email">Correo electrónico</label>
@@ -2440,6 +2440,20 @@ const EXAMS={
   6:{ id:6, name:"Examen 6 · Situaciones de aula (Secundaria)", short:"Examen 6",
       questions:QUESTIONS_7, duration:2*60*60, shuffle:true }
 };
+
+/* Calcula automáticamente las estadísticas de la portada desde EXAMS,
+   así nunca quedan desactualizadas al agregar o quitar exámenes. */
+(function actualizarEstadisticas(){
+  try{
+    const lista=Object.values(EXAMS);
+    const totalExamenes=lista.length;
+    const totalItems=lista.reduce((suma,ex)=>suma+(ex.questions?ex.questions.length:0),0);
+    const elExam=document.getElementById("statExams");
+    const elItems=document.getElementById("statItems");
+    if(elExam) elExam.textContent=totalExamenes;
+    if(elItems) elItems.textContent=totalItems;
+  }catch(e){ /* si algo falla, se mantienen los números del HTML */ }
+})();
 
 let TOTAL=QUESTIONS.length;
 let DURATION=2*60*60; // se ajusta al elegir el examen
